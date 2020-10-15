@@ -24,8 +24,8 @@ Potential classes:
      - School
      - Index numbers
      - Vacancies
-   - Return noVacancies(courseCode)
-   - editCourse(courseCode)
+     - Return noVacancies(courseCode)
+     - editCourse(courseCode)
 
 User Interface:
 
