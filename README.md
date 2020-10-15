@@ -40,3 +40,5 @@ Data files:
 - Passwords should have a hash function --> hashCode() method
 - Courses
 - Courses and Users should have a method to store all information into a textfile
+
+madrackwp
