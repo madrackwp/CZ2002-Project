@@ -7,15 +7,17 @@ public class CourseIndex extends Course {
     private ArrayList<Student> waitList;
     private ArrayList<Student> registeredStudents;
 
-    public CourseIndex() {
+    public CourseIndex(String courseCode, String school, String description, int indexNo) {
+        super(courseCode, school, description);
+        this.indexNo = indexNo;
     }
 
     public int getIndexNo() {
-        return this.indexNo;
+        return indexNo;
     }
 
     public int getCapacity() {
-        return this.capacity();
+        return this.capacity;
     }
 
     public int getVacancies() {
