@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Course.Course;
+import Course.CourseIndex;
 import Users.Student;
 
 public class Reader {
@@ -108,8 +109,8 @@ public class Reader {
 		return null;
 	}
 
-	public ArrayList<Course> getAllCourses() {
-		ArrayList<Course> courses = new ArrayList<Course>();
+	public ArrayList<CourseIndex> getAllCourses() {
+		ArrayList<CourseIndex> courseIndexes = new ArrayList<CourseIndex>();
 
 		String line;
 		try {
@@ -118,11 +119,12 @@ public class Reader {
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
-				Course course = new Course(tokens[0], tokens[2]);
-				courses.add(course);
+				CourseIndex courseIndex = new CourseIndex(Integer.parseInt(tokens[1]), tokens[0], tokens[2],
+						Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
+				courseIndexes.add(courseIndex);
 				// reader.close()
 			} while (line != null);
-			return courses;
+			return courseIndexes;
 			// reader.close();
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
@@ -130,7 +132,7 @@ public class Reader {
 			return null;
 		} catch (NullPointerException n) {
 			// System.out.println(n.getMessage());
-			return courses;
+			return courseIndexes;
 		}
 	}
 

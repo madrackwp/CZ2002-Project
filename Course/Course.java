@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Course {
     private String courseCode, school;
-    // private ArrayList<CourseIndex> indexes;
+    private ArrayList<CourseIndex> indexes;
 
     public Course(String courseCode, String school) {
         this.courseCode = courseCode;
         this.school = school;
-        // this.indexes = new ArrayList<CourseIndex>();
+        this.indexes = new ArrayList<CourseIndex>();
     };
 
     public boolean createIndeOx() {
@@ -17,13 +17,13 @@ public class Course {
         return true;
     }
 
-    // public boolean dropIndex(int indexNo) {
-    // if (indexes.removeIf(courseIndex -> courseIndex.getIndexNo() == indexNo)) {
-    // return true;
-    // } else {
-    // return false;
-    // }
-    // }
+    public boolean dropIndex(int indexNo) {
+        if (indexes.removeIf(courseIndex -> courseIndex.getIndexNo() == indexNo)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public void editCourse(String courseCode) {
 
@@ -46,9 +46,10 @@ public class Course {
         return this.school;
     }
 
-    // public String getindexes() {
-    // return this.indexes.toString();
-    // }
+    public String getIndexes() {
+        return this.indexes.toString();
+    }
+
     @Override
     public String toString() {
         return this.courseCode + " " + this.school;
