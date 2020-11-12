@@ -16,7 +16,8 @@ public class UserInterface {
         UserInterface u = new UserInterface();
         Reader r = new Reader();
         if (u.userChoice == 1){
-            r.studentLogin();
+            Student s = r.studentLogin();
+            System.out.println(s.getUserName());
         }
         else if(u.userChoice == 2){
             r.staffLogin();
