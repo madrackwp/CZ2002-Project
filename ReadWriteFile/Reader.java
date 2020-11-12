@@ -27,7 +27,7 @@ public class Reader {
 		String hashedPassword = Integer.toString(passID);
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("studentdata.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\studentdata.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
@@ -59,7 +59,7 @@ public class Reader {
 		String line;
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("studentdata.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\studentdata.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
@@ -83,8 +83,7 @@ public class Reader {
 	public Course getCourseInformation(String searchedCourse) {
 		String line;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(
-					"C:\\Users\\madra\\OneDrive - Nanyang Technological University\\Y2S1\\CZ2002\\CZ2002-Project\\ReadWriteFile\\courseData.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\courseData.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
@@ -114,15 +113,15 @@ public class Reader {
 
 		String line;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(
-					"C:\\Users\\madra\\OneDrive - Nanyang Technological University\\Y2S1\\CZ2002\\CZ2002-Project\\ReadWriteFile\\courseData.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\courseData.txt"));
 			do {
 				line = reader.readLine();
+				if (line == null)
+					return courseIndexes;
 				String[] tokens = line.split(" ");
 				CourseIndex courseIndex = new CourseIndex(Integer.parseInt(tokens[1]), tokens[0], tokens[2],
-						Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
+						Integer.parseInt(tokens[3]), Integer.parseInt(tokens[2]));
 				courseIndexes.add(courseIndex);
-				// reader.close()
 			} while (line != null);
 			return courseIndexes;
 			// reader.close();
@@ -131,16 +130,16 @@ public class Reader {
 			e.printStackTrace();
 			return null;
 		} catch (NullPointerException n) {
-			// System.out.println(n.getMessage());
-			return courseIndexes;
+			System.out.println("An error occurred.");
+			n.printStackTrace();
+			return null;
 		}
 	}
 
 	public int getVacancy(String course, String index) {
 		String line;
 		try {
-			BufferedReader reader = new BufferedReader(
-					new FileReader("C:\\Users\\bghx9\\eclipse-workspace\\STARS\\course.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\courseData.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
@@ -175,7 +174,7 @@ public class Reader {
 		String hashedPassword = Integer.toString(passID);
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("staffdata.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\staffdata.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
