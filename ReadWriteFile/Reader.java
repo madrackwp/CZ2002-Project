@@ -26,7 +26,7 @@ public class Reader {
 		String hashedPassword = Integer.toString(passID);
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("studentdata.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\studentdata.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
@@ -58,7 +58,7 @@ public class Reader {
 		String line;
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("studentdata.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\studentdata.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
@@ -82,8 +82,7 @@ public class Reader {
 	public Course getCourseInformation(String searchedCourse) {
 		String line;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(
-					"C:\\Users\\madra\\OneDrive - Nanyang Technological University\\Y2S1\\CZ2002\\CZ2002-Project\\ReadWriteFile\\courseData.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\courseData.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
@@ -113,14 +112,14 @@ public class Reader {
 
 		String line;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(
-					"C:\\Users\\madra\\OneDrive - Nanyang Technological University\\Y2S1\\CZ2002\\CZ2002-Project\\ReadWriteFile\\courseData.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\courseData.txt"));
 			do {
 				line = reader.readLine();
+				if(line == null)
+					return courses;
 				String[] tokens = line.split(" ");
 				Course course = new Course(tokens[0], tokens[2]);
 				courses.add(course);
-				// reader.close()
 			} while (line != null);
 			return courses;
 			// reader.close();
@@ -129,8 +128,9 @@ public class Reader {
 			e.printStackTrace();
 			return null;
 		} catch (NullPointerException n) {
-			// System.out.println(n.getMessage());
-			return courses;
+			System.out.println("An error occurred.");
+			n.printStackTrace();
+			return null;
 		}
 	}
 
@@ -138,7 +138,7 @@ public class Reader {
 		String line;
 		try {
 			BufferedReader reader = new BufferedReader(
-					new FileReader("C:\\Users\\bghx9\\eclipse-workspace\\STARS\\course.txt"));
+					new FileReader("ReadWriteFile\\courseData.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
@@ -173,7 +173,7 @@ public class Reader {
 		String hashedPassword = Integer.toString(passID);
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("staffdata.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\staffdata.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
