@@ -1,4 +1,6 @@
-public class Student extends User{
+package Users;
+
+public class Student extends User {
     private String matricNo;
     private int yearOfStudy;
 
@@ -7,6 +9,5 @@ public class Student extends User{
         this.matricNo = matricNo;
         this.yearOfStudy = yearOfStudy;
     }
-
 
 }

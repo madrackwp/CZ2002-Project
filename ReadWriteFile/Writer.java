@@ -1,3 +1,5 @@
+package ReadWriteFile;
+
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -7,9 +9,10 @@ public class Writer {
 
 	private String username, hashedPassword, matricNo, school;
 
-	public Writer () {}
+	public Writer() {
+	}
 
-	public void getAccount (String username, String hashedPassword, String matricNo, String school) {
+	public void getAccount(String username, String hashedPassword, String matricNo, String school) {
 		this.username = username;
 		this.hashedPassword = hashedPassword;
 		this.matricNo = matricNo;
@@ -18,7 +21,7 @@ public class Writer {
 
 	public void createStudentAccount() {
 		String line;
-		String temp = "\n"+username+" "+hashedPassword+" "+matricNo+" "+school;
+		String temp = "\n" + username + " " + hashedPassword + " " + matricNo + " " + school;
 		boolean found = false;
 
 		try {
@@ -32,8 +35,7 @@ public class Writer {
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
-		}
-		catch (NullPointerException n) {
+		} catch (NullPointerException n) {
 			// null exception handle by contain() function
 			try {
 				if (found == false) {
@@ -42,7 +44,7 @@ public class Writer {
 					writer.close();
 					System.out.println("Account Created");
 				}
-			}catch (IOException e) {
+			} catch (IOException e) {
 				System.out.println("An error occurred.");
 				e.printStackTrace();
 			}
@@ -51,10 +53,10 @@ public class Writer {
 		}
 	}
 
-	public void writeInformation (String course, String index, String total, String vacancy, String waitlist) {
+	public void writeInformation(String course, String index, String school, String vacancy, String waitlist) {
 		String line;
-		String temp = course+" "+index;
-		String in = "\n"+course+" "+index+" "+total+" "+vacancy+" "+waitlist;
+		String temp = course + " " + index;
+		String in = "\n" + course + " " + index + " " + school + " " + vacancy + " " + waitlist;
 		boolean found = false;
 
 		try {
@@ -69,8 +71,7 @@ public class Writer {
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
-		}
-		catch (NullPointerException n) {
+		} catch (NullPointerException n) {
 			// null exception handle by contain() function
 			try {
 				if (found == false) {
@@ -79,7 +80,7 @@ public class Writer {
 					writer.close();
 					System.out.println("Information Added");
 				}
-			}catch (IOException e) {
+			} catch (IOException e) {
 				System.out.println("An error occurred.");
 				e.printStackTrace();
 			}

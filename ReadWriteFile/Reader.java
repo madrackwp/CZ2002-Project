@@ -1,7 +1,10 @@
 package ReadWriteFile;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import Course.Course;
 import Users.Student;
 
 public class Reader {
@@ -76,25 +79,61 @@ public class Reader {
 		}
 	}
 
-	public void getCourseInformation(String course) {
+	public Course getCourseInformation(String searchedCourse) {
 		String line;
 		try {
-			BufferedReader reader = new BufferedReader(
-					new FileReader("C:\\Users\\bghx9\\eclipse-workspace\\STARS\\course.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader(
+					"C:\\Users\\madra\\OneDrive - Nanyang Technological University\\Y2S1\\CZ2002\\CZ2002-Project\\ReadWriteFile\\courseData.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
-				if (course.equals(tokens[0])) {
-					System.out.println("Index: " + tokens[1]);
-					System.out.println("Vacancy: " + tokens[2]);
-					System.out.println("Waitlist: " + tokens[3]);
+				if (searchedCourse.equals(tokens[0])) {
+
+					// System.out.println("Index: " + tokens[1]);
+					// System.out.println("Vacancy: " + tokens[2]);
+					// System.out.println("Waitlist: " + tokens[3]);
+					Course course = new Course(tokens[0], tokens[2]);
+					reader.close();
+					return course;
 				}
 			} while (line != null);
 			reader.close();
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
+			return null;
 		} catch (NullPointerException n) {
+			return null;
+		}
+		return null;
+	}
+
+	public ArrayList<Course> getAllCourses() {
+		ArrayList<Course> courses = new ArrayList<Course>();
+
+		String line;
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader("courseData.txt"));
+			do {
+				line = reader.readLine();
+				String[] tokens = line.split(" ");
+
+				// System.out.println("Index: " + tokens[1]);
+				// System.out.println("Vacancy: " + tokens[2]);
+				// System.out.println("Waitlist: " + tokens[3]);
+				Course course = new Course(tokens[0], tokens[2]);
+				reader.close();
+				courses.add(course);
+
+			} while (line != null);
+			reader.close();
+			return courses;
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+			return null;
+		} catch (NullPointerException n) {
+			return null;
 		}
 	}
 
