@@ -1,5 +1,5 @@
 student1 12345
-student2 -1524582912 U1920609E SCSE
+student2 -1524582912 name1 SCSE U1920609E 2
 student3    12345
 student4    12345
 student5    12345

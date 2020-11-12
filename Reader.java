@@ -6,7 +6,7 @@ public class Reader {
 	public Reader () {}
 
 	//Student stuff
-	public void studentLogin () {
+	public Student studentLogin () {
 		String line;
 		boolean userBool = false;
 
@@ -25,7 +25,8 @@ public class Reader {
 				String [] tokens = line.split(" ");
 				if ((tokens[0].equals(userID)) && tokens[1].equals(hashedPassword)) {
 					System.out.println("Login Successful");
-					break;
+					Student s = new Student(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]));
+					return s;
 				}
 				else
 					if (tokens[0].equals(userID))
@@ -40,11 +41,14 @@ public class Reader {
 		catch (NullPointerException n) {
 			// null exception handle by contain() function
 			// for when account don't match
-			if (userBool == false)
+			if (userBool == false) {
 				System.out.println("Invalid Username");
-			else
+			}
+			else {
 				System.out.println("Invalid Password");
+			}
 		}
+		return null;
 	}
 
 	public String getSchool(String username) {
@@ -125,7 +129,7 @@ public class Reader {
 
 
 	//Staff stuff
-	public void staffLogin () {
+	public boolean staffLogin () {
 		String line;
 		boolean userBool = false;
 
@@ -144,7 +148,7 @@ public class Reader {
 				String [] tokens = line.split(" ");
 				if ((tokens[0].equals(userID)) && tokens[1].equals(hashedPassword)) {
 					System.out.println("Login Successful");
-					break;
+					return true;
 				}
 				else
 				if (tokens[0].equals(userID))
@@ -159,11 +163,14 @@ public class Reader {
 		catch (NullPointerException n) {
 			// null exception handle by contain() function
 			// for when account don't match
-			if (userBool == false)
+			if (userBool == false) {
 				System.out.println("Invalid Username");
-			else
+			}
+			else {
 				System.out.println("Invalid Password");
+			}
 		}
+		return false;
 	}
 
 }
