@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import Course.Course;
 import Users.*;
 import ReadWriteFile.*;
 
@@ -22,6 +25,10 @@ public class UserInterface {
         // r.staffLogin();
         // }
 
-        System.out.println(r.getAllCourses());
+        // System.out.println(r.getAllCourses());
+        ArrayList<Course> courses = r.getAllCourses();
+        for (Course course : courses) {
+            System.out.println(course);
+        }
     }
 }

@@ -49,5 +49,10 @@ public class Course {
     // public String getindexes() {
     // return this.indexes.toString();
     // }
+    @Override
+    public String toString() {
+        return this.courseCode + " " + this.school;
+
+    }
 
 }

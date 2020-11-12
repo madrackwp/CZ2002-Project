@@ -113,27 +113,24 @@ public class Reader {
 
 		String line;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader("courseData.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader(
+					"C:\\Users\\madra\\OneDrive - Nanyang Technological University\\Y2S1\\CZ2002\\CZ2002-Project\\ReadWriteFile\\courseData.txt"));
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
-
-				// System.out.println("Index: " + tokens[1]);
-				// System.out.println("Vacancy: " + tokens[2]);
-				// System.out.println("Waitlist: " + tokens[3]);
 				Course course = new Course(tokens[0], tokens[2]);
-				reader.close();
 				courses.add(course);
-
+				// reader.close()
 			} while (line != null);
-			reader.close();
 			return courses;
+			// reader.close();
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 			return null;
 		} catch (NullPointerException n) {
-			return null;
+			// System.out.println(n.getMessage());
+			return courses;
 		}
 	}
 
