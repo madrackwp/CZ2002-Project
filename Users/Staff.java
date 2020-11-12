@@ -1,3 +1,5 @@
+package Users;
+
 public class Staff extends User {
     private String staffIDNo;
 
