@@ -11,7 +11,7 @@ public class CourseIndex {
     // private ArrayList<Student> waitList;
     // private ArrayList<Student> registeredStudents;
 
-    public CourseIndex(int indexNo, String courseCode, String school, int capacity, int vacancies) {
+    public CourseIndex(String courseCode, int indexNo, String school, int capacity, int vacancies) {
         this.indexNo = indexNo;
         this.courseCode = courseCode;
         this.school = school;
@@ -37,6 +37,10 @@ public class CourseIndex {
 
     public String getSchool() {
         return this.school;
+    }
+
+    public String toString() {
+        return this.courseCode + " " + this.indexNo + " " + this.school + " " + this.capacity + " " + this.vacancies;
     }
 
     // public ArrayList<Student> getWaitList() {

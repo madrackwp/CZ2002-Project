@@ -119,8 +119,8 @@ public class Reader {
 				if (line == null)
 					return courseIndexes;
 				String[] tokens = line.split(" ");
-				CourseIndex courseIndex = new CourseIndex(Integer.parseInt(tokens[1]), tokens[0], tokens[2],
-						Integer.parseInt(tokens[3]), Integer.parseInt(tokens[2]));
+				CourseIndex courseIndex = new CourseIndex(tokens[0], Integer.parseInt(tokens[1]), tokens[2],
+						Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
 				courseIndexes.add(courseIndex);
 			} while (line != null);
 			return courseIndexes;
