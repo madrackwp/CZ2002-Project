@@ -9,5 +9,4 @@ public class Student extends User {
         this.matricNo = matricNo;
         this.yearOfStudy = yearOfStudy;
     }
-
 }

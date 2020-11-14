@@ -43,3 +43,16 @@ Data files:
 
 madrackwp
 Bryan
+
+==========FOR BRYAN ONLY==========
+TO UPLOAD CODE:
+
+1. git add .
+2. git commit -m "<INSERT COMMENTS HERE>"
+3. git push
+
+TO DOWNLOAD CODE:
+
+1. git pull
+
+===================================

@@ -6,12 +6,14 @@ import java.util.Scanner;
 
 import Course.Course;
 import Course.CourseIndex;
-import Users.Student;
+import Users.*;
 
-public class Reader {
+public abstract class Reader {
 
 	public Reader() {
 	}
+
+	public abstract Object readFile();
 
 	// Student stuff
 	public Student studentLogin() {
@@ -108,33 +110,35 @@ public class Reader {
 		return null;
 	}
 
-	public ArrayList<CourseIndex> getAllCourses() {
-		ArrayList<CourseIndex> courseIndexes = new ArrayList<CourseIndex>();
+	// public ArrayList<CourseIndex> getAllCourses() {
+	// ArrayList<CourseIndex> courseIndexes = new ArrayList<CourseIndex>();
 
-		String line;
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\courseData.txt"));
-			do {
-				line = reader.readLine();
-				if (line == null)
-					return courseIndexes;
-				String[] tokens = line.split(" ");
-				CourseIndex courseIndex = new CourseIndex(tokens[0], Integer.parseInt(tokens[1]), tokens[2],
-						Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
-				courseIndexes.add(courseIndex);
-			} while (line != null);
-			return courseIndexes;
-			// reader.close();
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-			return null;
-		} catch (NullPointerException n) {
-			System.out.println("An error occurred.");
-			n.printStackTrace();
-			return null;
-		}
-	}
+	// String line;
+	// try {
+	// BufferedReader reader = new BufferedReader(new
+	// FileReader("ReadWriteFile\\courseData.txt"));
+	// do {
+	// line = reader.readLine();
+	// if (line == null)
+	// return courseIndexes;
+	// String[] tokens = line.split(" ");
+	// CourseIndex courseIndex = new CourseIndex(tokens[0],
+	// Integer.parseInt(tokens[1]), tokens[2],
+	// Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
+	// courseIndexes.add(courseIndex);
+	// } while (line != null);
+	// return courseIndexes;
+	// // reader.close();
+	// } catch (IOException e) {
+	// System.out.println("An error occurred.");
+	// e.printStackTrace();
+	// return null;
+	// } catch (NullPointerException n) {
+	// System.out.println("An error occurred.");
+	// n.printStackTrace();
+	// return null;
+	// }
+	// }
 
 	public int getVacancy(String course, String index) {
 		String line;
