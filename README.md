@@ -45,6 +45,12 @@ madrackwp
 Bryan
 
 ==========FOR BRYAN ONLY==========
+START HERE:
+
+1. OPEN CMD
+2. USE cd <directory-name> <- Use this to navigate your directory
+3. Find where you store the project
+
 TO UPLOAD CODE:
 
 1. git add .
