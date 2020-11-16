@@ -19,5 +19,7 @@ public class UserInterface {
         UserReader r = new UserReader();
         ArrayList<Student> s = r.ReadFile();
         System.out.println(s);
+        Student s1 = s.get(0);
+        System.out.println(s1.getSchool());
     }
 }

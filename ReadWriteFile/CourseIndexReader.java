@@ -7,7 +7,7 @@
 //import Users.User;
 //import Course.*;
 //
-//public class CourseIndexReader extends Reader {
+//public class CourseIndexReader extends TextFileReader {
 //
 //    @Override
 //    public ArrayList<CourseIndex> ReadFile() {
@@ -15,7 +15,7 @@
 //
 //        String line;
 //        try {
-//            BufferedReader reader = new BufferedReader(new FileReader("ReadWriteFile\\courseData.txt"));
+//            BufferedReader reader = new BufferedReader(new TextFileReader("ReadWriteFile\\courseData.txt"));
 //            do {
 //                line = reader.readLine();
 //                if (line == null)

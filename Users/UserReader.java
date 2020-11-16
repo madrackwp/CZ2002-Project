@@ -1,12 +1,13 @@
 package Users;
 
+import ReadWriteFile.TextFileReader;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 
-public class UserReader extends Reader{
+public class UserReader extends TextFileReader {
 	
 	public UserReader() {}
 
