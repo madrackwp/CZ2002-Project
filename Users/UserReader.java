@@ -11,8 +11,8 @@ public class UserReader extends TextFileReader {
 	
 	public UserReader() {}
 
-	public ArrayList<Student> ReadFile() {
-		ArrayList<Student> tempArr2 = new ArrayList<Student>();
+	public ArrayList<StudentAcc> ReadFile() {
+		ArrayList<StudentAcc> tempArr2 = new ArrayList<StudentAcc>();
 		
 		String line;
 		String path = "ReadWriteFile\\studentdata.txt";
@@ -22,12 +22,7 @@ public class UserReader extends TextFileReader {
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
-				Student s = new Student(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]));
-//				ArrayList<String> tempArr1 = new ArrayList<>();
-//				tempArr1.add(tokens[0]);
-//				tempArr1.add(tokens[1]);
-//				tempArr1.add(tokens[2]);
-//				tempArr1.add(tokens[3]);
+				StudentAcc s = new StudentAcc(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]));
 				tempArr2.add(s);
 			} while (line != null);
 			reader.close();

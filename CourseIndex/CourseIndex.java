@@ -1,6 +1,6 @@
 package CourseIndex;
 
-import Users.Student;
+import Users.StudentAcc;
 
 import java.util.ArrayList;
 
@@ -8,13 +8,13 @@ public class CourseIndex {
     int indexNo;
     int capacity;
     int vacancies;
-    ArrayList<Student> registeredStudent;
+    ArrayList<StudentAcc> registeredStudent;
     String tutorialDateTime;
     String lectureDateTime;
     String courseCode;
     String school;
 
-    public CourseIndex(int i, int c, int v, ArrayList<Student> r, String t, String l, String cc, String s){
+    public CourseIndex(int i, int c, int v, ArrayList<StudentAcc> r, String t, String l, String cc, String s){
         this.indexNo = i;
         this.capacity = c;
         this.vacancies = v;
@@ -34,7 +34,7 @@ public class CourseIndex {
         return vacancies;
     }
 
-    public ArrayList<Student> getRegisteredStudent() {
+    public ArrayList<StudentAcc> getRegisteredStudent() {
         return registeredStudent;
     }
 }

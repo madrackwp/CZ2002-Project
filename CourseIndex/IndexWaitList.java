@@ -1,25 +1,25 @@
 package CourseIndex;
 
-import Users.Student;
+import Users.StudentAcc;
 
 import java.util.ArrayList;
 
 public class IndexWaitList {
-    ArrayList<Student> waitList;
+    ArrayList<StudentAcc> waitList;
 
-    public IndexWaitList(ArrayList<Student> w){
+    public IndexWaitList(ArrayList<StudentAcc> w){
         this.waitList = w;
     }
 
-    public void addStudent(Student s){
+    public void addStudent(StudentAcc s){
         this.waitList.add(s);
-        System.out.println("Student added successfully!");
+        System.out.println("StudentAcc added successfully!");
     }
 
-    public void removeStudent(Student s){
+    public void removeStudent(StudentAcc s){
         boolean check = this.waitList.remove(s);
         if(check){
-            System.out.println("Student removed!");
+            System.out.println("StudentAcc removed!");
         }
         else{
             System.out.println("Removal unsuccessful");

@@ -4,7 +4,7 @@
 //import java.io.IOException;
 //import java.util.ArrayList;
 //
-//import Users.User;
+//import Users.UserAcc;
 //import Course.*;
 //
 //public class CourseIndexReader extends TextFileReader {

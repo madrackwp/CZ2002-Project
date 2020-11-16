@@ -1,15 +1,12 @@
 package Course;
 
-import java.util.ArrayList;
-import Users.Student;
-
 public class CourseIndex {
     private int indexNo;
     private int capacity;
     private int vacancies;
     private String courseCode, school;
-    // private ArrayList<Student> waitList;
-    // private ArrayList<Student> registeredStudents;
+    // private ArrayList<StudentAcc> waitList;
+    // private ArrayList<StudentAcc> registeredStudents;
 
     public CourseIndex(String courseCode, int indexNo, String school, int capacity, int vacancies) {
         this.indexNo = indexNo;
@@ -43,15 +40,15 @@ public class CourseIndex {
         return this.courseCode + " " + this.indexNo + " " + this.school + " " + this.capacity + " " + this.vacancies;
     }
 
-    // public ArrayList<Student> getWaitList() {
+    // public ArrayList<StudentAcc> getWaitList() {
     // return this.waitList;
     // }
 
-    // public ArrayList<Student> getRegisteredStudents() {
+    // public ArrayList<StudentAcc> getRegisteredStudents() {
     // return this.registeredStudents;
     // }
 
-    // public boolean registerStudent(Student student) {
+    // public boolean registerStudent(StudentAcc student) {
     // if (getVacancies() <= 0) {
     // waitList.add(student);
     // return false;
