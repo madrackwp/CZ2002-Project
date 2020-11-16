@@ -56,42 +56,6 @@ public class User {
         return true;
     }
 
-    // login
-    // public boolean login(){
-    // //read user input
-    // System.out.println("Enter username:");
-    // Scanner sc = new Scanner(System.in);
-    // String userID = sc.nextLine();
-    // System.out.println("Enter password:");
-    // int passID = sc.nextLine().hashCode();
-    //
-    // //match user input with text file
-    // try{
-    // File dataFile = new File("usernamepasswords.txt");
-    // Scanner myReader = new Scanner(dataFile);
-    // while (myReader.hasNextLine()){
-    // String dataUser = myReader.nextLine();
-    // if(dataUser.startsWith(userID)){
-    // int dataPass = Integer.parseInt(dataUser.substring(8));
-    // if(dataPass == passID){
-    // System.out.println("Login successful!");
-    // System.out.println("Welcome to STARS");
-    // return true;
-    // }
-    // else{
-    // System.out.println("Invalid password");
-    // return false;
-    // }
-    // }
-    // }
-    // System.out.println("Invalid username");
-    // } catch (FileNotFoundException e){
-    // System.out.println("Error");
-    // e.printStackTrace();
-    // }
-    // return false;
-    // }
-
     // logout
     public boolean logout() {
         System.out.println("Are you sure you want to logout?");

@@ -1,15 +1,1 @@
-student1 12345
 student2 -1524582912 name1 SCSE U1920609E 2
-student3    12345
-student4    12345
-student5    12345
-student6    12345
-student7    12345
-student8    12345
-student9    12345
-student10   12345
-student11   12345
-student12   12345
-student13   12345
-student14   12345
-student15   12345

@@ -16,19 +16,8 @@ public class UserInterface {
     // }
 
     public static void main(String[] args) {
-        // UserInterface u = new UserInterface();
-        Reader r = new Reader();
-        // if (u.userChoice == 1) {
-        // Student s = r.studentLogin();
-        // System.out.println(s.getUserName());
-        // } else if (u.userChoice == 2) {
-        // r.staffLogin();
-        // }
-
-        // System.out.println(r.getAllCourses());
-        ArrayList<CourseIndex> courseIndexes = r.getAllCourses();
-        for (CourseIndex courseIndex : courseIndexes) {
-            System.out.println(courseIndex);
-        }
+        UserReader r = new UserReader();
+        ArrayList<Student> s = r.ReadFile();
+        System.out.println(s);
     }
 }
