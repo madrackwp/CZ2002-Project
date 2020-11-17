@@ -21,7 +21,8 @@ public class StudentReader extends Reader {
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
-				StudentAcc s = new StudentAcc(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]));
+				StudentAcc s = new StudentAcc(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]),
+						Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), Integer.parseInt(tokens[8]));
 				studentArr.add(s);
 			} while (line != null);
 			reader.close();

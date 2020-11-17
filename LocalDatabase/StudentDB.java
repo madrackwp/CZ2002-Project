@@ -25,17 +25,4 @@ public class StudentDB implements Database{
     public ArrayList<StudentAcc> getStudentDB() {
         return studentDB;
     }
-
-    //test
-    public static void main(String[] args) {
-        ArrayList<StudentAcc> s = new ArrayList<>();
-        StudentAcc s1 = new StudentAcc("hello", "hello", "hello", "hello",
-                "hello", 1);
-        s.add(s1);
-        StudentDB ss = new StudentDB(s);
-        ss.print();
-
-    }
-
-
 }
