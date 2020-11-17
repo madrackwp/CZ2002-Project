@@ -8,7 +8,7 @@ public class CourseIndex {
     int indexNo;
     int capacity;
     int vacancies;
-    ArrayList<String> registeredStudent;
+    ArrayList<String> registeredStudentMatricNo;
     String tutorialDateTime;
     String lectureDateTime;
     String courseCode;
@@ -42,24 +42,24 @@ public class CourseIndex {
         return this.indexNo;
     }
 
-    public ArrayList<StudentAcc> getRegisteredStudent() {
+    public ArrayList<String> getRegisteredStudentMatricNo() {
 
-        return this.registeredStudent;
+        return this.registeredStudentMatricNo;
     }
 
     public boolean addStudent(String studentMatricString) {
         if (vacancies == 0) {
             return false;
         } else {
-            registeredStudent.add(studentMatricString);
+            registeredStudentMatricNo.add(studentMatricString);
             vacancies--;
             return true;
         }
     }
 
     public boolean removeStudent(String studentMatricString) {
-        if (registeredStudent.contains(studentMatricString)) {
-            registeredStudent.remove(studentMatricString);
+        if (registeredStudentMatricNo.contains(studentMatricString)) {
+            registeredStudentMatricNo.remove(studentMatricString);
             vacancies++;
             return true;
         } else {
