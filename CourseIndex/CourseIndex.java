@@ -18,7 +18,7 @@ public class CourseIndex {
 
         this.indexNo = i;
         this.vacancies = v;
-        this.registeredStudent = r;
+        this.registeredStudentMatricNo = r;
         this.tutorialDateTime = t;
         this.lectureDateTime = l;
         this.courseCode = cc;
