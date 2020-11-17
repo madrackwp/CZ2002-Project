@@ -50,5 +50,4 @@ public class UserDB implements Database {
         }
         return false;
     }
-
 }
