@@ -38,9 +38,23 @@ public class CourseIndex {
         return this.courseCode;
     }
 
-    public
-
     public ArrayList<StudentAcc> getRegisteredStudent() {
         return registeredStudent;
+    }
+
+    public String getLectureDateTime() {
+        return lectureDateTime;
+    }
+
+    public String getTutorialDateTime() {
+        return tutorialDateTime;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public int getIndexNo() {
+        return indexNo;
     }
 }
