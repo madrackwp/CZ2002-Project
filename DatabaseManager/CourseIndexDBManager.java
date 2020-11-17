@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package DatabaseManager;
 
 import LocalDatabase.*;
@@ -13,7 +12,7 @@ public class CourseIndexDBManager implements DatabaseManager {
 
     public CourseIndexDBManager(CourseIndexDB courseIndexDB) {
         this.courseIndexes = courseIndexDB.getCourseIndexes();
-    };S
+    };
 
     @Override
     public boolean addEntry(Object courseIndex) {
@@ -36,13 +35,12 @@ public class CourseIndexDBManager implements DatabaseManager {
             System.out.println("Entry does not exist");
             return false;
         }
-
     }
 
     public boolean addStudentToIndex(StudentAcc student, int indexNo, String courseCode) {
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
-                courseIndex.addStudent(student);
+                courseIndex.addStudent(student.getName());
                 return true;
             }
         }
@@ -52,7 +50,7 @@ public class CourseIndexDBManager implements DatabaseManager {
     public boolean removeStudentFromIndex(StudentAcc student, int indexNo, String courseCode) {
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
-                courseIndex.removeStudent(student);
+                courseIndex.removeStudent(student.getName());
                 return true;
             }
         }
@@ -60,7 +58,9 @@ public class CourseIndexDBManager implements DatabaseManager {
     }
 
 }
+<<<<<<< HEAD
 =======
+
 //package DatabaseManager;
 //
 //import LocalDatabase.*;
@@ -101,4 +101,5 @@ public class CourseIndexDBManager implements DatabaseManager {
 //    }
 //
 //}
->>>>>>> 5b07c331498f03651c73d2fe42b2d8c91aee05af
+
+>>>>>>> 3890f2bbfab6e2cad152ac7ef3f997cf10347969

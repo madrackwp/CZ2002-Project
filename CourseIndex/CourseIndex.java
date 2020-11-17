@@ -14,7 +14,11 @@ public class CourseIndex {
     String courseCode;
     String school;
 
+<<<<<<< HEAD
     public CourseIndex(int i, int v, ArrayList<String> r, String t, String l, String cc, String s) {
+=======
+    public CourseIndex(int i, int c, int v, ArrayList<String> r, String t, String l, String cc, String s) {
+>>>>>>> 60571b2c202a2fffec28fd82d9e2ff0fef42b096
         this.indexNo = i;
         this.vacancies = v;
         this.registeredStudent = r;
@@ -42,25 +46,26 @@ public class CourseIndex {
         return this.indexNo;
     }
 
+    public ArrayList<String> getRegisteredStudent() {
 =======
->>>>>>> 5b07c331498f03651c73d2fe42b2d8c91aee05af
     public ArrayList<StudentAcc> getRegisteredStudent() {
+>>>>>>> 3890f2bbfab6e2cad152ac7ef3f997cf10347969
         return this.registeredStudent;
     }
 
-    public boolean addStudent(StudentAcc student) {
+    public boolean addStudent(String studentMatricString) {
         if (vacancies == 0) {
             return false;
         } else {
-            registeredStudent.add(student);
+            registeredStudent.add(studentMatricString);
             vacancies--;
             return true;
         }
     }
 
-    public boolean removeStudent(StudentAcc student) {
-        if (registeredStudent.contains(student)) {
-            registeredStudent.remove(student);
+    public boolean removeStudent(String studentMatricString) {
+        if (registeredStudent.contains(studentMatricString)) {
+            registeredStudent.remove(studentMatricString);
             vacancies++;
             return true;
         } else {
@@ -80,7 +85,4 @@ public class CourseIndex {
         return school;
     }
 
-    public int getIndexNo() {
-        return indexNo;
-    }
 }
