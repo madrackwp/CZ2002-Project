@@ -19,4 +19,8 @@ public class StaffDB implements Database{
                     + " " + staffDB.get(i).getSchool());
         }
     }
+
+    public ArrayList<StaffAcc> getStaffDB() {
+        return staffDB;
+    }
 }

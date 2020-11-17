@@ -26,4 +26,9 @@ public class StaffAcc extends UserAcc {
     public String getStaffIDNo() {
         return staffIDNo;
     }
+
+    @Override
+    public String getPassword() {
+        return super.getPassword();
+    }
 }

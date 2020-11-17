@@ -30,9 +30,9 @@ public class UserInterface {
                 }
             }
         }
-        // else if(userChoice == 2){
-        // this.staffLogin();
-        // }
+         else if(userChoice == 2){
+         this.staffLogin();
+         }
 
     }
 
@@ -66,18 +66,31 @@ public class UserInterface {
         }
         System.out.println("Login failed");
         return null;
+    }
 
-        // if(!sl.isEmpty()){
-        // UserDB udb = new UserDB();
+    public StaffAcc staffLogin(){
+        StaffReader s = new StaffReader();
+        ArrayList<StaffAcc> staffList = s.ReadFile();
+        Scanner sc = new Scanner(System.in);
+        StaffAcc sa;
 
+        System.out.println("Enter Username: ");
+        String userName = sc.nextLine();
+        System.out.println("Enter Password: ");
+        String password = Integer.toString(sc.nextLine().hashCode());
+
+        for(StaffAcc saZ : staffList){
+            sa = saZ;
+            if(sa.getUserName().equals(userName) && sa.getPassword().equals(password)){
+                System.out.println("Login Successful!");
+                return sa;
+            }
+        }
+        System.out.println("Login Failed");
+        return null;
     }
 
     public static void main(String[] args) {
-        // StudentReader r = new StudentReader();
-        // ArrayList<StudentAcc> s = r.ReadFile();
-        // System.out.println(s);
-        // StudentAcc s1 = s.get(0);
-        // System.out.println(s1.getSchool());
         UserInterface u = new UserInterface();
 
     }
