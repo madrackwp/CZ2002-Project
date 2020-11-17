@@ -2,22 +2,22 @@ package LocalDatabase;
 
 import java.util.ArrayList;
 
-import Course.*;
 import CourseIndex.*;
 
 public class CourseIndexDB implements Database {
 
     private ArrayList<CourseIndex> courseIndexes;
 
-    // @Override
-    // public void print() {
-    // for (CourseIndex courseIndex : this.courseIndexes) {
-    // System.out.println(courseIndex);
-    // }
-    // }
+    public CourseIndexDB(ArrayList<CourseIndex> c) {
+        this.courseIndexes = c;
+    }
 
-    public CourseIndexDB() {
-        courseIndexes = new ArrayList<CourseIndex>();
+    @Override
+    public void print() {
+        for (CourseIndex courseIndex : this.courseIndexes) {
+            System.out.println(courseIndex.getSchool() + " " + courseIndex.getCourseCode() + " "
+                    + courseIndex.getIndexNo() + " " + courseIndex.getCapacity() + " " + courseIndex.getVacancies());
+        }
     }
 
     public ArrayList<CourseIndex> getCourseIndexes() {

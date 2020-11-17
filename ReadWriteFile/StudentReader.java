@@ -1,18 +1,17 @@
-package Users;
-
-import ReadWriteFile.TextFileReader;
+package ReadWriteFile;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import Users.StudentAcc;
 
-public class UserReader extends TextFileReader {
+public class StudentReader extends Reader {
 	
-	public UserReader() {}
+	public StudentReader() {}
 
 	public ArrayList<StudentAcc> ReadFile() {
-		ArrayList<StudentAcc> tempArr2 = new ArrayList<StudentAcc>();
+		ArrayList<StudentAcc> studentArr = new ArrayList<StudentAcc>();
 		
 		String line;
 		String path = "ReadWriteFile\\studentdata.txt";
@@ -22,14 +21,15 @@ public class UserReader extends TextFileReader {
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
-				StudentAcc s = new StudentAcc(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]));
-				tempArr2.add(s);
+				StudentAcc s = new StudentAcc(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4], Integer.parseInt(tokens[5]),
+						Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]), Integer.parseInt(tokens[8]));
+				studentArr.add(s);
 			} while (line != null);
 			reader.close();
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		} catch (NullPointerException n) {}
-		return tempArr2;
+		return studentArr;
 	}
 }
