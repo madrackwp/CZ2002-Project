@@ -38,9 +38,31 @@ public class CourseIndex {
         return this.courseCode;
     }
 
-    public
+    public int getIndexNo() {
+        return this.indexNo;
+    }
 
     public ArrayList<StudentAcc> getRegisteredStudent() {
-        return registeredStudent;
+        return this.registeredStudent;
+    }
+
+    public boolean addStudent(StudentAcc student) {
+        if (vacancies == 0) {
+            return false;
+        } else {
+            registeredStudent.add(student);
+            vacancies--;
+            return true;
+        }
+    }
+
+    public boolean removeStudent(StudentAcc student) {
+        if (registeredStudent.contains(student)) {
+            registeredStudent.remove(student);
+            vacancies++;
+            return true;
+        } else {
+            return false;
+        }
     }
 }

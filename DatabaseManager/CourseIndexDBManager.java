@@ -2,16 +2,22 @@ package DatabaseManager;
 
 import LocalDatabase.*;
 
+import java.util.ArrayList;
+
+import CourseIndex.*;
+import Users.*;
+
 public class CourseIndexDBManager implements DatabaseManager {
     private ArrayList<CourseIndex> courseIndexes;
 
-    public CounrseIndexDBManager(CourseIndexDB courseIndexDB){
+    public CourseIndexDBManager(CourseIndexDB courseIndexDB) {
         this.courseIndexes = courseIndexDB.getCourseIndexes();
-    };
+    };S
 
-    public boolean addEntry(CourseIndex courseIndex) {
+    @Override
+    public boolean addEntry(Object courseIndex) {
         try {
-            courseIndexDB.add(courseIndex);
+            courseIndexes.add((CourseIndex) courseIndex);
             return true;
         } catch (Exception e) {
             System.out.println("FOR DEBUGGING: " + e.getMessage());
@@ -20,8 +26,9 @@ public class CourseIndexDBManager implements DatabaseManager {
 
     }
 
-    public boolean removeEntry(CourseIndex courseIndex) {
-        if (this.courseIndexes.contains(courseIndex)) {
+    @Override
+    public boolean removeEntry(Object courseIndex) {
+        if (this.courseIndexes.contains((CourseIndex) courseIndex)) {
             this.courseIndexes.remove(courseIndex);
             return true;
         } else {
@@ -31,10 +38,24 @@ public class CourseIndexDBManager implements DatabaseManager {
 
     }
 
-    public boolean addStudentToIndex(StudentAcc student, int indexNo, String courseCode){
-        for (CourseIndex courseIndex : courseIndexes){
-            if (courseIndex.)
+    public boolean addStudentToIndex(StudentAcc student, int indexNo, String courseCode) {
+        for (CourseIndex courseIndex : courseIndexes) {
+            if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
+                courseIndex.addStudent(student);
+                return true;
+            }
         }
+        return false;
+    }
+
+    public boolean removeStudentFromIndex(StudentAcc student, int indexNo, String courseCode) {
+        for (CourseIndex courseIndex : courseIndexes) {
+            if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
+                courseIndex.removeStudent(student);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
