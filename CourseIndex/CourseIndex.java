@@ -80,8 +80,14 @@ public class CourseIndex {
     }
 
     public String toWrite() {
-        return this.courseCode + " " + Integer.toString(this.indexNo) + " " + this.school + " "
+        String result = this.courseCode + " " + Integer.toString(this.indexNo) + " " + this.school + " "
                 + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
+
+        for (String matricNo : this.registeredStudentMatricNo) {
+            result += " " + matricNo;
+        }
+        // result += "\n";
+        return result;
     }
 
 }

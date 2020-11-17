@@ -20,8 +20,7 @@ public class CourseIndexWriter extends Writer {
             FileOutputStream writer = new FileOutputStream(path, false);
 
             for (int i = 0; i < courseIndexes.size(); i++) {
-                System.out.println(courseIndexes.get(i).toString());
-                writer.write(courseIndexes.get(i).toString().getBytes());
+                writer.write(courseIndexes.get(i).toWrite().getBytes());
                 writer.write("\n".getBytes());
             }
             writer.close();

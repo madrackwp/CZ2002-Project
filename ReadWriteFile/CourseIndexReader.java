@@ -9,7 +9,7 @@ import CourseIndex.CourseIndex;
 public class CourseIndexReader extends Reader {
 
     public ArrayList<CourseIndex> ReadFile() {
-        ArrayList<String> matricArr = new ArrayList<String>();
+
         ArrayList<CourseIndex> courseIndexes = new ArrayList<CourseIndex>();
 
         String line;
@@ -18,6 +18,7 @@ public class CourseIndexReader extends Reader {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             do {
+                ArrayList<String> matricArr = new ArrayList<String>();
                 line = reader.readLine();
                 String[] tokens = line.split(" ");
                 for (int i = 5; i < tokens.length; i++) {
