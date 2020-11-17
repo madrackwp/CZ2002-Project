@@ -12,13 +12,13 @@ public class CourseIndexDB implements Database {
         this.courseIndexes = c;
     }
 
-     @Override
-     public void print() {
-         for (CourseIndex courseIndex : this.courseIndexes) {
-            System.out.println(courseIndex.getSchool() + " " + courseIndex.getCourseCode() + " " + courseIndex.getIndexNo()
-                    + " " + courseIndex.getCapacity() + " " + courseIndex.getVacancies());
-         }
-     }
+    @Override
+    public void print() {
+        for (CourseIndex courseIndex : this.courseIndexes) {
+            System.out.println(courseIndex.getSchool() + " " + courseIndex.getCourseCode() + " "
+                    + courseIndex.getIndexNo() + " " + courseIndex.getCapacity() + " " + courseIndex.getVacancies());
+        }
+    }
 
     public ArrayList<CourseIndex> getCourseIndexes() {
         return this.courseIndexes;

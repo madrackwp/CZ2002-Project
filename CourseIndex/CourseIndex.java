@@ -8,15 +8,18 @@ public class CourseIndex {
     int indexNo;
     int capacity;
     int vacancies;
-    ArrayList<StudentAcc> registeredStudent;
+    ArrayList<String> registeredStudent;
     String tutorialDateTime;
     String lectureDateTime;
     String courseCode;
     String school;
 
-    public CourseIndex(int i, int c, int v, ArrayList<StudentAcc> r, String t, String l, String cc, String s) {
+<<<<<<< HEAD
+    public CourseIndex(int i, int v, ArrayList<String> r, String t, String l, String cc, String s) {
+=======
+    public CourseIndex(int i, int c, int v, ArrayList<String> r, String t, String l, String cc, String s) {
+>>>>>>> 60571b2c202a2fffec28fd82d9e2ff0fef42b096
         this.indexNo = i;
-        this.capacity = c;
         this.vacancies = v;
         this.registeredStudent = r;
         this.tutorialDateTime = t;
@@ -38,23 +41,31 @@ public class CourseIndex {
         return this.courseCode;
     }
 
+<<<<<<< HEAD
+    public int getIndexNo() {
+        return this.indexNo;
+    }
+
+    public ArrayList<String> getRegisteredStudent() {
+=======
     public ArrayList<StudentAcc> getRegisteredStudent() {
+>>>>>>> 3890f2bbfab6e2cad152ac7ef3f997cf10347969
         return this.registeredStudent;
     }
 
-    public boolean addStudent(StudentAcc student) {
+    public boolean addStudent(String studentMatricString) {
         if (vacancies == 0) {
             return false;
         } else {
-            registeredStudent.add(student);
+            registeredStudent.add(studentMatricString);
             vacancies--;
             return true;
         }
     }
 
-    public boolean removeStudent(StudentAcc student) {
-        if (registeredStudent.contains(student)) {
-            registeredStudent.remove(student);
+    public boolean removeStudent(String studentMatricString) {
+        if (registeredStudent.contains(studentMatricString)) {
+            registeredStudent.remove(studentMatricString);
             vacancies++;
             return true;
         } else {
@@ -74,7 +85,4 @@ public class CourseIndex {
         return school;
     }
 
-    public int getIndexNo() {
-        return indexNo;
-    }
 }

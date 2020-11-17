@@ -40,7 +40,7 @@ public class CourseIndexDBManager implements DatabaseManager {
     public boolean addStudentToIndex(StudentAcc student, int indexNo, String courseCode) {
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
-                courseIndex.addStudent(student);
+                courseIndex.addStudent(student.getName());
                 return true;
             }
         }
@@ -50,7 +50,7 @@ public class CourseIndexDBManager implements DatabaseManager {
     public boolean removeStudentFromIndex(StudentAcc student, int indexNo, String courseCode) {
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
-                courseIndex.removeStudent(student);
+                courseIndex.removeStudent(student.getName());
                 return true;
             }
         }
@@ -58,6 +58,8 @@ public class CourseIndexDBManager implements DatabaseManager {
     }
 
 }
+<<<<<<< HEAD
+=======
 
 //package DatabaseManager;
 //
@@ -100,3 +102,4 @@ public class CourseIndexDBManager implements DatabaseManager {
 //
 //}
 
+>>>>>>> 3890f2bbfab6e2cad152ac7ef3f997cf10347969

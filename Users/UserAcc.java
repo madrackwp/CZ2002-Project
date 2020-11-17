@@ -1,9 +1,5 @@
 package Users;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 public class UserAcc {
     private String userName, name, school;
     private int password;
