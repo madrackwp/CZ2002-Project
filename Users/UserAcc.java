@@ -2,12 +2,12 @@ package Users;
 
 public class UserAcc {
     private String userName, name, school;
-    private int password;
+    private String password;
 
     // constructor
     public UserAcc(String userName, String password, String name, String school) {
         this.userName = userName;
-        this.password = password.hashCode();
+        this.password = password;
         this.name = name;
         this.school = school;
     }
@@ -40,7 +40,15 @@ public class UserAcc {
 
     // change password
     public boolean changePassword(String newPassword) {
-        this.password = newPassword.hashCode();
-        return true;
+        try {
+            this.password = Integer.toString(newPassword.hashCode());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 }
