@@ -35,7 +35,6 @@ public class CourseIndexDBManager implements DatabaseManager {
             System.out.println("Entry does not exist");
             return false;
         }
-
     }
 
     public boolean addStudentToIndex(StudentAcc student, int indexNo, String courseCode) {
