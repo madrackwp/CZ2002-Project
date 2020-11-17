@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import Users.StudentAcc;
 
-public class UserReader extends Reader {
+public class StudentReader extends Reader {
 	
-	public UserReader() {}
+	public StudentReader() {}
 
 	public ArrayList<StudentAcc> ReadFile() {
 		ArrayList<StudentAcc> studentArr = new ArrayList<StudentAcc>();

@@ -3,17 +3,18 @@ package ReadWriteFile;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class UserWriter extends Writer {
+public class StudentWriter extends Writer {
     
-    UserReader reader = new UserReader();
+    StudentReader reader = new StudentReader();
     
-    public UserWriter() {}
+    public StudentWriter() {}
 
     public void WriteFile() {
+		String path = "ReadWriteFile\\studentdata.txt";
         
         try {
 			reader.ReadFile();
-			FileOutputStream writer = new FileOutputStream("C:\\Users\\bghx9\\eclipse-workspace\\STARS\\users.txt", false);
+			FileOutputStream writer = new FileOutputStream(path, false);
             for (int i = 0; i < reader.ReadFile().size(); i++) {
 		        writer.write(reader.ReadFile().get(i).toString().getBytes());
 		        writer.write(" ".getBytes());

@@ -14,11 +14,7 @@ public class CourseIndex {
     String courseCode;
     String school;
 
-<<<<<<< HEAD
     public CourseIndex(int i, int v, ArrayList<String> r, String t, String l, String cc, String s) {
-=======
-    public CourseIndex(int i, int c, int v, ArrayList<String> r, String t, String l, String cc, String s) {
->>>>>>> 60571b2c202a2fffec28fd82d9e2ff0fef42b096
         this.indexNo = i;
         this.vacancies = v;
         this.registeredStudent = r;
@@ -41,15 +37,11 @@ public class CourseIndex {
         return this.courseCode;
     }
 
-<<<<<<< HEAD
     public int getIndexNo() {
         return this.indexNo;
     }
 
     public ArrayList<String> getRegisteredStudent() {
-=======
-    public ArrayList<StudentAcc> getRegisteredStudent() {
->>>>>>> 3890f2bbfab6e2cad152ac7ef3f997cf10347969
         return this.registeredStudent;
     }
 
