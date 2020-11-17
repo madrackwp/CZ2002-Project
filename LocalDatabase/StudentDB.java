@@ -22,6 +22,9 @@ public class StudentDB implements Database{
         }
     }
 
+    public ArrayList<StudentAcc> getStudentDB() {
+        return studentDB;
+    }
 
     //test
     public static void main(String[] args) {

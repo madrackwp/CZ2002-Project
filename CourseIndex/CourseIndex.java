@@ -38,11 +38,15 @@ public class CourseIndex {
         return this.courseCode;
     }
 
+<<<<<<< HEAD
     public int getIndexNo() {
         return this.indexNo;
     }
 
     public ArrayList<String> getRegisteredStudent() {
+=======
+    public ArrayList<StudentAcc> getRegisteredStudent() {
+>>>>>>> 3890f2bbfab6e2cad152ac7ef3f997cf10347969
         return this.registeredStudent;
     }
 
