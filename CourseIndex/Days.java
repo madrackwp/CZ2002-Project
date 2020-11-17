@@ -1,0 +1,5 @@
+package CourseIndex;
+
+enum Day {
+    MONDAY, TUESDAY, WEDNESDAY, THUSRDAY, FRIDAY, SATURDAY, SUNDAY
+}

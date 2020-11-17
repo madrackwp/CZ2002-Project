@@ -8,20 +8,21 @@ public class CourseIndex {
     int indexNo;
     int capacity;
     int vacancies;
-    ArrayList<String> registeredStudentMatricNo;
-    String tutorialDateTime;
-    String lectureDateTime;
+    // ArrayList<Lesson> lessons;
     String courseCode;
     String school;
+    ArrayList<String> registeredStudentMatricNo;
 
-    public CourseIndex(int i, int v, ArrayList<String> r, String t, String l, String cc, String s) {
-        this.indexNo = i;
-        this.vacancies = v;
-        this.registeredStudentMatricNo = r;
-        this.tutorialDateTime = t;
-        this.lectureDateTime = l;
-        this.courseCode = cc;
-        this.school = s;
+    public CourseIndex(int indexNo, int vacancies,
+            // String tutorialStartTime, String tutorialEndTime, Day tutorialDay, String
+            // lectureStartTime,
+            // String lectureEndTime, Day lectureDay,
+            String courseCode, String school, ArrayList<String> registeredStudentMatricNo) {
+        this.indexNo = indexNo;
+        this.vacancies = vacancies;
+        this.courseCode = courseCode;
+        this.school = school;
+        this.registeredStudentMatricNo = registeredStudentMatricNo;
         // IndexWaitList indexWaitList = new IndexWaitList();
     }
 
@@ -70,16 +71,17 @@ public class CourseIndex {
         }
     }
 
-    public String getLectureDateTime() {
-        return lectureDateTime;
-    }
-
-    public String getTutorialDateTime() {
-        return tutorialDateTime;
-    }
+    // public ArrayList<Lesson> getLessons() {
+    // return this.lessons;
+    // }
 
     public String getSchool() {
         return school;
+    }
+
+    public String toWrite() {
+        return this.courseCode + " " + Integer.toString(this.indexNo) + " " + this.school + " "
+                + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
     }
 
 }

@@ -1,6 +1,6 @@
 package ReadWriteFile;
 
 abstract class Writer {
-	abstract void WriteFile();
-	abstract void WriteDirect();
+	abstract void writeFile(Object object);
+	// abstract void WriteDirect();
 }

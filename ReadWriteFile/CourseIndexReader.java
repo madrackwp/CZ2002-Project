@@ -20,17 +20,19 @@ public class CourseIndexReader extends Reader {
             do {
                 line = reader.readLine();
                 String[] tokens = line.split(" ");
-                for (int i = 7; i < tokens.length; i++) {
+                for (int i = 5; i < tokens.length; i++) {
                     matricArr.add(tokens[i]);
                 }
-                CourseIndex c = new CourseIndex(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[3]), matricArr, tokens[5], tokens[6], tokens[0], tokens[2]);
+                CourseIndex c = new CourseIndex(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[3]), tokens[0],
+                        tokens[2], matricArr);
                 courseIndexes.add(c);
             } while (line != null);
             reader.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
-        } catch (NullPointerException n) {}
+        } catch (NullPointerException n) {
+        }
         return courseIndexes;
-   }
+    }
 }
