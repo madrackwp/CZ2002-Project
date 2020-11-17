@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package DatabaseManager;
 
 import LocalDatabase.*;
@@ -13,7 +12,7 @@ public class CourseIndexDBManager implements DatabaseManager {
 
     public CourseIndexDBManager(CourseIndexDB courseIndexDB) {
         this.courseIndexes = courseIndexDB.getCourseIndexes();
-    };S
+    };
 
     @Override
     public boolean addEntry(Object courseIndex) {
@@ -60,7 +59,7 @@ public class CourseIndexDBManager implements DatabaseManager {
     }
 
 }
-=======
+
 //package DatabaseManager;
 //
 //import LocalDatabase.*;
@@ -101,4 +100,4 @@ public class CourseIndexDBManager implements DatabaseManager {
 //    }
 //
 //}
->>>>>>> 5b07c331498f03651c73d2fe42b2d8c91aee05af
+

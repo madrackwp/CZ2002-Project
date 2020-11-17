@@ -2,7 +2,6 @@ package LocalDatabase;
 
 import java.util.ArrayList;
 
-import Course.*;
 import CourseIndex.*;
 
 public class CourseIndexDB implements Database {
