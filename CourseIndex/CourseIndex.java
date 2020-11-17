@@ -15,10 +15,6 @@ public class CourseIndex {
     String school;
 
     public CourseIndex(int i, int v, ArrayList<String> r, String t, String l, String cc, String s) {
-<<<<<<< HEAD
-=======
-
->>>>>>> db0d92824bb672d00293fbbb927321eca05a30cb
         this.indexNo = i;
         this.vacancies = v;
         this.registeredStudentMatricNo = r;
@@ -27,6 +23,10 @@ public class CourseIndex {
         this.courseCode = cc;
         this.school = s;
         // IndexWaitList indexWaitList = new IndexWaitList();
+    }
+
+    public String toString() {
+        return Integer.toString(this.indexNo) + " " + this.courseCode;
     }
 
     public int getCapacity() {
@@ -45,14 +45,9 @@ public class CourseIndex {
         return this.indexNo;
     }
 
-<<<<<<< HEAD
-    public ArrayList<String> getRegisteredStudent() {
-        return this.registeredStudent;
-=======
     public ArrayList<String> getRegisteredStudentMatricNo() {
 
         return this.registeredStudentMatricNo;
->>>>>>> db0d92824bb672d00293fbbb927321eca05a30cb
     }
 
     public boolean addStudent(String studentMatricString) {

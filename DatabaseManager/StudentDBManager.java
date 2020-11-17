@@ -7,10 +7,10 @@ import Users.StudentAcc;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StudentDBManager implements DatabaseManager{
+public class StudentDBManager implements DatabaseManager {
     private ArrayList<StudentAcc> studentAccs;
 
-    public StudentDBManager(StudentDB studentDB){
+    public StudentDBManager(StudentDB studentDB) {
         this.studentAccs = studentDB.getStudentDB();
     }
 
@@ -36,22 +36,22 @@ public class StudentDBManager implements DatabaseManager{
         }
     }
 
-    public boolean changeAccess(String matricNo){
-        for(int i=0; i<this.studentAccs.size(); i++){
-            if(matricNo.equals(studentAccs.get(i).getMatricNo())){
-                System.out.print("Enter new access year: ");
-                Scanner sc = new Scanner(System.in);
-                int year = sc.nextInt();
-                studentAccs.get(i).setAccessYear(year);
-                System.out.print("Enter new access month: ");
-                int month = sc.nextInt();
-                studentAccs.get(i).setAccessMonth(month);
-                System.out.print("Enter new access date: ");
-                int date = sc.nextInt();
-                studentAccs.get(i).setAccesDate(date);
-                return true;
-            }
-        }
-        return false;
-    }
+    // public boolean changeAccess(String matricNo){
+    // for(int i=0; i<this.studentAccs.size(); i++){
+    // if(matricNo.equals(studentAccs.get(i).getMatricNo())){
+    // System.out.print("Enter new access year: ");
+    // Scanner sc = new Scanner(System.in);
+    // int year = sc.nextInt();
+    // studentAccs.get(i).setAccessYear(year);
+    // System.out.print("Enter new access month: ");
+    // int month = sc.nextInt();
+    // studentAccs.get(i).setAccessMonth(month);
+    // System.out.print("Enter new access date: ");
+    // int date = sc.nextInt();
+    // studentAccs.get(i).setAccesDate(date);
+    // return true;
+    // }
+    // }
+    // return false;
+    // }
 }
