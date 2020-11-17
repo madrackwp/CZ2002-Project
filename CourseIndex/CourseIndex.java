@@ -8,13 +8,13 @@ public class CourseIndex {
     int indexNo;
     int capacity;
     int vacancies;
-    ArrayList<StudentAcc> registeredStudent;
+    ArrayList<String> registeredStudent;
     String tutorialDateTime;
     String lectureDateTime;
     String courseCode;
     String school;
 
-    public CourseIndex(int i, int c, int v, ArrayList<StudentAcc> r, String t, String l, String cc, String s) {
+    public CourseIndex(int i, int c, int v, ArrayList<String> r, String t, String l, String cc, String s) {
         this.indexNo = i;
         this.capacity = c;
         this.vacancies = v;
@@ -38,30 +38,27 @@ public class CourseIndex {
         return this.courseCode;
     }
 
-<<<<<<< HEAD
     public int getIndexNo() {
         return this.indexNo;
     }
 
-=======
->>>>>>> 5b07c331498f03651c73d2fe42b2d8c91aee05af
-    public ArrayList<StudentAcc> getRegisteredStudent() {
+    public ArrayList<String> getRegisteredStudent() {
         return this.registeredStudent;
     }
 
-    public boolean addStudent(StudentAcc student) {
+    public boolean addStudent(String studentMatricString) {
         if (vacancies == 0) {
             return false;
         } else {
-            registeredStudent.add(student);
+            registeredStudent.add(studentMatricString);
             vacancies--;
             return true;
         }
     }
 
-    public boolean removeStudent(StudentAcc student) {
-        if (registeredStudent.contains(student)) {
-            registeredStudent.remove(student);
+    public boolean removeStudent(String studentMatricString) {
+        if (registeredStudent.contains(studentMatricString)) {
+            registeredStudent.remove(studentMatricString);
             vacancies++;
             return true;
         } else {
@@ -81,7 +78,4 @@ public class CourseIndex {
         return school;
     }
 
-    public int getIndexNo() {
-        return indexNo;
-    }
 }
