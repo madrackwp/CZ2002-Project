@@ -8,15 +8,14 @@ public class CourseIndex {
     int indexNo;
     int capacity;
     int vacancies;
-    ArrayList<StudentAcc> registeredStudent;
+    ArrayList<String> registeredStudent;
     String tutorialDateTime;
     String lectureDateTime;
     String courseCode;
     String school;
 
-    public CourseIndex(int i, int c, int v, ArrayList<StudentAcc> r, String t, String l, String cc, String s) {
+    public CourseIndex(int i, int v, ArrayList<String> r, String t, String l, String cc, String s) {
         this.indexNo = i;
-        this.capacity = c;
         this.vacancies = v;
         this.registeredStudent = r;
         this.tutorialDateTime = t;
