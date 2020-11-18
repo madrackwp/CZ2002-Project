@@ -36,11 +36,11 @@ public class CourseIndexWriter extends Writer {
 
     // }
 
-    public static void main(String[] args) {
-        CourseIndexReader cr1 = new CourseIndexReader();
-        ArrayList<CourseIndex> courseIndexes = cr1.ReadFile();
-        CourseIndexDB db = new CourseIndexDB(courseIndexes);
-        CourseIndexWriter writer = new CourseIndexWriter();
-        writer.writeFile(db);
-    }
+//    public static void main(String[] args) {
+//        CourseIndexReader cr1 = new CourseIndexReader();
+//        ArrayList<CourseIndex> courseIndexes = cr1.ReadFile();
+//        CourseIndexDB db = new CourseIndexDB(courseIndexes);
+//        CourseIndexWriter writer = new CourseIndexWriter();
+//        writer.writeFile(db);
+//    }
 }
