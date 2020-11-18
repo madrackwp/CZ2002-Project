@@ -40,7 +40,7 @@ public class CourseIndexDBManager implements DatabaseManager {
     public boolean addStudentToIndex(StudentAcc student, int indexNo, String courseCode) {
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
-                courseIndex.addStudent(student.getName());
+                courseIndex.addStudent(student.getMatricNo());
                 return true;
             }
         }
@@ -50,7 +50,7 @@ public class CourseIndexDBManager implements DatabaseManager {
     public boolean removeStudentFromIndex(StudentAcc student, int indexNo, String courseCode) {
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
-                courseIndex.removeStudent(student.getName());
+                courseIndex.removeStudent(student.getMatricNo());
                 return true;
             }
         }

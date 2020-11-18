@@ -1,5 +1,5 @@
 package CourseIndex;
 
-enum Day {
+public enum Day {
     MONDAY, TUESDAY, WEDNESDAY, THUSRDAY, FRIDAY, SATURDAY, SUNDAY
 }
