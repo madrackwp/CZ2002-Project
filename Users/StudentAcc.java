@@ -61,9 +61,12 @@ public class StudentAcc extends UserAcc {
         return this.accessDate;
     }
 
-    public
+    public ArrayList<CourseIndex> getRegisteredCourseIndex() {
+        return this.registeredCourseIndexes;
+    }
 
     public void setAccessDate() {
 
     }
+
 }
