@@ -23,7 +23,7 @@ public class ShowAllCourses {
 
     public CourseIndex selectCourse(CourseIndexDBManager dbManager) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Select course to add");
+        System.out.println("Select course to add:");
         showCourses(dbManager);
         int input = sc.nextInt();
         ArrayList<CourseIndex> temp = dbManager.getCourseIndexes();

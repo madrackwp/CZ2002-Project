@@ -18,7 +18,7 @@ public class Timetable {
         this.timetable = new String[5][14];
     }
 
-    public Boolean checkEmptySlot(CourseIndex c) {
+    public boolean checkEmptySlot(CourseIndex c) {
         for (int i = 0; i < coursestaken.size(); i++) {
             this.addIndex(this.coursestaken.get(i));
         }
@@ -157,6 +157,7 @@ public class Timetable {
         for (int i = 0; i < coursestaken.size(); i++) {
             for (int j = 0; j < coursestaken.get(i).getLessons().size(); j++) {
                 System.out.print(coursestaken.get(i).getCourseCode() + " ");
+                System.out.print(coursestaken.get(i).getIndexNo() + " ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getType() + " ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getDay() + " ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getStartTime() + "-");

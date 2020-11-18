@@ -72,4 +72,26 @@ public class StudentAcc extends UserAcc {
         this.registeredCourseIndexes.add(courseIndex);
     }
 
+    public void removeCourse(CourseIndex courseIndex) {
+        this.registeredCourseIndexes.remove(courseIndex);
+    }
+
+    public boolean takingCourse(String courseCode) {
+        for (CourseIndex courseIndex : this.registeredCourseIndexes) {
+            if (courseIndex.getCourseCode().equals(courseCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public CourseIndex getCourseIndex(String courseCode) {
+        for (CourseIndex courseIndex : this.registeredCourseIndexes) {
+            if (courseIndex.getCourseCode().equals(courseCode)) {
+                return courseIndex;
+            }
+        }
+        return null;
+    }
+
 }
