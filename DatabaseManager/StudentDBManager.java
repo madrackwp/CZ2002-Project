@@ -36,6 +36,10 @@ public class StudentDBManager implements DatabaseManager {
         }
     }
 
+    public ArrayList<StudentAcc> getStudentAccs() {
+        return this.studentAccs;
+    }
+
     // public boolean changeAccess(String matricNo){
     // for(int i=0; i<this.studentAccs.size(); i++){
     // if(matricNo.equals(studentAccs.get(i).getMatricNo())){

@@ -69,4 +69,15 @@ public class StudentAcc extends UserAcc {
 
     }
 
+    public String toWrite() {
+        String temp = super.getUserName() + " " + super.getPassword() + " " + super.getName() + " " + super.getSchool()
+                + " " + this.getMatricNo() + " " + Integer.toString(this.getYearOfStudy()) + " " + this.getAccessDate();
+        for (CourseIndex courseIndex : this.registeredCourseIndexes) {
+            String courseInfo = courseIndex.getCourseCode() + "," + Integer.toString(courseIndex.getIndexNo());
+            temp = temp + " ";
+            temp = temp + courseInfo;
+        }
+        return temp;
+    }
+
 }
