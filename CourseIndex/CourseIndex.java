@@ -14,7 +14,7 @@ public class CourseIndex {
     ArrayList<Lesson> lessons;
 
     public CourseIndex(String courseCode, int indexNo, String school, int capacity, int vacancies,
-                       ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
+            ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
         this.courseCode = courseCode;
         this.indexNo = indexNo;
         this.school = school;
@@ -26,7 +26,8 @@ public class CourseIndex {
     }
 
     public String toString() {
-        return Integer.toString(this.indexNo) + " " + this.courseCode;
+        return this.courseCode + " " + this.school + " " + Integer.toString(this.indexNo) + " "
+                + Integer.toString(this.vacancies);
     }
 
     public int getCapacity() {
@@ -49,19 +50,19 @@ public class CourseIndex {
         return this.registeredStudentMatricNo;
     }
 
-    public boolean addStudent(String studentMatricString) {
+    public boolean addStudent(String studentMatricNo) {
         if (vacancies == 0) {
             return false;
         } else {
-            registeredStudentMatricNo.add(studentMatricString);
+            registeredStudentMatricNo.add(studentMatricNo);
             vacancies--;
             return true;
         }
     }
 
-    public boolean removeStudent(String studentMatricString) {
-        if (registeredStudentMatricNo.contains(studentMatricString)) {
-            registeredStudentMatricNo.remove(studentMatricString);
+    public boolean removeStudent(String studentMatricNo) {
+        if (registeredStudentMatricNo.contains(studentMatricNo)) {
+            registeredStudentMatricNo.remove(studentMatricNo);
             vacancies++;
             return true;
         } else {
@@ -70,7 +71,7 @@ public class CourseIndex {
     }
 
     public ArrayList<Lesson> getLessons() {
-     return this.lessons;
+        return this.lessons;
     }
 
     public String getSchool() {
@@ -82,16 +83,17 @@ public class CourseIndex {
                 + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
         result += " ";
 
-        for(int i=0; i<registeredStudentMatricNo.size(); i++){
-            if(i==registeredStudentMatricNo.size()-1){
+        for (int i = 0; i < registeredStudentMatricNo.size(); i++) {
+            if (i == registeredStudentMatricNo.size() - 1) {
                 result += registeredStudentMatricNo.get(i);
-            }else{
+            } else {
                 result += registeredStudentMatricNo.get(i) + ",";
             }
         }
         result += " ";
-        for(Lesson l: this.lessons){
-            result += l.getStartTime() + "," + l.getEndTime() + "," + l.getTypeToString() + "," + l.getDayToString() + " ";
+        for (Lesson l : this.lessons) {
+            result += l.getStartTime() + "," + l.getEndTime() + "," + l.getTypeToString() + "," + l.getDayToString()
+                    + " ";
         }
         // result += "\n";
         return result;

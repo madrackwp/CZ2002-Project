@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import CourseIndex.CourseIndex;
+import Timetable.Timetable;
 
 public class StudentAcc extends UserAcc {
     private String matricNo;
     private int yearOfStudy;
     private String accessDate;
     private ArrayList<CourseIndex> registeredCourseIndexes;
+    private Timetable timetable;
 
     public StudentAcc(String userName, String password, String name, String school, String matricNo, int yearOfStudy,
             String accessDate, ArrayList<CourseIndex> registeredCourseIndexes) {
@@ -19,38 +21,11 @@ public class StudentAcc extends UserAcc {
         this.yearOfStudy = yearOfStudy;
         this.accessDate = accessDate;
         this.registeredCourseIndexes = registeredCourseIndexes;
-
-        // SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
-        // try {
-        // this.accessDate = sdf
-        // .parse(Integer.toString(date) + " " + Integer.toString(month) + " " +
-        // Integer.toString(accessYear));
-        // } catch (Exception e) {
-
-        // }
-    }
-
-    @Override
-    public String getUserName() {
-        return super.getUserName();
-    }
-
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
+        this.timetable = new Timetable(registeredCourseIndexes);
     }
 
     public String getMatricNo() {
         return matricNo;
-    }
-
-    @Override
-    public String getSchool() {
-        return super.getSchool();
     }
 
     public int getYearOfStudy() {
@@ -59,6 +34,10 @@ public class StudentAcc extends UserAcc {
 
     public String getAccessDate() {
         return this.accessDate;
+    }
+
+    public void setAccessDate(String accessDate) {
+        this.accessDate = accessDate;
     }
 
     public ArrayList<CourseIndex> getRegisteredCourseIndex() {
@@ -70,6 +49,7 @@ public class StudentAcc extends UserAcc {
     }
 
     public String toWrite() {
+
         String temp = super.getUserName() + " " + super.getPassword() + " " + super.getName() + " " + super.getSchool()
                 + " " + this.getMatricNo() + " " + Integer.toString(this.getYearOfStudy()) + " " + this.getAccessDate();
         for (CourseIndex courseIndex : this.registeredCourseIndexes) {
@@ -78,6 +58,18 @@ public class StudentAcc extends UserAcc {
             temp = temp + courseInfo;
         }
         return temp;
+    }
+
+    public void incrementYearOfStudy() {
+        this.yearOfStudy++;
+    }
+
+    public Timetable getTimetable() {
+        return this.timetable;
+    }
+
+    public void addNewCourse(CourseIndex courseIndex) {
+        this.registeredCourseIndexes.add(courseIndex);
     }
 
 }

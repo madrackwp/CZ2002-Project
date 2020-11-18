@@ -9,7 +9,7 @@ import CourseIndex.CourseIndex;
 import DatabaseManager.CourseIndexDBManager;
 import Users.StudentAcc;
 
-public class StudentReader extends Reader {
+public class StudentReader extends TextFileReader {
 
 	public StudentReader() {
 	}
@@ -50,6 +50,12 @@ public class StudentReader extends Reader {
 		} catch (NullPointerException n) {
 		}
 		return studentArr;
+	}
+
+	@Override
+	public Object ReadFile() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

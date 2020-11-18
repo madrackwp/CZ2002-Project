@@ -25,6 +25,10 @@ public class UserAcc {
         return school;
     }
 
+    public String getPassword() {
+        return this.password;
+    }
+
     // setters
     public void setUserName(String userName) {
         this.userName = userName;
@@ -38,17 +42,12 @@ public class UserAcc {
         this.school = school;
     }
 
-    // change password
-    public boolean changePassword(String newPassword) {
+    public boolean setPassword(String newPassword) {
         try {
             this.password = Integer.toString(newPassword.hashCode());
             return true;
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public String getPassword() {
-        return this.password;
     }
 }

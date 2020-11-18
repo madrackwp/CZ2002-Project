@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import CourseIndex.CourseIndex;
 import CourseIndex.*;
 
-public class CourseIndexReader extends Reader {
+public class CourseIndexReader extends TextFileReader {
 
     public ArrayList<CourseIndex> ReadFile() {
 
@@ -34,8 +34,8 @@ public class CourseIndexReader extends Reader {
                             Day.valueOf(lessonDetails[3]));
                     lessonArrayList.add(l);
                 }
-                CourseIndex c = new CourseIndex(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Integer.parseInt(tokens[3])
-                , Integer.parseInt(tokens[4]), matricArr, lessonArrayList);
+                CourseIndex c = new CourseIndex(tokens[0], Integer.parseInt(tokens[1]), tokens[2],
+                        Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), matricArr, lessonArrayList);
                 courseIndexes.add(c);
             } while (line != null);
             reader.close();
@@ -47,9 +47,4 @@ public class CourseIndexReader extends Reader {
         return courseIndexes;
     }
 
-    @Override
-    Object ReadFile(Object object) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

@@ -8,27 +8,7 @@ public class StaffAcc extends UserAcc {
         this.staffIDNo = staffIDNo;
     }
 
-    @Override
-    public String getSchool() {
-        return super.getSchool();
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public String getUserName() {
-        return super.getUserName();
-    }
-
     public String getStaffIDNo() {
-        return staffIDNo;
-    }
-
-    @Override
-    public String getPassword() {
-        return super.getPassword();
+        return this.staffIDNo;
     }
 }

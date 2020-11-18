@@ -3,6 +3,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import CourseController.AddDropController;
+import CourseController.ShowAllCourses;
 import CourseIndex.CourseIndex;
 import DatabaseManager.CourseIndexDBManager;
 import LocalDatabase.*;
@@ -19,9 +21,24 @@ public class UserInterface {
         Scanner sc = new Scanner(System.in);
         userChoice = sc.nextInt();
         if (userChoice == 1) {
-            SA = this.studentLogin();
+            CourseIndexReader CIR = new CourseIndexReader();
+            ArrayList<CourseIndex> temp = CIR.ReadFile();
+            CourseIndexDB indexDB = new CourseIndexDB(temp);
+            CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
+
+            StudentReader ur = new StudentReader();
+            ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
+
+            SA = this.studentLogin(studentList);
             // System.out.println(SA.getUserName());
             if (SA != null) {
+                SA.getTimetable().printTimetable();
+                AddDropController addDropController = new AddDropController();
+                ShowAllCourses showAllCourses = new ShowAllCourses();
+                CourseIndex toAdd = showAllCourses.selectCourse(indexDBManager);
+                addDropController.addCourse(SA, toAdd);
+                SA.getTimetable().printTimetable();
+                // addDropController.addCourse(SA, courseToAdd)
                 // CourseIndexReader cir = new CourseIndexReader();
                 // ArrayList<CourseIndex> courseIndexes = cir.ReadFile();
                 // for (CourseIndex ci : courseIndexes) {
@@ -34,14 +51,14 @@ public class UserInterface {
 
     }
 
-    public StudentAcc studentLogin() {
-        CourseIndexReader CIR = new CourseIndexReader();
-        ArrayList<CourseIndex> temp = CIR.ReadFile();
-        CourseIndexDB indexDB = new CourseIndexDB(temp);
-        CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
+    public StudentAcc studentLogin(ArrayList<StudentAcc> studentList) {
+        // CourseIndexReader CIR = new CourseIndexReader();
+        // ArrayList<CourseIndex> temp = CIR.ReadFile();
+        // CourseIndexDB indexDB = new CourseIndexDB(temp);
+        // CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
 
-        StudentReader ur = new StudentReader();
-        ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
+        // StudentReader ur = new StudentReader();
+        // ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
 
         Scanner sc = new Scanner(System.in);
         StudentAcc sa;
@@ -95,8 +112,4 @@ public class UserInterface {
         return null;
     }
 
-    public static void main(String[] args) {
-        UserInterface u = new UserInterface();
-
-    }
 }
