@@ -14,7 +14,7 @@ public class StudentReader extends Reader {
 	public StudentReader() {
 	}
 
-	public ArrayList<StudentAcc> ReadFile(CourseIndexDBManager courseIndexDBManager) {
+	public ArrayList<StudentAcc> ReadFile(Object courseIndexDBManager) {
 		ArrayList<StudentAcc> studentArr = new ArrayList<StudentAcc>();
 
 		String line;
@@ -22,15 +22,17 @@ public class StudentReader extends Reader {
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(path));
+
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
 				ArrayList<CourseIndex> registeredCourseIndexes = new ArrayList<CourseIndex>();
 				for (int i = 7; i < tokens.length; i++) {
 					String[] indexInfo = tokens[i].split(",");
+					// System.out.println(indexInfo[0] + indexInfo[1]);
 					try {
-						CourseIndex tempCourseIndex = courseIndexDBManager.getCourseIndexInfo(indexInfo[0],
-								Integer.parseInt(indexInfo[1]));
+						CourseIndex tempCourseIndex = ((CourseIndexDBManager) courseIndexDBManager)
+								.getCourseIndexInfo(indexInfo[0], Integer.parseInt(indexInfo[1]));
 						registeredCourseIndexes.add(tempCourseIndex);
 					} catch (NullPointerException e) {
 						System.out.println("The course does not exist");
@@ -49,4 +51,5 @@ public class StudentReader extends Reader {
 		}
 		return studentArr;
 	}
+
 }

@@ -8,13 +8,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class StaffReader extends Reader{
-    public StaffReader(){
+public class StaffReader extends Reader {
+    public StaffReader() {
 
     }
 
-
-    @Override
     public ArrayList<StaffAcc> ReadFile() {
         ArrayList<StaffAcc> staffArr = new ArrayList<>();
         String line;
@@ -35,5 +33,11 @@ public class StaffReader extends Reader{
         } catch (NullPointerException n) {
         }
         return staffArr;
+    }
+
+    @Override
+    Object ReadFile(Object object) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

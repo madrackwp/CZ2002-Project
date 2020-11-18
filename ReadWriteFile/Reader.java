@@ -1,5 +1,5 @@
 package ReadWriteFile;
 
 abstract class Reader {
-	abstract Object ReadFile();
+	abstract Object ReadFile(Object object);
 }

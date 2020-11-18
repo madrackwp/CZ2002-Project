@@ -24,13 +24,14 @@ public class CourseIndexReader extends Reader {
                 String[] tokens = line.split(" ");
                 String[] matNo = tokens[5].split(",");
                 ArrayList<String> matricArr = new ArrayList<>();
-                for(int i=0; i<matNo.length; i++){
+                for (int i = 0; i < matNo.length; i++) {
                     matricArr.add(matNo[i]);
                 }
                 ArrayList<Lesson> lessonArrayList = new ArrayList<>();
-                for(int i=6; i<tokens.length; i++){
+                for (int i = 6; i < tokens.length; i++) {
                     String[] lessonDetails = tokens[i].split(",");
-                    Lesson l = new Lesson(lessonDetails[0], lessonDetails[1], Type.valueOf(lessonDetails[2]), Day.valueOf(lessonDetails[3]));
+                    Lesson l = new Lesson(lessonDetails[0], lessonDetails[1], Type.valueOf(lessonDetails[2]),
+                            Day.valueOf(lessonDetails[3]));
                     lessonArrayList.add(l);
                 }
                 CourseIndex c = new CourseIndex(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[3]), tokens[0],
@@ -44,5 +45,11 @@ public class CourseIndexReader extends Reader {
         } catch (NullPointerException n) {
         }
         return courseIndexes;
+    }
+
+    @Override
+    Object ReadFile(Object object) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
