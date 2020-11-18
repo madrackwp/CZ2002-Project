@@ -57,4 +57,13 @@ public class CourseIndexDBManager implements DatabaseManager {
         return false;
     }
 
+    public CourseIndex getCourseIndexInfo(String courseCode, int indexNo) {
+        for (CourseIndex courseIndex : courseIndexes) {
+            if (courseIndex.getCourseCode().equals(courseCode) && courseIndex.getIndexNo() == indexNo) {
+                return courseIndex;
+            }
+        }
+        return null;
+    }
+
 }

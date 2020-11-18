@@ -1,19 +1,24 @@
 package Users;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import CourseIndex.CourseIndex;
 
 public class StudentAcc extends UserAcc {
     private String matricNo;
     private int yearOfStudy;
     private String accessDate;
+    private ArrayList<CourseIndex> registeredCourseIndexes;
 
     public StudentAcc(String userName, String password, String name, String school, String matricNo, int yearOfStudy,
-            String accessDate) {
+            String accessDate, ArrayList<CourseIndex> registeredCourseIndexes) {
         super(userName, password, name, school);
         this.matricNo = matricNo;
         this.yearOfStudy = yearOfStudy;
         this.accessDate = accessDate;
+        this.registeredCourseIndexes = registeredCourseIndexes;
 
         // SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
         // try {
@@ -56,31 +61,9 @@ public class StudentAcc extends UserAcc {
         return this.accessDate;
     }
 
+    public
+
     public void setAccessDate() {
 
     }
-
-    // public int getAccessYear() {
-    // return accessYear;
-    // }
-
-    // public int getAccessMonth() {
-    // return accessMonth;
-    // }
-
-    // public int getAccesDate() {
-    // return accesDate;
-    // }
-
-    // public void setAccessYear(int accessYear) {
-    // this.accessYear = accessYear;
-    // }
-
-    // public void setAccessMonth(int accessMonth) {
-    // this.accessMonth = accessMonth;
-    // }
-
-    // public void setAccesDate(int accesDate) {
-    // this.accesDate = accesDate;
-    // }
 }
