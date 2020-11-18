@@ -2,29 +2,32 @@ package Timetable;
 
 import java.util.ArrayList;
 import CourseIndex.CourseIndex;
+import CourseIndex.Day;
+import CourseIndex.Type;
+import CourseIndex.Lesson;
 
 public class TimetableTrial {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+
         ArrayList<String> matricnumber = new ArrayList<String>();
         matricnumber.add("U1921535H");
-        CourseIndex index1 = new CourseIndex(10001, 20, matricnumber, "Monday", "09:30", "11:30", "Tuesday", "14:30",
-                "17:30", "CZ2001", "SCSE");
-        CourseIndex index2 = new CourseIndex(10102, 20, matricnumber, "Wednesday", "08:30", "10:30", "Thursday",
-                "18:30", "21:30", "CZ2002", "SCSE");
-        CourseIndex index3 = new CourseIndex(10203, 20, matricnumber, "Monday", "11:30", "12:30", "Thursday", "11:30",
-                "12:30", "CZ2003", "SCSE");
+
+        ArrayList<Lesson> lessons1 = new ArrayList<Lesson>();
+        Lesson lesson11 = new Lesson("09:30", "11:30", Type.Lecture, Day.MONDAY);
+        lessons1.add(lesson11);
+
+        ArrayList<Lesson> lessons2 = new ArrayList<Lesson>();
+        Lesson lesson21 = new Lesson("11:30", "13:30", Type.Tutorial, Day.MONDAY);
+        lessons2.add(lesson21);
+
+        CourseIndex index1 = new CourseIndex(10001, 20, "CZ2001", "SCSE", matricnumber, lessons1);
+        CourseIndex index2 = new CourseIndex(10102, 20, "CZ2002", "SCSE", matricnumber, lessons2);
 
         ArrayList<CourseIndex> courses = new ArrayList<CourseIndex>();
         courses.add(index1);
-        courses.add(index2);
-        courses.add(index3);
 
         Timetable timetable1 = new Timetable(courses);
-        for (int index = 0; index < courses.size(); index++) {
-            timetable1.addIndex(courses.get(index));
-        }
-
-        timetable1.printTimetable(timetable1.getTimetable());
+        System.out.println(timetable1.checkEmptySlot(index2));
+        timetable1.printTimetable();
     }
 }
