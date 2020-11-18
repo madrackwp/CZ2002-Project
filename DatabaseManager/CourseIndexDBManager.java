@@ -66,4 +66,7 @@ public class CourseIndexDBManager implements DatabaseManager {
         return null;
     }
 
+    public ArrayList<CourseIndex> getCourseIndexes() {
+        return this.courseIndexes;
+    }
 }

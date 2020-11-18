@@ -1,11 +1,10 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 import CourseIndex.CourseIndex;
+import DatabaseManager.CourseIndexDBManager;
 import LocalDatabase.*;
 import ReadWriteFile.*;
 import Users.*;
@@ -23,22 +22,27 @@ public class UserInterface {
             SA = this.studentLogin();
             // System.out.println(SA.getUserName());
             if (SA != null) {
-                CourseIndexReader cir = new CourseIndexReader();
-                ArrayList<CourseIndex> courseIndexes = cir.ReadFile();
-                for (CourseIndex ci : courseIndexes) {
-                    System.out.println(ci.toString());
-                }
+                // CourseIndexReader cir = new CourseIndexReader();
+                // ArrayList<CourseIndex> courseIndexes = cir.ReadFile();
+                // for (CourseIndex ci : courseIndexes) {
+                // System.out.println(ci.toString());
+                // }
             }
+        } else if (userChoice == 2) {
+            this.staffLogin();
         }
-         else if(userChoice == 2){
-         this.staffLogin();
-         }
 
     }
 
     public StudentAcc studentLogin() {
+        CourseIndexReader CIR = new CourseIndexReader();
+        ArrayList<CourseIndex> temp = CIR.ReadFile();
+        CourseIndexDB indexDB = new CourseIndexDB(temp);
+        CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
+
         StudentReader ur = new StudentReader();
-        ArrayList<StudentAcc> studentList = ur.ReadFile();
+        ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
+
         Scanner sc = new Scanner(System.in);
         StudentAcc sa;
         String currentDate;
@@ -57,6 +61,7 @@ public class UserInterface {
             if (sa.getUserName().equals(userName) && sa.getPassword().equals(password)) {
                 if (sa.getAccessDate().equals(currentDate)) {
                     System.out.println("Login Success!");
+                    System.out.println(sa.getRegisteredCourseIndex());
                     return sa;
                 } else {
                     System.out.println("Wrong access date");
@@ -68,7 +73,7 @@ public class UserInterface {
         return null;
     }
 
-    public StaffAcc staffLogin(){
+    public StaffAcc staffLogin() {
         StaffReader s = new StaffReader();
         ArrayList<StaffAcc> staffList = s.ReadFile();
         Scanner sc = new Scanner(System.in);
@@ -79,9 +84,9 @@ public class UserInterface {
         System.out.println("Enter Password: ");
         String password = Integer.toString(sc.nextLine().hashCode());
 
-        for(StaffAcc saZ : staffList){
+        for (StaffAcc saZ : staffList) {
             sa = saZ;
-            if(sa.getUserName().equals(userName) && sa.getPassword().equals(password)){
+            if (sa.getUserName().equals(userName) && sa.getPassword().equals(password)) {
                 System.out.println("Login Successful!");
                 return sa;
             }

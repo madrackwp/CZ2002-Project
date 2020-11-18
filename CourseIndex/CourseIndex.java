@@ -5,22 +5,23 @@ import Users.StudentAcc;
 import java.util.ArrayList;
 
 public class CourseIndex {
+    String courseCode;
     int indexNo;
+    String school;
     int capacity;
     int vacancies;
-    ArrayList<Lesson> lessons;
-    String courseCode;
-    String school;
     ArrayList<String> registeredStudentMatricNo;
+    ArrayList<Lesson> lessons;
 
-    public CourseIndex(int indexNo, int vacancies, String courseCode, String school,
+    public CourseIndex(String courseCode, int indexNo, String school, int capacity, int vacancies,
                        ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
-        this.indexNo = indexNo;
-        this.vacancies = vacancies;
-        this.lessons = lessons;
         this.courseCode = courseCode;
+        this.indexNo = indexNo;
         this.school = school;
+        this.capacity = capacity;
+        this.vacancies = vacancies;
         this.registeredStudentMatricNo = registeredStudentMatricNo;
+        this.lessons = lessons;
         // IndexWaitList indexWaitList = new IndexWaitList();
     }
 
@@ -79,9 +80,18 @@ public class CourseIndex {
     public String toWrite() {
         String result = this.courseCode + " " + Integer.toString(this.indexNo) + " " + this.school + " "
                 + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
+        result += " ";
 
-        for (String matricNo : this.registeredStudentMatricNo) {
-            result += " " + matricNo;
+        for(int i=0; i<registeredStudentMatricNo.size(); i++){
+            if(i==registeredStudentMatricNo.size()-1){
+                result += registeredStudentMatricNo.get(i);
+            }else{
+                result += registeredStudentMatricNo.get(i) + ",";
+            }
+        }
+        result += " ";
+        for(Lesson l: this.lessons){
+            result += l.getStartTime() + "," + l.getEndTime() + "," + l.getTypeToString() + "," + l.getDayToString() + " ";
         }
         // result += "\n";
         return result;

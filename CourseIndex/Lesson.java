@@ -25,7 +25,15 @@ public class Lesson {
         return this.type;
     }
 
+    public String getTypeToString() {
+        return this.type.toString();
+    }
+
     public Day getDay() {
         return this.day;
+    }
+
+    public String getDayToString() {
+        return this.day.toString();
     }
 }

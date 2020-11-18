@@ -19,9 +19,8 @@ public class TimetableTrial {
         ArrayList<Lesson> lessons2 = new ArrayList<Lesson>();
         Lesson lesson21 = new Lesson("11:30", "13:30", Type.Tutorial, Day.MONDAY);
         lessons2.add(lesson21);
-
-        CourseIndex index1 = new CourseIndex(10001, 20, "CZ2001", "SCSE", matricnumber, lessons1);
-        CourseIndex index2 = new CourseIndex(10102, 20, "CZ2002", "SCSE", matricnumber, lessons2);
+        CourseIndex index1 = new CourseIndex("CZ2001", 10001, "SCSE", 20, 20, matricnumber, lessons1);
+        CourseIndex index2 = new CourseIndex("CZ2002", 10102, "SCSE", 30, 30, matricnumber, lessons2);
 
         ArrayList<CourseIndex> courses = new ArrayList<CourseIndex>();
         courses.add(index1);
