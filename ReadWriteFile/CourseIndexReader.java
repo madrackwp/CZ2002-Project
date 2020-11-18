@@ -34,8 +34,8 @@ public class CourseIndexReader extends Reader {
                             Day.valueOf(lessonDetails[3]));
                     lessonArrayList.add(l);
                 }
-                CourseIndex c = new CourseIndex(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[3]), tokens[0],
-                        tokens[2], matricArr, lessonArrayList);
+                CourseIndex c = new CourseIndex(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Integer.parseInt(tokens[3])
+                , Integer.parseInt(tokens[4]), matricArr, lessonArrayList);
                 courseIndexes.add(c);
             } while (line != null);
             reader.close();
