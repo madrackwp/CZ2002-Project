@@ -8,18 +8,16 @@ public class CourseIndex {
     int indexNo;
     int capacity;
     int vacancies;
-    // ArrayList<Lesson> lessons;
+    ArrayList<Lesson> lessons;
     String courseCode;
     String school;
     ArrayList<String> registeredStudentMatricNo;
 
-    public CourseIndex(int indexNo, int vacancies,
-            // String tutorialStartTime, String tutorialEndTime, Day tutorialDay, String
-            // lectureStartTime,
-            // String lectureEndTime, Day lectureDay,
-            String courseCode, String school, ArrayList<String> registeredStudentMatricNo) {
+    public CourseIndex(int indexNo, int vacancies, String courseCode, String school,
+                       ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
         this.indexNo = indexNo;
         this.vacancies = vacancies;
+        this.lessons = lessons;
         this.courseCode = courseCode;
         this.school = school;
         this.registeredStudentMatricNo = registeredStudentMatricNo;
@@ -70,9 +68,9 @@ public class CourseIndex {
         }
     }
 
-    // public ArrayList<Lesson> getLessons() {
-    // return this.lessons;
-    // }
+    public ArrayList<Lesson> getLessons() {
+     return this.lessons;
+    }
 
     public String getSchool() {
         return school;

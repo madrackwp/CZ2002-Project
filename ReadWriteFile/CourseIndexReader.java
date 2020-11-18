@@ -3,8 +3,10 @@ package ReadWriteFile;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import CourseIndex.CourseIndex;
+import CourseIndex.*;
 
 public class CourseIndexReader extends Reader {
 
@@ -18,14 +20,21 @@ public class CourseIndexReader extends Reader {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
             do {
-                ArrayList<String> matricArr = new ArrayList<String>();
                 line = reader.readLine();
                 String[] tokens = line.split(" ");
-                for (int i = 5; i < tokens.length; i++) {
-                    matricArr.add(tokens[i]);
+                String[] matNo = tokens[5].split(",");
+                ArrayList<String> matricArr = new ArrayList<>();
+                for(int i=0; i<matNo.length; i++){
+                    matricArr.add(matNo[i]);
+                }
+                ArrayList<Lesson> lessonArrayList = new ArrayList<>();
+                for(int i=6; i<tokens.length; i++){
+                    String[] lessonDetails = tokens[i].split(",");
+                    Lesson l = new Lesson(lessonDetails[0], lessonDetails[1], Type.valueOf(lessonDetails[2]), Day.valueOf(lessonDetails[3]));
+                    lessonArrayList.add(l);
                 }
                 CourseIndex c = new CourseIndex(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[3]), tokens[0],
-                        tokens[2], matricArr);
+                        tokens[2], matricArr, lessonArrayList);
                 courseIndexes.add(c);
             } while (line != null);
             reader.close();

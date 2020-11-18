@@ -1,5 +1,5 @@
 package CourseIndex;
 
-enum Type {
+public enum Type {
     Lecture, Tutorial, Lab
 }
