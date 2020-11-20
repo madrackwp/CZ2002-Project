@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -96,6 +97,7 @@ public class UserInterface {
         // ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
 
         Scanner sc = new Scanner(System.in);
+        Console cs = System.console();
         StudentAcc sa;
         String currentDate;
 
@@ -105,8 +107,15 @@ public class UserInterface {
 
         System.out.println("Enter username");
         String userName = sc.nextLine();
-        System.out.println("Enter password");
-        String password = Integer.toString(sc.nextLine().hashCode());
+        String password;
+        if (cs != null) {
+            cs.printf("Testing password%n");
+            char[] passwordArray = cs.readPassword("Enter your secret password: ");
+            cs.printf("Password entered was: %s%n", new String(passwordArray));
+            password = Integer.toString(passwordArray.hashCode());
+        }
+        // System.out.println("Enter password");
+        // String password = Integer.toString(passwordArray.hashCode());
 
         for (StudentAcc saZ : studentList) {
             sa = saZ;
