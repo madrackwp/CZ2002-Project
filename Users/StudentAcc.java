@@ -24,7 +24,7 @@ public class StudentAcc extends UserAcc {
         this.yearOfStudy = yearOfStudy;
         this.accessDate = accessDate;
         this.registeredCourseIndexes = registeredCourseIndexes;
-        this.timetable = new Timetable(registeredCourseIndexes);
+        this.timetable = new Timetable(registeredCourseIndexes, courseHash);
         this.courseHash = courseHash;
     }
 

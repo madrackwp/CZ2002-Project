@@ -160,7 +160,6 @@ public class Timetable {
             System.out.print(coursestaken.get(i).getCourseCode() + " ");
             System.out.print(coursestaken.get(i).getIndexNo() + " ");
             System.out.print(coursestaken.get(i).getAcademicUnits() + "AU ");
-            System.out.println(coursestaken.get(i).get + "");
 
             for (int j = 0; j < coursestaken.get(i).getLessons().size(); j++) {
                 System.out.print(coursestaken.get(i).getLessons().get(j).getType() + " ");
