@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class CourseIndex {
     String courseCode;
     int indexNo;
+    int academicUnits;
     String school;
     ModType modType;
     int capacity;
@@ -14,10 +15,11 @@ public class CourseIndex {
     ArrayList<String> registeredStudentMatricNo;
     ArrayList<Lesson> lessons;
 
-    public CourseIndex(String courseCode, int indexNo, String school, ModType modType, int capacity, int vacancies,
-            ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
+    public CourseIndex(String courseCode, int indexNo, int academicUnits, String school, ModType modType, int capacity,
+            int vacancies, ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
         this.courseCode = courseCode;
         this.indexNo = indexNo;
+        this.academicUnits = academicUnits;
         this.school = school;
         this.modType = modType;
         this.capacity = capacity;
@@ -87,9 +89,9 @@ public class CourseIndex {
     }
 
     public String toWrite() {
-        String result = this.courseCode + " " + Integer.toString(this.indexNo) + " " + this.school + " "
-                + this.modType.toString() + " " + Integer.toString(this.capacity) + " "
-                + Integer.toString(this.vacancies);
+        String result = this.courseCode + " " + Integer.toString(this.indexNo) + " "
+                + Integer.toString(this.academicUnits) + " " + this.school + " " + this.modType.toString() + " "
+                + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
         result += " ";
 
         if (!this.registeredStudentMatricNo.isEmpty()) {
@@ -109,6 +111,10 @@ public class CourseIndex {
         }
         // result += "\n";
         return result;
+    }
+
+    public int getAcademicUnits() {
+        return this.academicUnits;
     }
 
 }

@@ -154,10 +154,13 @@ public class Timetable {
     }
 
     public void printTimetable() {
+        int totalAU = 0;
         for (int i = 0; i < coursestaken.size(); i++) {
+            totalAU += coursestaken.get(i).getAcademicUnits();
             for (int j = 0; j < coursestaken.get(i).getLessons().size(); j++) {
                 System.out.print(coursestaken.get(i).getCourseCode() + " ");
                 System.out.print(coursestaken.get(i).getIndexNo() + " ");
+                System.out.print(coursestaken.get(i).getAcademicUnits() + "AU ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getType() + " ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getDay() + " ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getStartTime() + "-");
@@ -165,5 +168,6 @@ public class Timetable {
                 System.out.println();
             }
         }
+        System.out.println("Total AUs taken: " + totalAU);
     }
 }
