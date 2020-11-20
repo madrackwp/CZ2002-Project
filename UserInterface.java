@@ -23,14 +23,16 @@ public class UserInterface {
         StudentAcc SA = null;
 
         CourseIndexReader CIR = new CourseIndexReader();
-        ArrayList<CourseIndex> temp = CIR.ReadFile();
-        CourseIndexDB indexDB = new CourseIndexDB(temp);
+        ArrayList<CourseIndex> courseList = CIR.ReadFile();
+        CourseIndexDB indexDB = new CourseIndexDB(courseList);
         CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
 
         StudentReader ur = new StudentReader();
         ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
         StudentDB studentDB = new StudentDB(studentList);
         StudentDBManager studentDBManager = new StudentDBManager(studentDB);
+        StudentWriter studentWriter = new StudentWriter();
+        CourseIndexWriter courseIndexWriter = new CourseIndexWriter();
 
         System.out.println("Welcome to STARS");
         System.out.println("Select login: 1. StudentAcc 2. StaffAcc");
@@ -66,12 +68,20 @@ public class UserInterface {
                             }
 
                             studentList.remove(SA);
+
                             CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
+                            courseList.remove(toAdd);
                             addDropCtrl.addCourse(SA, toAdd);
                             SA.getTimetable().printTimetable();
                             System.out.println("");
+
                             studentList.add(SA);
                             studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(toAdd);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
 
                             for (StudentAcc s : studentList) {
                                 System.out.println(s.getName());

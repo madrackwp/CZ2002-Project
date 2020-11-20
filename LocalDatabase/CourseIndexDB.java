@@ -23,4 +23,13 @@ public class CourseIndexDB implements Database {
     public ArrayList<CourseIndex> getCourseIndexes() {
         return this.courseIndexes;
     }
+
+    public boolean setCourseIndexes(ArrayList<CourseIndex> courseToSet) {
+        try {
+            this.courseIndexes = courseToSet;
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
