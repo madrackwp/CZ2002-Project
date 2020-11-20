@@ -8,7 +8,7 @@ import Users.StudentAcc;
 
 import java.util.ArrayList;
 
-public class StaffDBManager implements DatabaseManager{
+public class StaffDBManager implements DatabaseManager {
     private ArrayList<StaffAcc> staffAccs;
 
     public StaffDBManager(StaffDB staffDB) {
@@ -35,5 +35,11 @@ public class StaffDBManager implements DatabaseManager{
             System.out.println("Entry does not exist");
             return false;
         }
+    }
+
+    @Override
+    public boolean updateDatabase(Object arrayList, Object dataBase) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

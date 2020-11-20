@@ -69,4 +69,10 @@ public class CourseIndexDBManager implements DatabaseManager {
     public ArrayList<CourseIndex> getCourseIndexes() {
         return this.courseIndexes;
     }
+
+    @Override
+    public boolean updateDatabase(Object arrayList, Object dataBase) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }
