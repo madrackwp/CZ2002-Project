@@ -4,11 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import CourseController.AddDropCtrl;
-import CourseController.CheckVacancyCtrl;
-import CourseController.ReclassifyCtrl;
-import CourseController.ShowAllCoursesCtrl;
-import CourseController.SwapIndexCtrl;
+import CourseController.*;
 import CourseIndex.CourseIndex;
 import DatabaseManager.CourseIndexDBManager;
 import DatabaseManager.StudentDBManager;
@@ -48,10 +44,11 @@ public class UserInterface {
                     System.out.println("1. Add course");
                     System.out.println("2. Drop course");
                     System.out.println("3. Check Registered Courses");
-                    System.out.println("4. Swap index with peer");
-                    System.out.println("5. Check Vacancies Available");
-                    System.out.println("6. Reclassify mod type");
-                    System.out.println("7. Logout");
+                    System.out.println("4. Change Index");
+                    System.out.println("5. Swap index with peer");
+                    System.out.println("6. Check Vacancies Available");
+                    System.out.println("7. Reclassify mod type");
+                    System.out.println("8. Logout");
                     System.out.println("===========================================");
 
                     userChoice = sc.nextInt();
@@ -100,7 +97,16 @@ public class UserInterface {
                             SA.getTimetable().printTimetable();
                             System.out.println("");
                             break;
-                        case 4:
+                        case 4: 
+                            ChangeIndexCtrl cic = new ChangeIndexCtrl();
+                            System.out.println("Enter course to change index");
+                            String courseToChange = sc.next();
+                            cic.changeIndex(SA, courseToChange, indexDBManager, addDropCtrl);
+                            System.out.println("");
+                            System.out.println("Student timetable");
+                            SA.getTimetable().printTimetable();
+                            break;
+                        case 5:
                             StudentAcc student2 = studentLogin(studentList);
                             System.out.println("Enter course to swap");
                             String courseToSwap = sc.next();
@@ -113,7 +119,7 @@ public class UserInterface {
                             student2.getTimetable().printTimetable();
                             System.out.println("");
                             break;
-                        case 5:
+                        case 6:
                             System.out.println("Enter course code to check: ");
                             String ccCheck = sc.next();
                             System.out.println("Enter index number to check: ");
@@ -127,13 +133,13 @@ public class UserInterface {
                             }
                             System.out.println("");
                             break;
-                        case 6:
+                        case 7:
                             ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
                             reclassifyCtrl.reclassifyCourse(SA, indexDBManager);
                             SA.getTimetable().printTimetable();
                             System.out.println("");
                             break;
-                        case 7:
+                        case 8:
                             System.out.println("Bye bye!");
                             login = false;
                             break;
