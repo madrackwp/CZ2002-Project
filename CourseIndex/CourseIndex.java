@@ -8,16 +8,18 @@ public class CourseIndex {
     String courseCode;
     int indexNo;
     String school;
+    ModType modType;
     int capacity;
     int vacancies;
     ArrayList<String> registeredStudentMatricNo;
     ArrayList<Lesson> lessons;
 
-    public CourseIndex(String courseCode, int indexNo, String school, int capacity, int vacancies,
+    public CourseIndex(String courseCode, int indexNo, String school, ModType modType, int capacity, int vacancies,
             ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
         this.courseCode = courseCode;
         this.indexNo = indexNo;
         this.school = school;
+        this.modType = modType;
         this.capacity = capacity;
         this.vacancies = vacancies;
         this.registeredStudentMatricNo = registeredStudentMatricNo;
@@ -28,6 +30,12 @@ public class CourseIndex {
     public String toString() {
         return this.courseCode + " " + this.school + " " + Integer.toString(this.indexNo) + " "
                 + Integer.toString(this.vacancies);
+    }
+
+    public String fullDetails() {
+        return this.courseCode + " " + this.indexNo + " " + this.school + " " + this.modType.toString() + " "
+                + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies) + " "
+                + this.registeredStudentMatricNo + " " + this.lessons;
     }
 
     public int getCapacity() {
@@ -80,17 +88,21 @@ public class CourseIndex {
 
     public String toWrite() {
         String result = this.courseCode + " " + Integer.toString(this.indexNo) + " " + this.school + " "
-                + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
+                + this.modType.toString() + " " + Integer.toString(this.capacity) + " "
+                + Integer.toString(this.vacancies);
         result += " ";
 
-        for (int i = 0; i < registeredStudentMatricNo.size(); i++) {
-            if (i == registeredStudentMatricNo.size() - 1) {
-                result += registeredStudentMatricNo.get(i);
-            } else {
-                result += registeredStudentMatricNo.get(i) + ",";
+        if (!this.registeredStudentMatricNo.isEmpty()) {
+            for (int i = 0; i < registeredStudentMatricNo.size(); i++) {
+                if (i == registeredStudentMatricNo.size() - 1) {
+                    result += registeredStudentMatricNo.get(i);
+                } else {
+                    result += registeredStudentMatricNo.get(i) + ",";
+                }
             }
+            result += " ";
         }
-        result += " ";
+
         for (Lesson l : this.lessons) {
             result += l.getStartTime() + "," + l.getEndTime() + "," + l.getTypeToString() + "," + l.getDayToString()
                     + " ";

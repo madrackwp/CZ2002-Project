@@ -35,7 +35,8 @@ public class CourseIndexReader extends TextFileReader {
                     lessonArrayList.add(l);
                 }
                 CourseIndex c = new CourseIndex(tokens[0], Integer.parseInt(tokens[1]), tokens[2],
-                        Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), matricArr, lessonArrayList);
+                        ModType.valueOf(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5]), matricArr,
+                        lessonArrayList);
                 courseIndexes.add(c);
             } while (line != null);
             reader.close();
