@@ -80,6 +80,7 @@ public class StudentAcc extends UserAcc {
 
     public void addNewCourse(CourseIndex courseIndex) {
         this.registeredCourseIndexes.add(courseIndex);
+        this.courseHash.put(courseIndex.getCourseCode(), courseIndex.getDefaultModType());
     }
 
     public void removeCourse(CourseIndex courseIndex) {
@@ -104,4 +105,12 @@ public class StudentAcc extends UserAcc {
         return null;
     }
 
+    public boolean editModType(String courseCode, ModType newModType) {
+        try {
+            this.courseHash.put(courseCode, newModType);
+            return true;
+        } catch (Exception e) {
+            return true;
+        }
+    }
 }

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import CourseController.AddDropCtrl;
 import CourseController.CheckVacancyCtrl;
+import CourseController.ReclassifyCtrl;
 import CourseController.ShowAllCoursesCtrl;
 import CourseController.SwapIndexCtrl;
 import CourseIndex.CourseIndex;
@@ -35,62 +36,85 @@ public class UserInterface {
             SA = this.studentLogin(studentList);
             // System.out.println(SA.getUserName());
             if (SA != null) {
+                boolean login = true;
+                while (login) {
+                    System.out.println("Choose option:");
+                    System.out.println("1. Add course");
+                    System.out.println("2. Drop course");
+                    System.out.println("3. Check Registered Courses");
+                    System.out.println("4. Swap index with peer");
+                    System.out.println("5. Check Vacancies Available");
+                    System.out.println("6. Reclassify mod type");
+                    System.out.println("7. Logout");
+                    System.out.println("===========================================");
 
-                System.out.println("Choose option:");
-                System.out.println("1. Add course");
-                System.out.println("2. Drop course");
-                System.out.println("3. Check Registered Courses");
-                System.out.println("4. Swap index with peer");
-                System.out.println("5. Check Vacancies Available");
-                System.out.println("===========================================");
+                    userChoice = sc.nextInt();
 
-                userChoice = sc.nextInt();
+                    AddDropCtrl addDropCtrl = new AddDropCtrl();
+                    ShowAllCoursesCtrl showAllCoursesCtrl = new ShowAllCoursesCtrl();
 
-                AddDropCtrl addDropCtrl = new AddDropCtrl();
-                ShowAllCoursesCtrl showAllCoursesCtrl = new ShowAllCoursesCtrl();
+                    switch (userChoice) {
+                        case 1:
+                            // SA.getTimetable().printTimetable();
+                            CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
+                            addDropCtrl.addCourse(SA, toAdd);
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 2:
+                            // SA.getTimetable().printTimetable();
+                            System.out.println("Enter course to drop");
+                            String courseToDrop = sc.next();
+                            addDropCtrl.dropCourse(SA, courseToDrop);
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 3:
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 4:
+                            StudentAcc student2 = studentLogin(studentList);
+                            System.out.println("Enter course to swap");
+                            String courseToSwap = sc.next();
+                            SwapIndexCtrl sic = new SwapIndexCtrl();
+                            sic.swapIndex(SA, student2, courseToSwap, addDropCtrl);
+                            System.out.println("Student1 timetable");
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            System.out.println("Student2 timetable");
+                            student2.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 5:
+                            System.out.println("Enter course code to check: ");
+                            String ccCheck = sc.next();
+                            System.out.println("Enter index number to check: ");
+                            int iCheck = sc.nextInt();
+                            CheckVacancyCtrl cvc = new CheckVacancyCtrl();
+                            int vacancy = cvc.getVacancies(ccCheck, iCheck, indexDBManager);
+                            if (vacancy == -1) {
+                                System.out.println("Invalid Course/Index");
+                            } else {
+                                System.out.println("Number of vacancies: " + vacancy);
+                            }
+                            System.out.println("");
+                            break;
+                        case 6:
+                            ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
+                            reclassifyCtrl.reclassifyCourse(SA, indexDBManager);
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 7:
+                            System.out.println("Bye bye!");
+                            login = false;
+                            break;
+                        default:
+                            System.out.println("Invalid option, try again idiot");
+                            break;
 
-                switch (userChoice) {
-                    case 1:
-                        // SA.getTimetable().printTimetable();
-                        CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
-                        addDropCtrl.addCourse(SA, toAdd);
-                        SA.getTimetable().printTimetable();
-                        break;
-                    case 2:
-                        // SA.getTimetable().printTimetable();
-                        System.out.println("Enter course to drop");
-                        String courseToDrop = sc.next();
-                        addDropCtrl.dropCourse(SA, courseToDrop);
-                        SA.getTimetable().printTimetable();
-                        break;
-                    case 3:
-                        SA.getTimetable().printTimetable();
-                        break;
-                    case 4:
-                        StudentAcc student2 = studentLogin(studentList);
-                        System.out.println("Enter course to swap");
-                        String courseToSwap = sc.next();
-                        SwapIndexCtrl sic = new SwapIndexCtrl();
-                        sic.swapIndex(SA, student2, courseToSwap, addDropCtrl);
-                        System.out.println("Student1 timetable");
-                        SA.getTimetable().printTimetable();
-                        System.out.println("");
-                        System.out.println("Student2 timetable");
-                        student2.getTimetable().printTimetable();
-                        break;
-                    case 5:
-                        System.out.println("Enter course code to check: ");
-                        String ccCheck = sc.next();
-                        System.out.println("Enter index number to check: ");
-                        int iCheck = sc.nextInt();
-                        CheckVacancyCtrl cvc = new CheckVacancyCtrl();
-                        int vacancy = cvc.getVacancies(ccCheck, iCheck, indexDBManager);
-                        if (vacancy == -1) {
-                            System.out.println("Invalid Course/Index");
-                        } else {
-                            System.out.println("Number of vacancies: " + vacancy);
-                        }
-                        break;
+                    }
 
                 }
 
@@ -130,9 +154,9 @@ public class UserInterface {
         String password = null;
         if (cs != null) {
             // cs.printf("Testing password%n");
-            char[] passwordArray = cs.readPassword("Enter your secret password: ");
+            char[] passwordArray = cs.readPassword("Enter your password: ");
             String newString = new String(passwordArray);
-            cs.printf("Password entered was: %s%n", newString);
+            // cs.printf("Password entered was: %s%n", newString);
             password = Integer.toString(newString.hashCode());
         }
         // System.out.println("Enter password");

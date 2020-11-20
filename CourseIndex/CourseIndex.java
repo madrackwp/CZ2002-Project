@@ -131,4 +131,12 @@ public class CourseIndex {
         return this.academicUnits;
     }
 
+    public ModType getDefaultModType() {
+        return this.allowedModType.get(0);
+    }
+
+    public ArrayList<ModType> getAllowedModTypes() {
+        return this.allowedModType;
+    }
+
 }
