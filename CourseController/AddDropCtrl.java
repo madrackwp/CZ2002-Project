@@ -6,8 +6,8 @@ import CourseIndex.*;
 import Timetable.Timetable;
 import Users.*;
 
-public class AddDropController {
-    public AddDropController() {
+public class AddDropCtrl {
+    public AddDropCtrl() {
     }
 
     public boolean addCourse(StudentAcc student, CourseIndex courseToAdd) {

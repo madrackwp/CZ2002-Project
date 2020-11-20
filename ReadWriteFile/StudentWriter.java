@@ -1,7 +1,6 @@
 package ReadWriteFile;
 
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import CourseIndex.CourseIndex;
@@ -10,7 +9,7 @@ import DatabaseManager.*;
 import LocalDatabase.CourseIndexDB;
 import LocalDatabase.StudentDB;
 
-public class StudentWriter extends Writer {
+public class StudentWriter extends TextFileWriter {
 
     StudentReader reader = new StudentReader();
 

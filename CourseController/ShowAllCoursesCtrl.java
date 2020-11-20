@@ -6,8 +6,8 @@ import java.util.Scanner;
 import CourseIndex.CourseIndex;
 import DatabaseManager.CourseIndexDBManager;
 
-public class ShowAllCourses {
-    public ShowAllCourses() {
+public class ShowAllCoursesCtrl {
+    public ShowAllCoursesCtrl() {
     }
 
     public void showCourses(CourseIndexDBManager dbManager) {
