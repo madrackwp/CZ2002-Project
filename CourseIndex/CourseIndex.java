@@ -9,23 +9,25 @@ public class CourseIndex {
     int indexNo;
     int academicUnits;
     String school;
-    ModType modType;
+    ArrayList<ModType> allowedModType;
     int capacity;
     int vacancies;
     ArrayList<String> registeredStudentMatricNo;
     ArrayList<Lesson> lessons;
 
-    public CourseIndex(String courseCode, int indexNo, int academicUnits, String school, ModType modType, int capacity,
-            int vacancies, ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
+    public CourseIndex(String courseCode, int indexNo, int academicUnits, String school,
+            ArrayList<ModType> allowedModType, int capacity, int vacancies, ArrayList<String> registeredStudentMatricNo,
+            ArrayList<Lesson> lessons) {
         this.courseCode = courseCode;
         this.indexNo = indexNo;
         this.academicUnits = academicUnits;
         this.school = school;
-        this.modType = modType;
+        this.allowedModType = allowedModType;
         this.capacity = capacity;
         this.vacancies = vacancies;
         this.registeredStudentMatricNo = registeredStudentMatricNo;
         this.lessons = lessons;
+
         // IndexWaitList indexWaitList = new IndexWaitList();
     }
 
@@ -34,11 +36,13 @@ public class CourseIndex {
                 + Integer.toString(this.vacancies);
     }
 
-    public String fullDetails() {
-        return this.courseCode + " " + this.indexNo + " " + this.school + " " + this.modType.toString() + " "
-                + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies) + " "
-                + this.registeredStudentMatricNo + " " + this.lessons;
-    }
+    // public String fullDetails() {
+    // return this.courseCode + " " + this.indexNo + " " + this.school + " " +
+    // this.modType.toString() + " "
+    // + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies) +
+    // " "
+    // + this.registeredStudentMatricNo + " " + this.lessons;
+    // }
 
     public int getCapacity() {
         return capacity;
@@ -90,8 +94,18 @@ public class CourseIndex {
 
     public String toWrite() {
         String result = this.courseCode + " " + Integer.toString(this.indexNo) + " "
-                + Integer.toString(this.academicUnits) + " " + this.school + " " + this.modType.toString() + " "
-                + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
+                + Integer.toString(this.academicUnits) + " " + this.school + " ";
+
+        for (int i = 0; i < allowedModType.size(); i++) {
+            result += allowedModType.get(i).toString();
+            if (i != allowedModType.size() - 1) {
+                result += ",";
+            } else {
+                result += " ";
+            }
+        }
+
+        result = result + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
         result += " ";
 
         if (!this.registeredStudentMatricNo.isEmpty()) {

@@ -21,7 +21,11 @@ public class CourseIndexReader extends TextFileReader {
             do {
                 line = reader.readLine();
                 String[] tokens = line.split(" ");
-
+                ArrayList<ModType> allowedModTypes = new ArrayList<ModType>();
+                String[] modTypes = tokens[4].split(",");
+                for (String modType : modTypes) {
+                    allowedModTypes.add(ModType.valueOf(modType));
+                }
                 String[] matNo = tokens[7].split(",");
                 ArrayList<String> matricArr = new ArrayList<>();
                 if (!matNo[0].equals("null")) {
@@ -40,8 +44,8 @@ public class CourseIndexReader extends TextFileReader {
                     lessonArrayList.add(l);
                 }
                 CourseIndex c = new CourseIndex(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]),
-                        tokens[3], ModType.valueOf(tokens[4]), Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]),
-                        matricArr, lessonArrayList);
+                        tokens[3], allowedModTypes, Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), matricArr,
+                        lessonArrayList);
                 courseIndexes.add(c);
             } while (line != null);
             reader.close();
