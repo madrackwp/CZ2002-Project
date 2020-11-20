@@ -7,6 +7,7 @@ import java.util.Scanner;
 import CourseController.*;
 import CourseIndex.CourseIndex;
 import DatabaseManager.CourseIndexDBManager;
+import DatabaseManager.StudentDBManager;
 import LocalDatabase.*;
 import ReadWriteFile.*;
 import Users.*;
@@ -16,19 +17,22 @@ public class UserInterface {
     public UserInterface() {
         int userChoice;
         StudentAcc SA = null;
+
+        CourseIndexReader CIR = new CourseIndexReader();
+        ArrayList<CourseIndex> temp = CIR.ReadFile();
+        CourseIndexDB indexDB = new CourseIndexDB(temp);
+        CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
+
+        StudentReader ur = new StudentReader();
+        ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
+        StudentDB studentDB = new StudentDB(studentList);
+        StudentDBManager studentDBManager = new StudentDBManager(studentDB);
+
         System.out.println("Welcome to STARS");
         System.out.println("Select login: 1. StudentAcc 2. StaffAcc");
         Scanner sc = new Scanner(System.in);
         userChoice = sc.nextInt();
         if (userChoice == 1) {
-            CourseIndexReader CIR = new CourseIndexReader();
-            ArrayList<CourseIndex> temp = CIR.ReadFile();
-            CourseIndexDB indexDB = new CourseIndexDB(temp);
-            CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
-
-            StudentReader ur = new StudentReader();
-            ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
-
             SA = this.studentLogin(studentList);
             // System.out.println(SA.getUserName());
             if (SA != null) {
@@ -53,10 +57,23 @@ public class UserInterface {
                     switch (userChoice) {
                         case 1:
                             // SA.getTimetable().printTimetable();
+
+                            for (StudentAcc s : studentList) {
+                                System.out.println(s.getName());
+                            }
+
+                            studentList.remove(SA);
                             CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
                             addDropCtrl.addCourse(SA, toAdd);
                             SA.getTimetable().printTimetable();
                             System.out.println("");
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+
+                            for (StudentAcc s : studentList) {
+                                System.out.println(s.getName());
+                            }
+
                             break;
                         case 2:
                             // SA.getTimetable().printTimetable();
