@@ -3,8 +3,10 @@ package Users;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import CourseIndex.CourseIndex;
+import CourseIndex.ModType;
 import Timetable.Timetable;
 
 public class StudentAcc extends UserAcc {
@@ -13,19 +15,25 @@ public class StudentAcc extends UserAcc {
     private String accessDate;
     private ArrayList<CourseIndex> registeredCourseIndexes;
     private Timetable timetable;
+    private HashMap<String, ModType> courseHash;
 
     public StudentAcc(String userName, String password, String name, String school, String matricNo, int yearOfStudy,
-            String accessDate, ArrayList<CourseIndex> registeredCourseIndexes) {
+            String accessDate, ArrayList<CourseIndex> registeredCourseIndexes, HashMap<String, ModType> courseHash) {
         super(userName, password, name, school);
         this.matricNo = matricNo;
         this.yearOfStudy = yearOfStudy;
         this.accessDate = accessDate;
         this.registeredCourseIndexes = registeredCourseIndexes;
         this.timetable = new Timetable(registeredCourseIndexes);
+        this.courseHash = courseHash;
     }
 
     public String getMatricNo() {
         return matricNo;
+    }
+
+    public HashMap<String, ModType> getCourseHash() {
+        return courseHash;
     }
 
     public int getYearOfStudy() {
@@ -53,7 +61,9 @@ public class StudentAcc extends UserAcc {
         String temp = super.getUserName() + " " + super.getPassword() + " " + super.getName() + " " + super.getSchool()
                 + " " + this.getMatricNo() + " " + Integer.toString(this.getYearOfStudy()) + " " + this.getAccessDate();
         for (CourseIndex courseIndex : this.registeredCourseIndexes) {
-            String courseInfo = courseIndex.getCourseCode() + "," + Integer.toString(courseIndex.getIndexNo());
+            String modType = courseHash.get(courseIndex.getCourseCode()).toString();
+            String courseInfo = courseIndex.getCourseCode() + "," + Integer.toString(courseIndex.getIndexNo()) + ","
+                    + modType;
             temp = temp + " ";
             temp = temp + courseInfo;
         }

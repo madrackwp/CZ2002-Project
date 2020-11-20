@@ -2,20 +2,20 @@ package Timetable;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import CourseIndex.CourseIndex;
-import CourseIndex.Lesson;
-import CourseIndex.Type;
-import CourseIndex.Day;
+import CourseIndex.*;
 
 public class Timetable {
     private ArrayList<CourseIndex> coursestaken;
     private String[][] timetable;
+    private HashMap<String, ModType> courseHash;
 
-    public Timetable(ArrayList<CourseIndex> c) {
+    public Timetable(ArrayList<CourseIndex> c, HashMap<String, ModType> courseHash) {
         this.coursestaken = c;
         this.timetable = new String[5][14];
+        this.courseHash = courseHash;
     }
 
     public boolean checkEmptySlot(CourseIndex c) {
@@ -157,16 +157,19 @@ public class Timetable {
         int totalAU = 0;
         for (int i = 0; i < coursestaken.size(); i++) {
             totalAU += coursestaken.get(i).getAcademicUnits();
+            System.out.print(coursestaken.get(i).getCourseCode() + " ");
+            System.out.print(coursestaken.get(i).getIndexNo() + " ");
+            System.out.print(coursestaken.get(i).getAcademicUnits() + "AU ");
+            System.out.println(coursestaken.get(i).get + "");
+
             for (int j = 0; j < coursestaken.get(i).getLessons().size(); j++) {
-                System.out.print(coursestaken.get(i).getCourseCode() + " ");
-                System.out.print(coursestaken.get(i).getIndexNo() + " ");
-                System.out.print(coursestaken.get(i).getAcademicUnits() + "AU ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getType() + " ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getDay() + " ");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getStartTime() + "-");
                 System.out.print(coursestaken.get(i).getLessons().get(j).getEndTime());
                 System.out.println();
             }
+            System.out.println("----------------------------------------------");
         }
         System.out.println("Total AUs taken: " + totalAU);
     }
