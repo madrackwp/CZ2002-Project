@@ -4,9 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import CourseController.AddDropController;
-import CourseController.ShowAllCourses;
-import CourseController.SwapIndexController;
+import CourseController.AddDropCtrl;
+import CourseController.ShowAllCoursesCtrl;
+import CourseController.SwapIndexCtrl;
 import CourseIndex.CourseIndex;
 import DatabaseManager.CourseIndexDBManager;
 import LocalDatabase.*;
@@ -41,29 +41,29 @@ public class UserInterface {
                 System.out.println("3. Swap index with peer");
                 userChoice = sc.nextInt();
 
-                AddDropController addDropController = new AddDropController();
-                ShowAllCourses showAllCourses = new ShowAllCourses();
+                AddDropCtrl addDropCtrl = new AddDropCtrl();
+                ShowAllCoursesCtrl showAllCoursesCtrl = new ShowAllCoursesCtrl();
 
                 switch (userChoice) {
                     case 1:
                         SA.getTimetable().printTimetable();
-                        CourseIndex toAdd = showAllCourses.selectCourse(indexDBManager);
-                        addDropController.addCourse(SA, toAdd);
+                        CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
+                        addDropCtrl.addCourse(SA, toAdd);
                         SA.getTimetable().printTimetable();
                         break;
                     case 2:
                         SA.getTimetable().printTimetable();
                         System.out.println("Enter course to drop");
                         String courseToDrop = sc.next();
-                        addDropController.dropCourse(SA, courseToDrop);
+                        addDropCtrl.dropCourse(SA, courseToDrop);
                         SA.getTimetable().printTimetable();
                         break;
                     case 3:
                         StudentAcc student2 = studentLogin(studentList);
                         System.out.println("Enter course to swap");
                         String courseToSwap = sc.next();
-                        SwapIndexController sic = new SwapIndexController();
-                        sic.swapIndex(SA, student2, courseToSwap, addDropController);
+                        SwapIndexCtrl sic = new SwapIndexCtrl();
+                        sic.swapIndex(SA, student2, courseToSwap, addDropCtrl);
                         System.out.println("Student1 timetable");
                         SA.getTimetable().printTimetable();
                         System.out.println("");
@@ -74,7 +74,7 @@ public class UserInterface {
 
                 }
 
-                // addDropController.addCourse(SA, courseToAdd)
+                // addDropCtrl.addCourse(SA, courseToAdd)
                 // CourseIndexReader cir = new CourseIndexReader();
                 // ArrayList<CourseIndex> courseIndexes = cir.ReadFile();
                 // for (CourseIndex ci : courseIndexes) {
@@ -107,6 +107,7 @@ public class UserInterface {
 
         System.out.println("Enter username");
         String userName = sc.nextLine();
+<<<<<<< HEAD
         String password;
         if (cs != null) {
             cs.printf("Testing password%n");
@@ -116,6 +117,13 @@ public class UserInterface {
         }
         // System.out.println("Enter password");
         // String password = Integer.toString(passwordArray.hashCode());
+=======
+        Console console = System.console();
+        if (console != null) {
+            System.out.println("Enter password");
+        }
+        String password = Integer.toString(sc.nextLine().hashCode());
+>>>>>>> 5d01db74e329716b7fb54d08978bc68b102fdea5
 
         for (StudentAcc saZ : studentList) {
             sa = saZ;

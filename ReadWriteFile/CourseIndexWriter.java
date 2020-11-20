@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import CourseIndex.CourseIndex;
 import LocalDatabase.CourseIndexDB;
 
-public class CourseIndexWriter extends Writer {
+public class CourseIndexWriter extends TextFileWriter {
 
     public CourseIndexWriter() {
     }
