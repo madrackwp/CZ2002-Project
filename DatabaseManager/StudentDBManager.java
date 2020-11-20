@@ -2,6 +2,7 @@ package DatabaseManager;
 
 import CourseIndex.CourseIndex;
 import LocalDatabase.StudentDB;
+import ReadWriteFile.StudentWriter;
 import Users.StudentAcc;
 
 import java.util.ArrayList;
@@ -38,6 +39,18 @@ public class StudentDBManager implements DatabaseManager {
 
     public ArrayList<StudentAcc> getStudentAccs() {
         return this.studentAccs;
+    }
+
+    @Override
+    public boolean updateDatabase(Object studentAccs, Object studentDB) {
+        try {
+            ArrayList<StudentAcc> list = (ArrayList<StudentAcc>) studentAccs;
+            ((StudentDB) studentDB).setStudentDB(list);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     // public boolean changeAccess(String matricNo){
