@@ -97,6 +97,7 @@ public class UserInterface {
         // ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
 
         Scanner sc = new Scanner(System.in);
+        Console cs = System.console();
         StudentAcc sa;
         String currentDate;
 
@@ -106,11 +107,23 @@ public class UserInterface {
 
         System.out.println("Enter username");
         String userName = sc.nextLine();
+<<<<<<< HEAD
+        String password;
+        if (cs != null) {
+            cs.printf("Testing password%n");
+            char[] passwordArray = cs.readPassword("Enter your secret password: ");
+            cs.printf("Password entered was: %s%n", new String(passwordArray));
+            password = Integer.toString(passwordArray.hashCode());
+        }
+        // System.out.println("Enter password");
+        // String password = Integer.toString(passwordArray.hashCode());
+=======
         Console console = System.console();
         if (console != null) {
             System.out.println("Enter password");
         }
         String password = Integer.toString(sc.nextLine().hashCode());
+>>>>>>> 5d01db74e329716b7fb54d08978bc68b102fdea5
 
         for (StudentAcc saZ : studentList) {
             sa = saZ;
