@@ -74,6 +74,11 @@ public class CourseIndex {
         }
     }
 
+    public boolean addStudentEvenIfZero(String studentMatricNo) {
+        registeredStudentMatricNo.add(studentMatricNo);
+        return true;
+    }
+
     public boolean removeStudent(String studentMatricNo) {
         if (registeredStudentMatricNo.contains(studentMatricNo)) {
             registeredStudentMatricNo.remove(studentMatricNo);
@@ -137,6 +142,14 @@ public class CourseIndex {
 
     public ArrayList<ModType> getAllowedModTypes() {
         return this.allowedModType;
+    }
+
+    public void changeVacancies (String course, int index, int vacancy) {
+        System.out.println(index == indexNo);
+        if ((course.equals(courseCode)) && (index == indexNo)) {
+            this.vacancies = vacancy;
+            System.out.println(this.vacancies);
+        }
     }
 
 }

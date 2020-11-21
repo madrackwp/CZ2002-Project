@@ -3,5 +3,11 @@
         "lib/**/*.jar",
         "SendMailbygmail/activation.jar",
         "SendMailbygmail/mail.jar"
-    ]
+    ],
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
 }
