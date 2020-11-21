@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar",
+			"SendMailbygmail/activation.jar",
+			"SendMailbygmail/mail.jar"
+		]
+	}
+}
