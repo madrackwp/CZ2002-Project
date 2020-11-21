@@ -33,7 +33,7 @@ public class UserInterface {
         CourseIndexWriter courseIndexWriter = new CourseIndexWriter();
 
         System.out.println("Welcome to STARS");
-        System.out.println("Select login: 1. StudentAcc 2. StaffAcc");
+        System.out.println("Select Login Domain: 1. STUDENT 2. STAFF");
         Scanner sc = new Scanner(System.in);
         userChoice = sc.nextInt();
         if (userChoice == 1) {
@@ -47,9 +47,9 @@ public class UserInterface {
                     System.out.println("2. Drop course");
                     System.out.println("3. Check Registered Courses");
                     System.out.println("4. Change Index");
-                    System.out.println("5. Swap index with peer");
+                    System.out.println("5. Swap Index With Peer");
                     System.out.println("6. Check Vacancies Available");
-                    System.out.println("7. Reclassify mod type");
+                    System.out.println("7. Reclassify Mod Type");
                     System.out.println("8. Logout");
                     System.out.println("===========================================");
 
@@ -62,9 +62,9 @@ public class UserInterface {
                         case 1:
                             // SA.getTimetable().printTimetable();
 
-                            for (StudentAcc s : studentList) {
-                                System.out.println(s.getName());
-                            }
+                            // for (StudentAcc s : studentList) {
+                            // System.out.println(s.getName());
+                            // }
 
                             studentList.remove(SA);
 
@@ -82,9 +82,9 @@ public class UserInterface {
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
 
-                            for (StudentAcc s : studentList) {
-                                System.out.println(s.getName());
-                            }
+                            // for (StudentAcc s : studentList) {
+                            // System.out.println(s.getName());
+                            // }
                             SA.getTimetable().printTimetable();
                             System.out.println("");
 
@@ -97,15 +97,26 @@ public class UserInterface {
                             studentList.remove(SA);
 
                             CourseIndex toDrop = SA.getCourseIndex(courseToDrop);
-
                             courseList.remove(toDrop);
-                            CourseIndex dropppedCourse = addDropCtrl.dropCourse(SA, courseToDrop);
-                            studentList.add(SA);
+                            CourseIndex droppedCourse = addDropCtrl.dropCourse(SA, courseToDrop);
 
+                            ArrayList<String> indexWaitList = toDrop.getIndexWaitList().getWaitList();
+                            if (!indexWaitList.get(0).equals("null")) {
+                                String indexWaitListMatricNo = indexWaitList.remove(0);
+                                System.out.println(indexWaitList);
+                                StudentAcc waitingStudent = studentDBManager
+                                        .getStudentByMatricNo(indexWaitListMatricNo);
+                                studentList.remove(waitingStudent);
+                                addDropCtrl.addCourse(waitingStudent, droppedCourse);
+                                studentList.add(waitingStudent);
+                                // send notification
+                            }
+
+                            studentList.add(SA);
                             studentDBManager.updateDatabase(studentList, studentDB);
                             studentWriter.writeFile(studentDBManager);
 
-                            courseList.add(dropppedCourse);
+                            courseList.add(droppedCourse);
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
 
@@ -374,7 +385,6 @@ public class UserInterface {
         }
         // System.out.println("Enter password");
         // String password = Integer.toString(passwordArray.hashCode());
-        
 
         for (StudentAcc saZ : studentList) {
             sa = saZ;
@@ -392,9 +402,8 @@ public class UserInterface {
             }
         }
         if (foundUser == true) {
-            System.out.println("Invalid Password"); 
-        }
-        else {
+            System.out.println("Invalid Password");
+        } else {
             System.out.println("Invalid Username");
         }
         return null;
@@ -429,7 +438,7 @@ public class UserInterface {
 
         System.out.println("Enter username");
         String userName = sc.nextLine();
-        
+
         for (StudentAcc saZ : studentList) {
             sa = saZ;
             if (sa.getUserName().equals(userName)) {
