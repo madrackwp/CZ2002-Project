@@ -204,7 +204,20 @@ public class UserInterface {
                             break;
                         case 7:
                             ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
-                            reclassifyCtrl.reclassifyCourse(SA, indexDBManager);
+
+                            SA.getTimetable().printTimetable();
+                            System.out.println("=====================================");
+                            System.out.println("Select mod to reclassify:");
+                            String userInput = sc.next();
+
+                            studentList.remove(SA);
+
+                            reclassifyCtrl.reclassifyCourse(userInput, SA);
+
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
                             SA.getTimetable().printTimetable();
                             System.out.println("");
                             break;
