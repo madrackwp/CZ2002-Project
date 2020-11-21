@@ -251,8 +251,8 @@ public class UserInterface {
                     System.out.println("1. Add course");
                     System.out.println("2. Drop course");
                     System.out.println("3. Overwrite Vacancies");
-                    // System.out.println("4. Swap index with peer");
-                    // System.out.println("5. Check Vacancies Available");
+                    System.out.println("4. Print students by Index Number");
+                    System.out.println("5. Print students by Course");
                     // System.out.println("6. Reclassify mod type");
                     // System.out.println("7. Logout");
                     System.out.println("===========================================");
@@ -292,17 +292,50 @@ public class UserInterface {
                             System.out.println("");
                             break;
 
-                        case 3:
-                            indexDB.print();
-                            System.out.println("Enter course to change vacancies");
-                            String courseToChange = sc.next();
-                            System.out.println("Enter index of course to change vacancies");
-                            int courseIndexToChange = sc.nextInt();
-                            System.out.println("Value to change to:");
-                            int vacancy = sc.nextInt();
-                            addDropStaff.changeVacancies(indexDB, courseToChange, courseIndexToChange, vacancy);
-                            indexDB.print();
-                            System.out.println("");
+                        // case 3:
+                        //     indexDB.print();
+                        //     System.out.println("Enter course to change vacancies");
+                        //     String courseToChange = sc.next();
+                        //     System.out.println("Enter index of course to change vacancies");
+                        //     int courseIndexToChange = sc.nextInt();
+                        //     System.out.println("Value to change to:");
+                        //     int vacancy = sc.nextInt();
+                        //     addDropStaff.changeVacancies(indexDB, courseToChange, courseIndexToChange, vacancy);
+                        //     indexDB.print();
+                        //     System.out.println("");
+                        //     break;
+
+                        case 4:
+                            System.out.println("Enter Course");
+                            String course1 = sc.next();
+                            System.out.println("Enter Index");
+                            int index1 = sc.nextInt();
+                            CourseIndex courseIndex = indexDBManager.getCourseIndexInfo(course1, index1);
+                            ArrayList<String> mat = courseIndex.getRegisteredStudentMatricNo();
+                            for (int i = 0; i < mat.size(); i++) {
+                                StudentAcc temp = studentDBManager.getStudents(mat.get(i));
+                                System.out.println(temp);
+                                temp.print();
+                            }
+                            break;
+
+                        case 5:
+                            System.out.println("Enter Course");
+                            String course2 = sc.next();
+                            ArrayList<CourseIndex> courseIndex1 = indexDBManager.getCourseIndexInfo1(course2);
+                            ArrayList<String> mat1 = new ArrayList<String>();
+                            for (int i = 0; i < courseIndex1.size(); i++) {
+                                System.out.println(courseIndex1.size());
+                                for (int j = 0; j < courseIndex1.get(i).getRegisteredStudentMatricNo().size(); j++) {
+                                    if (!courseIndex1.get(i).getRegisteredStudentMatricNo().get(j).equals("null"))
+                                    mat1.add((courseIndex1.get(i).getRegisteredStudentMatricNo().get(j)));
+                                }
+                            }
+                            for (int z = 0; z < mat1.size(); z++) {
+                                StudentAcc temp = studentDBManager.getStudents(mat1.get(z));
+                                System.out.println(temp);
+                                temp.print();
+                            }
                             break;
                         }
                     }

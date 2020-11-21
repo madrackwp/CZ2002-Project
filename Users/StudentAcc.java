@@ -119,4 +119,8 @@ public class StudentAcc extends UserAcc {
             return true;
         }
     }
+
+    public void print() {
+        System.out.println(matricNo + " " + yearOfStudy);
+    }
 }
