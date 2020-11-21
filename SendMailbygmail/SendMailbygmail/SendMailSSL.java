@@ -1,9 +1,8 @@
-package Notification;
+package SendMailbygmail;
 
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
-import java.util.Scanner;
 
 class Mailer {
    public static void send(String from, String password, String to, String sub, String msg) {
@@ -37,16 +36,11 @@ class Mailer {
    }
 }
 
-public class EmailNotification {
-    public static void sendNotification(String username){
-        String toemail= username+"@gmail.com";
-        Mailer.send("staffaccntustar@gmail.com","P@ssword12345",toemail,"Notification: You have been added to a course on your waitlist.","insert preset message here");
-    }
-//    public static void main(String[] args) {
-//        // from,password,to,subject,message
-//        Mailer.send("from@gmail.com", "insert password here", "to@gmail.com", "insert subject here",
-//                "insert message body here");
-//        // change from, password, to, subject and message
-//    }
+public class SendMailSSL {
+   public static void main(String[] args) {
+       // from,password,to,subject,message
+       Mailer.send("from@gmail.com", "insert password here", "to@gmail.com", "insert subject here",
+               "insert message body here");
+       // change from, password, to, subject and message
+   }
 }
-
