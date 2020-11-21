@@ -287,16 +287,16 @@ public class UserInterface {
                 while (login) {
                     System.out.println("Choose option:");
                     System.out.println("1. Register course for student");
-                    System.out.println("2. Drop course");
-                    System.out.println("3. Overwrite Vacancies");
-                    System.out.println("4. Print students by Index Number");
-                    System.out.println("5. Print students by Course");
+                    System.out.println("2. Drop course"); // done
+                    System.out.println("3. Overwrite Vacancies"); // done
+                    System.out.println("4. Print students by Index Number"); // done
+                    System.out.println("5. Print students by Course"); // done
                     System.out.println("6. Add Course Code");
-                    System.out.println("7. Update Course Code");
-                    System.out.println("8. Update School");
+                    System.out.println("7. Update Course Code"); // done
+                    System.out.println("8. Update School"); // done
                     System.out.println("9. Add index number");
                     System.out.println("10. Change index number");
-                    System.out.println("11. Logout");
+                    System.out.println("11. Logout"); // done
                     System.out.println("===========================================");
 
                     userChoice = sc.nextInt();
