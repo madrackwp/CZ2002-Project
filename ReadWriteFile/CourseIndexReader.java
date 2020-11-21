@@ -21,11 +21,24 @@ public class CourseIndexReader extends TextFileReader {
             do {
                 line = reader.readLine();
                 String[] tokens = line.split(" ");
+
                 ArrayList<ModType> allowedModTypes = new ArrayList<ModType>();
                 String[] modTypes = tokens[4].split(",");
                 for (String modType : modTypes) {
                     allowedModTypes.add(ModType.valueOf(modType));
                 }
+
+                String[] waitListMatric = tokens[5].split(",");
+                ArrayList<String> waitList = new ArrayList<>();
+                if (!waitListMatric[0].equals("null")) {
+                    for (String matricNo : waitListMatric) {
+                        waitList.add(matricNo);
+                    }
+                } else {
+                    waitList.add("null");
+                }
+                IndexWaitList indexWaitList = new IndexWaitList(waitList);
+
                 String[] matNo = tokens[7].split(",");
                 ArrayList<String> matricArr = new ArrayList<>();
                 if (!matNo[0].equals("null")) {
@@ -43,8 +56,9 @@ public class CourseIndexReader extends TextFileReader {
                             Day.valueOf(lessonDetails[3]));
                     lessonArrayList.add(l);
                 }
+
                 CourseIndex c = new CourseIndex(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]),
-                        tokens[3], allowedModTypes, Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), matricArr,
+                        tokens[3], allowedModTypes, indexWaitList, Integer.parseInt(tokens[6]), matricArr,
                         lessonArrayList);
                 courseIndexes.add(c);
             } while (line != null);

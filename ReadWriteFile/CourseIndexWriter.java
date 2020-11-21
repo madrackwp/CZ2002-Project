@@ -25,7 +25,7 @@ public class CourseIndexWriter extends TextFileWriter {
                 writer.write("\n".getBytes());
             }
             writer.close();
-            System.out.println("BRYAYFASYDFDHLJFALSDKJFASLFJSD");
+            // System.out.println("BRYAYFASYDFDHLJFALSDKJFASLFJSD");
 
         } catch (IOException e) {
             System.out.println("An error occurred.");
