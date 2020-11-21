@@ -143,12 +143,36 @@ public class UserInterface {
                             int newCourseIndex = sc.nextInt();
                             CourseIndex indexToChangeTo = indexDBManager.getCourseIndexInfo(courseToChange,
                                     newCourseIndex);
+
                             studentList.remove(SA);
                             courseList.remove(indexToDrop);
                             courseList.remove(indexToChangeTo);
 
+                            ArrayList<String> IndexWaitList = indexToDrop.getIndexWaitList().getWaitList();
+                            StudentAcc waitingStudent = null;
+                            if (!IndexWaitList.get(0).equals("null")) {
+                                String indexWaitListMatricNo = IndexWaitList.get(0);
+                                // System.out.println(IndexWaitList);
+                                waitingStudent = studentDBManager.getStudentByMatricNo(indexWaitListMatricNo);
+
+                                // studentList.(waitingStudent);
+                                // addDropCtrl.addCourse(waitingStudent, indexToDrop);
+                                // studentList.add(waitingStudent);
+
+                                // send notification
+                            }
+
                             ArrayList<CourseIndex> oldNewCourseIndex = cic.changeIndex(indexToChangeTo, SA, indexToDrop,
                                     indexDBManager, addDropCtrl);
+                            // check old course if SA is still inside
+                            // if no, add waitingStudent into old course
+                            if (!oldNewCourseIndex.get(0).getRegisteredStudentMatricNo().contains(SA.getMatricNo())
+                                    && waitingStudent != null) {
+                                studentList.remove(waitingStudent);
+                                oldNewCourseIndex.get(0).getIndexWaitList().removeStudent(waitingStudent.getMatricNo());
+                                addDropCtrl.addCourse(waitingStudent, oldNewCourseIndex.get(0));
+                                studentList.add(waitingStudent);
+                            }
 
                             CourseIndex toChange_Drop = oldNewCourseIndex.get(0);
                             CourseIndex toChange_Add = oldNewCourseIndex.get(1);

@@ -74,6 +74,9 @@ public class CourseIndex {
             if (this.indexWaitList.getWaitList().isEmpty()) {
                 this.indexWaitList.addStudent("null");
             }
+            // else {
+            // this.indexWaitList.removeStudent(studentMatricNo);
+            // }
             registeredStudentMatricNo.add(studentMatricNo);
             vacancies--;
             return true;
