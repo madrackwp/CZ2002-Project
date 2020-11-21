@@ -28,21 +28,28 @@ public class StudentReader extends TextFileReader {
 			do {
 				line = reader.readLine();
 				String[] tokens = line.split(" ");
+				String temp1 = tokens[7];
 				ArrayList<CourseIndex> registeredCourseIndexes = new ArrayList<CourseIndex>();
 				HashMap<String, ModType> modHash = new HashMap<String, ModType>();
-				for (int i = 7; i < tokens.length; i++) {
-					String[] indexInfo = tokens[i].split(",");
-					// System.out.println(indexInfo[0] + indexInfo[1]);
-					try {
-						CourseIndex tempCourseIndex = ((CourseIndexDBManager) courseIndexDBManager)
-								.getCourseIndexInfo(indexInfo[0], Integer.parseInt(indexInfo[1]));
-						registeredCourseIndexes.add(tempCourseIndex);
-						modHash.put(indexInfo[0], ModType.valueOf(indexInfo[2]));
-					} catch (NullPointerException e) {
-						System.out.println("The course does not exist");
-						break;
+
+				// If the registered courses columns are null, return empty HashMap and
+				// ArrayList into constructor of StudentAcc
+				if (!temp1.equals("null")) {
+					for (int i = 7; i < tokens.length; i++) {
+						String[] indexInfo = tokens[i].split(",");
+						// System.out.println(indexInfo[0] + indexInfo[1]);
+						try {
+							CourseIndex tempCourseIndex = ((CourseIndexDBManager) courseIndexDBManager)
+									.getCourseIndexInfo(indexInfo[0], Integer.parseInt(indexInfo[1]));
+							registeredCourseIndexes.add(tempCourseIndex);
+							modHash.put(indexInfo[0], ModType.valueOf(indexInfo[2]));
+						} catch (NullPointerException e) {
+							System.out.println("The course does not exist");
+							break;
+						}
 					}
 				}
+
 				StudentAcc s = new StudentAcc(tokens[0], tokens[1], tokens[2], tokens[3], tokens[4],
 						Integer.parseInt(tokens[5]), (tokens[6]), registeredCourseIndexes, modHash);
 				studentArr.add(s);

@@ -71,8 +71,13 @@ public class CourseIndexDBManager implements DatabaseManager {
     }
 
     @Override
-    public boolean updateDatabase(Object arrayList, Object dataBase) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean updateDatabase(Object arrayListOfCourse, Object dataBaseForCourse) {
+        try {
+            ArrayList<CourseIndex> updatedCourses = (ArrayList<CourseIndex>) arrayListOfCourse;
+            ((CourseIndexDB) dataBaseForCourse).setCourseIndexes(updatedCourses);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

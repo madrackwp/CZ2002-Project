@@ -39,7 +39,7 @@ public class StudentWriter extends TextFileWriter {
     }
 
     @Override
-    void writeFile(Object studentDBManager) {
+    public void writeFile(Object studentDBManager) {
         String path = "ReadWriteFile\\studentdata.txt";
         // TODO Auto-generated method stub
         ArrayList<StudentAcc> studentAccs = ((StudentDBManager) studentDBManager).getStudentAccs();

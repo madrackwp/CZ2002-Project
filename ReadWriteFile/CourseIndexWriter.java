@@ -5,14 +5,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import CourseIndex.CourseIndex;
 import LocalDatabase.CourseIndexDB;
+import DatabaseManager.*;
 
 public class CourseIndexWriter extends TextFileWriter {
 
     public CourseIndexWriter() {
     }
 
-    public void writeFile(Object courseIndexDB) {
-        ArrayList<CourseIndex> courseIndexes = ((CourseIndexDB) courseIndexDB).getCourseIndexes();
+    public void writeFile(Object courseIndexDBManager) {
+        ArrayList<CourseIndex> courseIndexes = ((CourseIndexDBManager) courseIndexDBManager).getCourseIndexes();
 
         String path = "ReadWriteFile\\courseData.txt";
 
@@ -36,11 +37,11 @@ public class CourseIndexWriter extends TextFileWriter {
 
     // }
 
-//    public static void main(String[] args) {
-//        CourseIndexReader cr1 = new CourseIndexReader();
-//        ArrayList<CourseIndex> courseIndexes = cr1.ReadFile();
-//        CourseIndexDB db = new CourseIndexDB(courseIndexes);
-//        CourseIndexWriter writer = new CourseIndexWriter();
-//        writer.writeFile(db);
-//    }
+    // public static void main(String[] args) {
+    // CourseIndexReader cr1 = new CourseIndexReader();
+    // ArrayList<CourseIndex> courseIndexes = cr1.ReadFile();
+    // CourseIndexDB db = new CourseIndexDB(courseIndexes);
+    // CourseIndexWriter writer = new CourseIndexWriter();
+    // writer.writeFile(db);
+    // }
 }
