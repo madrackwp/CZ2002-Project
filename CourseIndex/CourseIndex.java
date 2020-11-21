@@ -4,26 +4,30 @@ import Users.StudentAcc;
 
 import java.util.ArrayList;
 
+import javax.print.attribute.standard.RequestingUserName;
+
 public class CourseIndex {
     String courseCode;
     int indexNo;
     int academicUnits;
     String school;
     ArrayList<ModType> allowedModType;
-    int capacity;
+    // int capacity;
+    IndexWaitList indexWaitList;
     int vacancies;
     ArrayList<String> registeredStudentMatricNo;
     ArrayList<Lesson> lessons;
 
     public CourseIndex(String courseCode, int indexNo, int academicUnits, String school,
-            ArrayList<ModType> allowedModType, int capacity, int vacancies, ArrayList<String> registeredStudentMatricNo,
-            ArrayList<Lesson> lessons) {
+            ArrayList<ModType> allowedModType, IndexWaitList indexWaitList, int vacancies,
+            ArrayList<String> registeredStudentMatricNo, ArrayList<Lesson> lessons) {
         this.courseCode = courseCode;
         this.indexNo = indexNo;
         this.academicUnits = academicUnits;
         this.school = school;
         this.allowedModType = allowedModType;
-        this.capacity = capacity;
+        // this.capacity = capacity;
+        this.indexWaitList = indexWaitList;
         this.vacancies = vacancies;
         this.registeredStudentMatricNo = registeredStudentMatricNo;
         this.lessons = lessons;
@@ -43,10 +47,6 @@ public class CourseIndex {
     // " "
     // + this.registeredStudentMatricNo + " " + this.lessons;
     // }
-
-    public int getCapacity() {
-        return capacity;
-    }
 
     public int getVacancies() {
         return vacancies;
@@ -71,11 +71,19 @@ public class CourseIndex {
             if (registeredStudentMatricNo.get(0).equals("null")) {
                 registeredStudentMatricNo.remove(0);
             }
+            if (this.indexWaitList.getWaitList().isEmpty()) {
+                this.indexWaitList.addStudent("null");
+            }
             registeredStudentMatricNo.add(studentMatricNo);
             vacancies--;
             return true;
         }
     }
+
+    // public boolean addStudentEvenIfZero(String studentMatricNo) {
+    // registeredStudentMatricNo.add(studentMatricNo);
+    // return true;
+    // }
 
     public boolean removeStudent(String studentMatricNo) {
         if (registeredStudentMatricNo.contains(studentMatricNo)) {
@@ -111,7 +119,16 @@ public class CourseIndex {
             }
         }
 
-        result = result + Integer.toString(this.capacity) + " " + Integer.toString(this.vacancies);
+        for (int i = 0; i < this.indexWaitList.getWaitList().size(); i++) {
+            if (i == indexWaitList.getWaitList().size() - 1) {
+                result += indexWaitList.getWaitList().get(i);
+            } else {
+                result += indexWaitList.getWaitList().get(i) + ",";
+            }
+            result += " ";
+        }
+
+        result = result + Integer.toString(this.vacancies);
         result += " ";
 
         if (!this.registeredStudentMatricNo.isEmpty()) {
@@ -145,4 +162,24 @@ public class CourseIndex {
         return this.allowedModType;
     }
 
+    public void setVacancy(int vacancy) {
+        this.vacancies = vacancy;
+    }
+
+    public boolean addToWaitList(String matricNo) {
+        try {
+            if (this.indexWaitList.getWaitList().get(0).equals("null")) {
+                this.indexWaitList.getWaitList().remove(0);
+            }
+
+            this.indexWaitList.addStudent(matricNo);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public IndexWaitList getIndexWaitList() {
+        return this.indexWaitList;
+    }
 }

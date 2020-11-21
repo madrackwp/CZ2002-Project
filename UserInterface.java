@@ -11,12 +11,14 @@ import DatabaseManager.StudentDBManager;
 import LocalDatabase.*;
 import ReadWriteFile.*;
 import Users.*;
+import StaffDuties.*;
 
 public class UserInterface {
 
     public UserInterface() {
         int userChoice;
         StudentAcc SA = null;
+        StaffAcc StA = null;
 
         CourseIndexReader CIR = new CourseIndexReader();
         ArrayList<CourseIndex> courseList = CIR.ReadFile();
@@ -31,7 +33,7 @@ public class UserInterface {
         CourseIndexWriter courseIndexWriter = new CourseIndexWriter();
 
         System.out.println("Welcome to STARS");
-        System.out.println("Select login: 1. StudentAcc 2. StaffAcc");
+        System.out.println("Select Login Domain: 1. STUDENT 2. STAFF");
         Scanner sc = new Scanner(System.in);
         userChoice = sc.nextInt();
         if (userChoice == 1) {
@@ -45,9 +47,9 @@ public class UserInterface {
                     System.out.println("2. Drop course");
                     System.out.println("3. Check Registered Courses");
                     System.out.println("4. Change Index");
-                    System.out.println("5. Swap index with peer");
+                    System.out.println("5. Swap Index With Peer");
                     System.out.println("6. Check Vacancies Available");
-                    System.out.println("7. Reclassify mod type");
+                    System.out.println("7. Reclassify Mod Type");
                     System.out.println("8. Logout");
                     System.out.println("===========================================");
 
@@ -60,9 +62,9 @@ public class UserInterface {
                         case 1:
                             // SA.getTimetable().printTimetable();
 
-                            for (StudentAcc s : studentList) {
-                                System.out.println(s.getName());
-                            }
+                            // for (StudentAcc s : studentList) {
+                            // System.out.println(s.getName());
+                            // }
 
                             studentList.remove(SA);
 
@@ -80,9 +82,9 @@ public class UserInterface {
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
 
-                            for (StudentAcc s : studentList) {
-                                System.out.println(s.getName());
-                            }
+                            // for (StudentAcc s : studentList) {
+                            // System.out.println(s.getName());
+                            // }
                             SA.getTimetable().printTimetable();
                             System.out.println("");
 
@@ -95,15 +97,26 @@ public class UserInterface {
                             studentList.remove(SA);
 
                             CourseIndex toDrop = SA.getCourseIndex(courseToDrop);
-
                             courseList.remove(toDrop);
-                            CourseIndex dropppedCourse = addDropCtrl.dropCourse(SA, courseToDrop);
-                            studentList.add(SA);
+                            CourseIndex droppedCourse = addDropCtrl.dropCourse(SA, courseToDrop);
 
+                            ArrayList<String> indexWaitList = toDrop.getIndexWaitList().getWaitList();
+                            if (!indexWaitList.get(0).equals("null")) {
+                                String indexWaitListMatricNo = indexWaitList.remove(0);
+                                System.out.println(indexWaitList);
+                                StudentAcc waitingStudent = studentDBManager
+                                        .getStudentByMatricNo(indexWaitListMatricNo);
+                                studentList.remove(waitingStudent);
+                                addDropCtrl.addCourse(waitingStudent, droppedCourse);
+                                studentList.add(waitingStudent);
+                                // send notification
+                            }
+
+                            studentList.add(SA);
                             studentDBManager.updateDatabase(studentList, studentDB);
                             studentWriter.writeFile(studentDBManager);
 
-                            courseList.add(dropppedCourse);
+                            courseList.add(droppedCourse);
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
 
@@ -204,7 +217,20 @@ public class UserInterface {
                             break;
                         case 7:
                             ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
-                            reclassifyCtrl.reclassifyCourse(SA, indexDBManager);
+
+                            SA.getTimetable().printTimetable();
+                            System.out.println("=====================================");
+                            System.out.println("Select mod to reclassify:");
+                            String userInput = sc.next();
+
+                            studentList.remove(SA);
+
+                            reclassifyCtrl.reclassifyCourse(userInput, SA);
+
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
                             SA.getTimetable().printTimetable();
                             System.out.println("");
                             break;
@@ -227,10 +253,74 @@ public class UserInterface {
                 // System.out.println(ci.toString());
                 // }
             }
-        } else if (userChoice == 2) {
-            this.staffLogin();
-        }
+            // } else if (userChoice == 2) {
+            // StA = this.staffLogin();
+            // if (StA != null) {
+            // boolean login = true;
+            // while (login) {
+            // System.out.println("Choose option:");
+            // System.out.println("1. Add course");
+            // System.out.println("2. Drop course");
+            // System.out.println("3. Overwrite Vacancies");
+            // // System.out.println("4. Swap index with peer");
+            // // System.out.println("5. Check Vacancies Available");
+            // // System.out.println("6. Reclassify mod type");
+            // // System.out.println("7. Logout");
+            // System.out.println("===========================================");
 
+            // userChoice = sc.nextInt();
+
+            // AddDropCtrl addDropCtrl = new AddDropCtrl();
+            // // StaffAddDrop addDropStaff = new StaffAddDrop();
+            // ShowAllCoursesCtrl showAllCoursesCtrl = new ShowAllCoursesCtrl();
+
+            // switch (userChoice) {
+            // case 1:
+            // SA = studentOverwrite(studentList);
+
+            // for (StudentAcc s : studentList) {
+            // System.out.println(s.getName());
+            // }
+            // studentList.remove(SA);
+            // CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
+            // addDropStaff.addCourse(SA, toAdd);
+            // SA.getTimetable().printTimetable();
+            // System.out.println("");
+            // studentList.add(SA);
+            // studentDBManager.updateDatabase(studentList, studentDB);
+
+            // for (StudentAcc s : studentList) {
+            // System.out.println(s.getName());
+            // }
+
+            // break;
+            // case 2:
+            // // SA.getTimetable().printTimetable();
+            // System.out.println("Enter course to drop");
+            // String courseToDrop = sc.next();
+            // addDropCtrl.dropCourse(SA, courseToDrop);
+            // SA.getTimetable().printTimetable();
+            // System.out.println("");
+            // break;
+
+            // case 3:
+            // indexDB.print();
+            // System.out.println("Enter course to change vacancies");
+            // String courseToChange = sc.next();
+            // System.out.println("Enter index of course to change vacancies");
+            // int courseIndexToChange = sc.nextInt();
+            // CourseIndex courseIndex = indexDBManager.getCourseIndexInfo(courseToChange,
+            // courseIndexToChange);
+            // System.out.println("Value to change to:");
+            // int vacancy = sc.nextInt();
+            // addDropStaff.changeVacancies(courseIndex, vacancy);
+            // indexDB.print();
+            // System.out.println("");
+            // break;
+            // }
+            // }
+            // }
+        }
     }
 
     public StudentAcc studentLogin(ArrayList<StudentAcc> studentList) {
@@ -246,6 +336,7 @@ public class UserInterface {
         Console cs = System.console();
         StudentAcc sa;
         String currentDate;
+        boolean foundUser = false;
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
@@ -266,18 +357,24 @@ public class UserInterface {
 
         for (StudentAcc saZ : studentList) {
             sa = saZ;
-            if (sa.getUserName().equals(userName) && sa.getPassword().equals(password)) {
-                if (sa.getAccessDate().equals(currentDate)) {
-                    System.out.println("Login Success!");
-                    // System.out.println(sa.getRegisteredCourseIndex());
-                    return sa;
-                } else {
-                    System.out.println("Wrong access date");
+            if (sa.getUserName().equals(userName)) {
+                foundUser = true;
+                if (sa.getPassword().equals(password)) {
+                    if (sa.getAccessDate().equals(currentDate)) {
+                        System.out.println("Login Success!");
+                        // System.out.println(sa.getRegisteredCourseIndex());
+                        return sa;
+                    } else {
+                        System.out.println("Wrong access date");
+                    }
                 }
-
             }
         }
-        System.out.println("Login failed");
+        if (foundUser == true) {
+            System.out.println("Invalid Password");
+        } else {
+            System.out.println("Invalid Username");
+        }
         return null;
     }
 
@@ -300,6 +397,25 @@ public class UserInterface {
             }
         }
         System.out.println("Login Failed");
+        return null;
+    }
+
+    public StudentAcc studentOverwrite(ArrayList<StudentAcc> studentList) {
+
+        Scanner sc = new Scanner(System.in);
+        StudentAcc sa;
+
+        System.out.println("Enter username");
+        String userName = sc.nextLine();
+
+        for (StudentAcc saZ : studentList) {
+            sa = saZ;
+            if (sa.getUserName().equals(userName)) {
+                System.out.println("User Found");
+                return sa;
+            }
+        }
+        System.out.println("Invalid User");
         return null;
     }
 

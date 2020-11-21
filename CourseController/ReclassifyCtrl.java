@@ -13,20 +13,20 @@ public class ReclassifyCtrl {
     public ReclassifyCtrl() {
     }
 
-    public boolean reclassifyCourse(StudentAcc studentAcc, CourseIndexDBManager courseIndexDBManager) {
+    public boolean reclassifyCourse(String courseCode, StudentAcc studentAcc) {
         Scanner sc = new Scanner(System.in);
-        studentAcc.getTimetable().printTimetable();
-        System.out.println("=====================================");
-        System.out.println("Select mod to reclassify:");
-        String userInput = sc.next();
-        if (!studentAcc.takingCourse(userInput)) {
+        // studentAcc.getTimetable().printTimetable();
+        // System.out.println("=====================================");
+        // System.out.println("Select mod to reclassify:");
+        // String userInput = sc.next();
+        if (!studentAcc.takingCourse(courseCode)) {
             System.out.println("Invalid input");
             return false;
         }
         ArrayList<ModType> allowedModTypes = new ArrayList<ModType>();
         System.out.println("Select desired mod type: ");
         for (CourseIndex courseIndex : studentAcc.getRegisteredCourseIndex()) {
-            if (courseIndex.getCourseCode().equals(userInput)) {
+            if (courseIndex.getCourseCode().equals(courseCode)) {
                 allowedModTypes = courseIndex.getAllowedModTypes();
                 int i = 1;
                 for (ModType modtype : allowedModTypes) {
@@ -39,7 +39,7 @@ public class ReclassifyCtrl {
 
         int anotherUserInput = sc.nextInt();
         ModType newModType = allowedModTypes.get(anotherUserInput - 1);
-        studentAcc.editModType(userInput, newModType);
+        studentAcc.editModType(courseCode, newModType);
         return true;
 
     }
