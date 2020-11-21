@@ -83,13 +83,30 @@ public class UserInterface {
                             for (StudentAcc s : studentList) {
                                 System.out.println(s.getName());
                             }
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
 
                             break;
                         case 2:
                             // SA.getTimetable().printTimetable();
                             System.out.println("Enter course to drop");
                             String courseToDrop = sc.next();
-                            addDropCtrl.dropCourse(SA, courseToDrop);
+
+                            studentList.remove(SA);
+
+                            CourseIndex toDrop = SA.getCourseIndex(courseToDrop);
+
+                            courseList.remove(toDrop);
+                            CourseIndex dropppedCourse = addDropCtrl.dropCourse(SA, courseToDrop);
+                            studentList.add(SA);
+
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(dropppedCourse);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
                             SA.getTimetable().printTimetable();
                             System.out.println("");
                             break;
@@ -97,21 +114,73 @@ public class UserInterface {
                             SA.getTimetable().printTimetable();
                             System.out.println("");
                             break;
-                        case 4: 
+                        case 4:
                             ChangeIndexCtrl cic = new ChangeIndexCtrl();
-                            System.out.println("Enter course to change index");
+
+                            System.out.println("Enter course code to change index: ");
                             String courseToChange = sc.next();
-                            cic.changeIndex(SA, courseToChange, indexDBManager, addDropCtrl);
+                            if (!SA.takingCourse(courseToChange)) {
+                                System.out.println("Invalid input");
+                                break;
+                            }
+
+                            CourseIndex indexToDrop = SA.getCourseIndex(courseToChange);
+                            cic.displayValidCourseToChange(courseToChange, indexDBManager, SA);
+                            System.out.println("Enter new course index: ");
+                            int newCourseIndex = sc.nextInt();
+                            CourseIndex indexToChangeTo = indexDBManager.getCourseIndexInfo(courseToChange,
+                                    newCourseIndex);
+                            studentList.remove(SA);
+                            courseList.remove(indexToDrop);
+                            courseList.remove(indexToChangeTo);
+
+                            ArrayList<CourseIndex> oldNewCourseIndex = cic.changeIndex(indexToChangeTo, SA, indexToDrop,
+                                    indexDBManager, addDropCtrl);
+
+                            CourseIndex toChange_Drop = oldNewCourseIndex.get(0);
+                            CourseIndex toChange_Add = oldNewCourseIndex.get(1);
+
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(toChange_Drop);
+                            courseList.add(toChange_Add);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
                             System.out.println("");
                             System.out.println("Student timetable");
                             SA.getTimetable().printTimetable();
                             break;
                         case 5:
                             StudentAcc student2 = studentLogin(studentList);
-                            System.out.println("Enter course to swap");
+                            studentList.remove(student2);
+                            studentList.remove(SA);
+
+                            System.out.println("Enter course code to swap");
                             String courseToSwap = sc.next();
+
+                            CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
+                            CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
+
+                            courseList.remove(student2Course);
+                            courseList.remove(SACourse);
+
                             SwapIndexCtrl sic = new SwapIndexCtrl();
-                            sic.swapIndex(SA, student2, courseToSwap, addDropCtrl);
+                            ArrayList<CourseIndex> courseIndexes = sic.swapIndex(SA, student2, SACourse, student2Course,
+                                    addDropCtrl);
+
+                            studentList.add(SA);
+                            studentList.add(student2);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(courseIndexes.get(0));
+                            courseList.add(courseIndexes.get(1));
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
                             System.out.println("Student1 timetable");
                             SA.getTimetable().printTimetable();
                             System.out.println("");

@@ -1,44 +1,45 @@
 package CourseController;
+
 import java.util.ArrayList;
 import CourseIndex.CourseIndex;
 import Users.StudentAcc;
 import DatabaseManager.CourseIndexDBManager;
-import java.util.Scanner;
+import Timetable.Timetable;
 
 public class ChangeIndexCtrl {
-    public ChangeIndexCtrl(){
+    public ChangeIndexCtrl() {
 
     }
 
-    public boolean changeIndex(StudentAcc student, String courseCode, CourseIndexDBManager courseIndexDBManager, AddDropCtrl addDropCtrl){
-        Scanner sc = new Scanner(System.in);
-        CourseIndex currentCourse = student.getCourseIndex(courseCode);
-        if (!student.takingCourse(courseCode)){
-            System.out.println("Invalid input");
-            return false;
+    public void displayValidCourseToChange(String course, CourseIndexDBManager dbManager, StudentAcc student) {
+        CourseIndex currentCourse = student.getCourseIndex(course);
+        ArrayList<CourseIndex> validCourseIndexes = new ArrayList<>();
+
+        for (CourseIndex i : dbManager.getCourseIndexes()) {
+            if (i.getCourseCode().equals(course) && (!i.equals(currentCourse))) {
+                validCourseIndexes.add(i);
+            }
         }
-        ArrayList<CourseIndex> validCourseIndexes = new ArrayList<CourseIndex>();
-        for (CourseIndex i : courseIndexDBManager.getCourseIndexes()){
-            if (i.getCourseCode().equals(courseCode) && (!i.equals(currentCourse))){
-                    validCourseIndexes.add(i);
-                }
+        for (CourseIndex j : validCourseIndexes) {
+            System.out.println(j.getIndexNo());
         }
-        System.out.println("Select desired index number: ");
-        int k = 1;
-        for (CourseIndex j : validCourseIndexes){
-            System.out.println(k + ": " + j.getIndexNo());
-            k++;
-        }
-        int userInput = sc.nextInt();
-        addDropCtrl.dropCourse(student, courseCode);
-        if (student.getTimetable().checkEmptySlot(validCourseIndexes.get(userInput-1))){
-            addDropCtrl.addCourse(student, validCourseIndexes.get(userInput-1));
+    }
+
+    public ArrayList<CourseIndex> changeIndex(CourseIndex newCourseIndex, StudentAcc student,
+            CourseIndex oldCourseIndex, CourseIndexDBManager courseIndexDBManager, AddDropCtrl addDropCtrl) {
+        ArrayList<CourseIndex> courseIndexes = new ArrayList<CourseIndex>();
+
+        addDropCtrl.dropCourse(student, oldCourseIndex.getCourseCode());
+        Timetable timetable = student.getTimetable();
+        if (timetable.checkEmptySlot(newCourseIndex)) {
+            addDropCtrl.addCourse(student, newCourseIndex);
             System.out.println("Change successful");
-        }
-        else{
+        } else {
             System.out.println("Timing Clash");
-            addDropCtrl.addCourse(student, currentCourse);
+            addDropCtrl.addCourse(student, oldCourseIndex);
         }
-        return true;
+        courseIndexes.add(oldCourseIndex);
+        courseIndexes.add(newCourseIndex);
+        return courseIndexes;
     }
 }

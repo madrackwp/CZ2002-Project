@@ -33,7 +33,7 @@ public class CourseIndexReader extends TextFileReader {
                         matricArr.add(matNo[i]);
                     }
                 } else {
-                    matricArr.add("No registered students");
+                    matricArr.add("null");
                 }
 
                 ArrayList<Lesson> lessonArrayList = new ArrayList<>();

@@ -35,15 +35,15 @@ public class AddDropCtrl {
         }
     }
 
-    public boolean dropCourse(StudentAcc student, String courseToDrop) {
+    public CourseIndex dropCourse(StudentAcc student, String courseToDrop) {
         CourseIndex droppingCourse = student.getCourseIndex(courseToDrop);
-        if (droppingCourse != null) {
+        if (courseToDrop != null) {
             student.removeCourse(droppingCourse);
             droppingCourse.removeStudent(student.getMatricNo());
-            return true;
+            return droppingCourse;
         }
 
-        return false;
+        return null;
     }
 
 }
