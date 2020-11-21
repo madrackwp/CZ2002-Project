@@ -66,12 +66,11 @@ public class CourseIndexDBManager implements DatabaseManager {
         return null;
     }
 
-    public ArrayList<CourseIndex> getCourseIndexInfo1(String courseCode) {
+    public ArrayList<CourseIndex> getCourseIndexInfoArray(String courseCode) {
         ArrayList<CourseIndex> temp = new ArrayList<CourseIndex>();
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getCourseCode().equals(courseCode)) {
-                System.out.println("How many times");
-                temp.add(courseIndex); 
+                temp.add(courseIndex);
             }
         }
         return temp;

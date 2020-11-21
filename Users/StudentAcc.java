@@ -28,6 +28,11 @@ public class StudentAcc extends UserAcc {
         this.courseHash = courseHash;
     }
 
+    public String toString() {
+        return "Name: " + super.getName() + " | School: " + super.getSchool() + " | MatricNo: " + this.matricNo
+                + " | YearOfStudy: " + this.yearOfStudy;
+    }
+
     public String getMatricNo() {
         return matricNo;
     }
@@ -120,7 +125,4 @@ public class StudentAcc extends UserAcc {
         }
     }
 
-    public void print() {
-        System.out.println(matricNo + " " + yearOfStudy);
-    }
 }

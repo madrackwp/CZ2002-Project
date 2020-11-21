@@ -83,10 +83,10 @@ public class CourseIndex {
         }
     }
 
-    // public boolean addStudentEvenIfZero(String studentMatricNo) {
-    // registeredStudentMatricNo.add(studentMatricNo);
-    // return true;
-    // }
+    public boolean addStudentEvenIfZero(String studentMatricNo) {
+        registeredStudentMatricNo.add(studentMatricNo);
+        return true;
+    }
 
     public boolean removeStudent(String studentMatricNo) {
         if (registeredStudentMatricNo.contains(studentMatricNo)) {
@@ -167,6 +167,14 @@ public class CourseIndex {
 
     public void setVacancy(int vacancy) {
         this.vacancies = vacancy;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public boolean addToWaitList(String matricNo) {
