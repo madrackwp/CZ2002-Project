@@ -31,7 +31,7 @@ public class UserInterface {
         CourseIndexWriter courseIndexWriter = new CourseIndexWriter();
 
         System.out.println("Welcome to STARS");
-        System.out.println("Select login: 1. StudentAcc 2. StaffAcc");
+        System.out.println("Select Login Domain: 1. STUDENT 2. STAFF");
         Scanner sc = new Scanner(System.in);
         userChoice = sc.nextInt();
         if (userChoice == 1) {
@@ -45,9 +45,9 @@ public class UserInterface {
                     System.out.println("2. Drop course");
                     System.out.println("3. Check Registered Courses");
                     System.out.println("4. Change Index");
-                    System.out.println("5. Swap index with peer");
+                    System.out.println("5. Swap Index With Peer");
                     System.out.println("6. Check Vacancies Available");
-                    System.out.println("7. Reclassify mod type");
+                    System.out.println("7. Reclassify Mod Type");
                     System.out.println("8. Logout");
                     System.out.println("===========================================");
 
