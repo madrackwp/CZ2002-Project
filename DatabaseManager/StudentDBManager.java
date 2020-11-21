@@ -53,6 +53,15 @@ public class StudentDBManager implements DatabaseManager {
         }
     }
 
+    public StudentAcc getStudentByMatricNo(String matNo) {
+        for (StudentAcc s : studentAccs) {
+            if (s.getMatricNo().equals(matNo)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
     // public boolean changeAccess(String matricNo){
     // for(int i=0; i<this.studentAccs.size(); i++){
     // if(matricNo.equals(studentAccs.get(i).getMatricNo())){

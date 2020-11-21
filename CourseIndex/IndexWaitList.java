@@ -5,24 +5,28 @@ import Users.StudentAcc;
 import java.util.ArrayList;
 
 public class IndexWaitList {
-    ArrayList<StudentAcc> waitList;
+    ArrayList<String> waitList;
 
-    public IndexWaitList(ArrayList<StudentAcc> w){
+    public IndexWaitList(ArrayList<String> w) {
         this.waitList = w;
     }
 
-    public void addStudent(StudentAcc s){
+    public void addStudent(String s) {
         this.waitList.add(s);
         System.out.println("StudentAcc added successfully!");
     }
 
-    public void removeStudent(StudentAcc s){
+    public void removeStudent(String s) {
         boolean check = this.waitList.remove(s);
-        if(check){
+        if (check) {
             System.out.println("StudentAcc removed!");
-        }
-        else{
+        } else {
             System.out.println("Removal unsuccessful");
         }
     }
+
+    public ArrayList<String> getWaitList() {
+        return this.waitList;
+    }
+
 }

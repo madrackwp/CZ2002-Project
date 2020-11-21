@@ -23,6 +23,7 @@ public class AddDropCtrl {
         }
         if (timetable.checkEmptySlot(courseToAdd)) {
             if (courseToAdd.getVacancies() == 0) {
+                courseToAdd.addToWaitList(student.getMatricNo());
                 System.out.println("No vacancies, added to waitlist");
                 return false;
             }
