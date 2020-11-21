@@ -60,13 +60,19 @@ public class StudentAcc extends UserAcc {
 
         String temp = super.getUserName() + " " + super.getPassword() + " " + super.getName() + " " + super.getSchool()
                 + " " + this.getMatricNo() + " " + Integer.toString(this.getYearOfStudy()) + " " + this.getAccessDate();
-        for (CourseIndex courseIndex : this.registeredCourseIndexes) {
-            String modType = courseHash.get(courseIndex.getCourseCode()).toString();
-            String courseInfo = courseIndex.getCourseCode() + "," + Integer.toString(courseIndex.getIndexNo()) + ","
-                    + modType;
-            temp = temp + " ";
-            temp = temp + courseInfo;
+
+        if (this.registeredCourseIndexes.isEmpty()) {
+            temp += " null";
+        } else {
+            for (CourseIndex courseIndex : this.registeredCourseIndexes) {
+                String modType = courseHash.get(courseIndex.getCourseCode()).toString();
+                String courseInfo = courseIndex.getCourseCode() + "," + Integer.toString(courseIndex.getIndexNo()) + ","
+                        + modType;
+                temp = temp + " ";
+                temp = temp + courseInfo;
+            }
         }
+
         return temp;
     }
 

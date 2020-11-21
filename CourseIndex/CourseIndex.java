@@ -68,6 +68,9 @@ public class CourseIndex {
         if (vacancies == 0) {
             return false;
         } else {
+            if (registeredStudentMatricNo.get(0).equals("null")) {
+                registeredStudentMatricNo.remove(0);
+            }
             registeredStudentMatricNo.add(studentMatricNo);
             vacancies--;
             return true;
@@ -83,6 +86,9 @@ public class CourseIndex {
         if (registeredStudentMatricNo.contains(studentMatricNo)) {
             registeredStudentMatricNo.remove(studentMatricNo);
             vacancies++;
+            if (registeredStudentMatricNo.isEmpty()) {
+                registeredStudentMatricNo.add("null");
+            }
             return true;
         } else {
             return false;

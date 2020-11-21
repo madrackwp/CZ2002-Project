@@ -4,11 +4,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import CourseController.AddDropCtrl;
-import CourseController.CheckVacancyCtrl;
-import CourseController.ReclassifyCtrl;
-import CourseController.ShowAllCoursesCtrl;
-import CourseController.SwapIndexCtrl;
+import CourseController.*;
 import CourseIndex.CourseIndex;
 import DatabaseManager.CourseIndexDBManager;
 import DatabaseManager.StudentDBManager;
@@ -25,14 +21,16 @@ public class UserInterface {
         StaffAcc StA = null;
 
         CourseIndexReader CIR = new CourseIndexReader();
-        ArrayList<CourseIndex> temp = CIR.ReadFile();
-        CourseIndexDB indexDB = new CourseIndexDB(temp);
+        ArrayList<CourseIndex> courseList = CIR.ReadFile();
+        CourseIndexDB indexDB = new CourseIndexDB(courseList);
         CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
 
         StudentReader ur = new StudentReader();
         ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
         StudentDB studentDB = new StudentDB(studentList);
         StudentDBManager studentDBManager = new StudentDBManager(studentDB);
+        StudentWriter studentWriter = new StudentWriter();
+        CourseIndexWriter courseIndexWriter = new CourseIndexWriter();
 
         System.out.println("Welcome to STARS");
         System.out.println("Select login: 1. StudentAcc 2. StaffAcc");
@@ -48,10 +46,11 @@ public class UserInterface {
                     System.out.println("1. Add course");
                     System.out.println("2. Drop course");
                     System.out.println("3. Check Registered Courses");
-                    System.out.println("4. Swap index with peer");
-                    System.out.println("5. Check Vacancies Available");
-                    System.out.println("6. Reclassify mod type");
-                    System.out.println("7. Logout");
+                    System.out.println("4. Change Index");
+                    System.out.println("5. Swap index with peer");
+                    System.out.println("6. Check Vacancies Available");
+                    System.out.println("7. Reclassify mod type");
+                    System.out.println("8. Logout");
                     System.out.println("===========================================");
 
                     userChoice = sc.nextInt();
@@ -68,23 +67,48 @@ public class UserInterface {
                             }
 
                             studentList.remove(SA);
+
                             CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
+                            courseList.remove(toAdd);
                             addDropCtrl.addCourse(SA, toAdd);
                             SA.getTimetable().printTimetable();
                             System.out.println("");
+
                             studentList.add(SA);
                             studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(toAdd);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
 
                             for (StudentAcc s : studentList) {
                                 System.out.println(s.getName());
                             }
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
 
                             break;
                         case 2:
                             // SA.getTimetable().printTimetable();
                             System.out.println("Enter course to drop");
                             String courseToDrop = sc.next();
-                            addDropCtrl.dropCourse(SA, courseToDrop);
+
+                            studentList.remove(SA);
+
+                            CourseIndex toDrop = SA.getCourseIndex(courseToDrop);
+
+                            courseList.remove(toDrop);
+                            CourseIndex dropppedCourse = addDropCtrl.dropCourse(SA, courseToDrop);
+                            studentList.add(SA);
+
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(dropppedCourse);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
                             SA.getTimetable().printTimetable();
                             System.out.println("");
                             break;
@@ -93,11 +117,72 @@ public class UserInterface {
                             System.out.println("");
                             break;
                         case 4:
+                            ChangeIndexCtrl cic = new ChangeIndexCtrl();
+
+                            System.out.println("Enter course code to change index: ");
+                            String courseToChange = sc.next();
+                            if (!SA.takingCourse(courseToChange)) {
+                                System.out.println("Invalid input");
+                                break;
+                            }
+
+                            CourseIndex indexToDrop = SA.getCourseIndex(courseToChange);
+                            cic.displayValidCourseToChange(courseToChange, indexDBManager, SA);
+                            System.out.println("Enter new course index: ");
+                            int newCourseIndex = sc.nextInt();
+                            CourseIndex indexToChangeTo = indexDBManager.getCourseIndexInfo(courseToChange,
+                                    newCourseIndex);
+                            studentList.remove(SA);
+                            courseList.remove(indexToDrop);
+                            courseList.remove(indexToChangeTo);
+
+                            ArrayList<CourseIndex> oldNewCourseIndex = cic.changeIndex(indexToChangeTo, SA, indexToDrop,
+                                    indexDBManager, addDropCtrl);
+
+                            CourseIndex toChange_Drop = oldNewCourseIndex.get(0);
+                            CourseIndex toChange_Add = oldNewCourseIndex.get(1);
+
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(toChange_Drop);
+                            courseList.add(toChange_Add);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
+                            System.out.println("");
+                            System.out.println("Student timetable");
+                            SA.getTimetable().printTimetable();
+                            break;
+                        case 5:
                             StudentAcc student2 = studentLogin(studentList);
-                            System.out.println("Enter course to swap");
+                            studentList.remove(student2);
+                            studentList.remove(SA);
+
+                            System.out.println("Enter course code to swap");
                             String courseToSwap = sc.next();
+
+                            CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
+                            CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
+
+                            courseList.remove(student2Course);
+                            courseList.remove(SACourse);
+
                             SwapIndexCtrl sic = new SwapIndexCtrl();
-                            sic.swapIndex(SA, student2, courseToSwap, addDropCtrl);
+                            ArrayList<CourseIndex> courseIndexes = sic.swapIndex(SA, student2, SACourse, student2Course,
+                                    addDropCtrl);
+
+                            studentList.add(SA);
+                            studentList.add(student2);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(courseIndexes.get(0));
+                            courseList.add(courseIndexes.get(1));
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
                             System.out.println("Student1 timetable");
                             SA.getTimetable().printTimetable();
                             System.out.println("");
@@ -105,7 +190,7 @@ public class UserInterface {
                             student2.getTimetable().printTimetable();
                             System.out.println("");
                             break;
-                        case 5:
+                        case 6:
                             System.out.println("Enter course code to check: ");
                             String ccCheck = sc.next();
                             System.out.println("Enter index number to check: ");
@@ -119,13 +204,26 @@ public class UserInterface {
                             }
                             System.out.println("");
                             break;
-                        case 6:
+                        case 7:
                             ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
-                            reclassifyCtrl.reclassifyCourse(SA, indexDBManager);
+
+                            SA.getTimetable().printTimetable();
+                            System.out.println("=====================================");
+                            System.out.println("Select mod to reclassify:");
+                            String userInput = sc.next();
+
+                            studentList.remove(SA);
+
+                            reclassifyCtrl.reclassifyCourse(userInput, SA);
+
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
                             SA.getTimetable().printTimetable();
                             System.out.println("");
                             break;
-                        case 7:
+                        case 8:
                             System.out.println("Bye bye!");
                             login = false;
                             break;
