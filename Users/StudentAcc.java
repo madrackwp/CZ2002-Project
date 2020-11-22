@@ -70,6 +70,11 @@ public class StudentAcc extends UserAcc {
             temp += " null";
         } else {
             for (CourseIndex courseIndex : this.registeredCourseIndexes) {
+                // if(this.registeredCourseIndexes.isEmpty()){
+                // String modType = "";
+                // String coursecode = "";
+                // break;
+                // }
                 String modType = courseHash.get(courseIndex.getCourseCode()).toString();
                 String courseInfo = courseIndex.getCourseCode() + "," + Integer.toString(courseIndex.getIndexNo()) + ","
                         + modType;
@@ -123,6 +128,13 @@ public class StudentAcc extends UserAcc {
         } catch (Exception e) {
             return true;
         }
+    }
+
+    public boolean updateCourseHash(String newCourseCode, String oldCourseCode) {
+        ModType temp = this.courseHash.get(oldCourseCode);
+        this.courseHash.remove(oldCourseCode);
+        this.courseHash.put(newCourseCode, temp);
+        return true;
     }
 
 }
