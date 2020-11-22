@@ -17,39 +17,48 @@ public class StaffCreateCourseCtrl {
     public ArrayList<CourseIndex> createCourse() {
         ArrayList<CourseIndex> newCourseIndexes = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        boolean checker4ModType = true;
 
         System.out.println("Add Course");
-        String courseCode = sc.next();
+        String courseCode = sc.next().toUpperCase();
 
         System.out.println("Course AU:");
         int noOfAUs = sc.nextInt();
 
         System.out.println("Course School");
-        String school = sc.next();
-
-        System.out.println("How many allowed mod types?");
+        String school = sc.next().toUpperCase();
+        
+        System.out.println("How many allowed mod types? (Max 6)");
         int noOfModTypes = sc.nextInt();
 
         ArrayList<ModType> allowedModTypes = new ArrayList<ModType>();
         for (int i = 0; i < noOfModTypes; i++) {
             System.out.println("Course Type: CORE, UE, GERPE_LA, GERPE_BM, GERPE_STS, MPE");
-            ModType modType = ModType.valueOf(sc.next());
+            ModType modType = ModType.valueOf(sc.next().toUpperCase());
             if (allowedModTypes.contains(modType)) {
                 System.out.println("Mod Type already added!");
+                i--;
+            }
+            else if (!modType.toString().equals("UE") || !modType.toString().equals("GERPE_LA") || !modType.toString().equals("GERPE_BM") || !modType.toString().equals("GERPE_STS") || !modType.toString().equals("MPE") || !modType.toString().equals("CORE")) {
+                System.out.println("Invalid Mod Input");
                 i--;
             }
             allowedModTypes.add(modType);
         }
 
-        System.out.println("How many different lesson types?");
+        System.out.println("How many different lesson types? (Max 3)");
         int noOfLessons = sc.nextInt();
 
         ArrayList<Type> lessonTypesInCourse = new ArrayList<>();
         for (int x = 0; x < noOfLessons; x++) {
             System.out.println("Enter lesson types that this course has");
-            Type lessonType = Type.valueOf(sc.next());
+            Type lessonType = Type.valueOf(sc.next().toUpperCase());
             if (lessonTypesInCourse.contains(lessonType)) {
                 System.out.println("Lesson Type already added!");
+                x--;
+            }
+            else if (!lessonType.toString().equals("LECTURE") || !lessonType.toString().equals("TUTORIAL") || !lessonType.toString().equals("LAB")){
+                System.out.println("Invalid Lesson Type");
                 x--;
             }
             lessonTypesInCourse.add(lessonType);
@@ -83,7 +92,6 @@ public class StaffCreateCourseCtrl {
                     lessons.add(lectureLesson);
                     in = true;
                 } else if ((type.toString().equals("Lecture")) && (in == true)) {
-                    System.out.print(lectureLesson);
                     lessons.add(lectureLesson);
                 } else {
                     System.out.print("For " + type.toString());
