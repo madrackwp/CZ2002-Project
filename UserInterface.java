@@ -14,6 +14,7 @@ import DatabaseManager.StudentDBManager;
 import LocalDatabase.*;
 import Login.StaffLogin;
 import Login.StudentLogin;
+import Notification.NotificationManager;
 import ReadWriteFile.*;
 import Users.*;
 import StaffDuties.*;
@@ -37,6 +38,8 @@ public class UserInterface {
         StudentWriter studentWriter = new StudentWriter();
         CourseIndexWriter courseIndexWriter = new CourseIndexWriter();
 
+        NotificationManager notificationManager = new NotificationManager();
+
         System.out.println("Welcome to STARS");
         System.out.println("Select Login Domain: 1. STUDENT 2. STAFF");
         Scanner sc = new Scanner(System.in);
@@ -49,8 +52,8 @@ public class UserInterface {
                 boolean login_access_student = true;
                 while (login_access_student) {
                     System.out.println("Choose option:");
-                    System.out.println("1. Add course");
-                    System.out.println("2. Drop course");
+                    System.out.println("1. Add Course");
+                    System.out.println("2. Drop Course");
                     System.out.println("3. Check Registered Courses");
                     System.out.println("4. Change Index");
                     System.out.println("5. Swap Index With Peer");
@@ -81,25 +84,21 @@ public class UserInterface {
                             courseList.add(toAdd);
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
-
-                            // for (StudentAcc s : studentList) {
-                            // System.out.println(s.getName());
-                            // }
-                            SA.getTimetable().printTimetable();
-                            System.out.println("");
-
                             break;
                         case 2:
-                            // SA.getTimetable().printTimetable();
+                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                                System.out.println("No Course Taken");
+                                break;
+                            }
                             String courseToDrop;
-                            System.out.println("Enter course to drop");
-                            while (true){
+                            System.out.println("Enter Course to Drop: ");
+                            while (true) {
                                 courseToDrop = sc.next();
-                                if (SA.takingCourse(courseToDrop)){
+                                if (SA.takingCourse(courseToDrop)) {
                                     break;
                                 }
-                                System.out.println("You are not currently taking this course");
-                                System.out.println("Please re-enter course to drop");
+                                System.out.println("Course Not Taken");
+                                System.out.println("Please Re-enter Course to Drop: ");
                             }
 
                             studentList.remove(SA);
@@ -118,6 +117,8 @@ public class UserInterface {
                                 addDropCtrl.addCourse(waitingStudent, droppedCourse);
                                 studentList.add(waitingStudent);
                                 // send notification
+                                notificationManager.sendEmail(waitingStudent.getUserName(), waitingStudent.getName(),
+                                        droppedCourse);
 
                             }
 
@@ -137,19 +138,24 @@ public class UserInterface {
                             System.out.println("");
                             break;
                         case 4:
-                            ChangeIndexCtrl cic = new ChangeIndexCtrl();
-
-                            System.out.println("Enter course code to change index: ");
-                            String courseToChange = sc.next();
-                            if (!SA.takingCourse(courseToChange)) {
-                                System.out.println("Invalid input");
+                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                                System.out.println("No Course Taken");
                                 break;
+                            }
+                            ChangeIndexCtrl cic = new ChangeIndexCtrl();
+                            System.out.println("Enter Course Code to Change Index: ");
+                            String courseToChange;
+                            while (true) {
+                                courseToChange = sc.next();
+                                if (SA.takingCourse(courseToChange)) {
+                                    break;
+                                }
+                                System.out.println("Course Not Taken");
+                                System.out.println("Please Re-enter Course Code to Change Index: ");
                             }
 
                             CourseIndex indexToDrop = SA.getCourseIndex(courseToChange);
-                            cic.displayValidCourseToChange(courseToChange, indexDBManager, SA);
-                            System.out.println("Enter new course index: ");
-                            int newCourseIndex = sc.nextInt();
+                            int newCourseIndex = cic.displayValidCourseToChange(courseToChange, indexDBManager, SA);
                             CourseIndex indexToChangeTo = indexDBManager.getCourseIndexInfo(courseToChange,
                                     newCourseIndex);
 
@@ -161,14 +167,7 @@ public class UserInterface {
                             StudentAcc waitingStudent = null;
                             if (!IndexWaitList.get(0).equals("null")) {
                                 String indexWaitListMatricNo = IndexWaitList.get(0);
-                                // System.out.println(IndexWaitList);
                                 waitingStudent = studentDBManager.getStudentByMatricNo(indexWaitListMatricNo);
-
-                                // studentList.(waitingStudent);
-                                // addDropCtrl.addCourse(waitingStudent, indexToDrop);
-                                // studentList.add(waitingStudent);
-
-                                // send notification
                             }
 
                             ArrayList<CourseIndex> oldNewCourseIndex = cic.changeIndex(indexToChangeTo, SA, indexToDrop,
@@ -195,18 +194,28 @@ public class UserInterface {
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
 
-                            System.out.println("");
-                            System.out.println("Student timetable");
                             SA.getTimetable().printTimetable();
+                            System.out.println("");
                             break;
                         case 5:
+                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                                System.out.println("No Course Taken");
+                                break;
+                            }
                             StudentAcc student2 = studentLogin.login(studentList);
                             studentList.remove(student2);
                             studentList.remove(SA);
 
-                            System.out.println("Enter course code to swap");
-                            String courseToSwap = sc.next();
-
+                            System.out.println("Enter Course Code to Swap: ");
+                            String courseToSwap;
+                            while (true){
+                                courseToSwap = sc.next();
+                                if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)){
+                                    break;
+                                }
+                                System.out.println("Course Not Taken by Both Students");
+                                System.out.println("Please Re-enter Course Code to Swap: ");
+                            }
                             CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
                             CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
 
@@ -227,10 +236,11 @@ public class UserInterface {
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
 
-                            System.out.println("Student1 timetable");
+                            System.out.println("");
+                            System.out.println("Student 1");
                             SA.getTimetable().printTimetable();
                             System.out.println("");
-                            System.out.println("Student2 timetable");
+                            System.out.println("Student 2");
                             student2.getTimetable().printTimetable();
                             System.out.println("");
                             break;
@@ -287,7 +297,7 @@ public class UserInterface {
                             login_access_student = false;
                             break;
                         default:
-                            System.out.println("Invalid option, try again idiot");
+                            System.out.println("Invalid Option, Try Again! ");
                             break;
 
                     }
@@ -308,14 +318,14 @@ public class UserInterface {
                 boolean login_access_staff = true;
                 while (login_access_staff) {
                     System.out.println("Choose option:");
-                    System.out.println("1. Create New Student Account");
-                    System.out.println("2. Change Student Access period"); // done
+                    System.out.println("1. Create New Student Account"); // done
+                    System.out.println("2. Change Student Access period");
                     System.out.println("3. Change Vacancies"); // done
                     System.out.println("4. Print students by Index Number"); // done
                     System.out.println("5. Print students by Course"); // done
                     System.out.println("6. Add Course Code"); // done
-                    System.out.println("7. Change Course Code"); // done
-                    System.out.println("8. Change School"); // done
+                    System.out.println("7. Change Course Code");// done
+                    System.out.println("8. Change School");// done
                     System.out.println("9. Add index number");// done
                     System.out.println("10. Change index number");
                     System.out.println("11. Logout"); // done
@@ -345,6 +355,7 @@ public class UserInterface {
                             String studentMatric = sc.next();
                             StudentAcc studentChangeAccess = studentDBManager.getStudentByMatricNo(studentMatric);
 
+<<<<<<< HEAD
                             if (studentChangeAccess != null) {
                                 studentList.remove(studentChangeAccess);
                                 while (true) {
@@ -362,6 +373,16 @@ public class UserInterface {
                                 studentDBManager.updateDatabase(studentList, studentDB);
                                 studentWriter.writeFile(studentDBManager);
                             }
+=======
+                            studentList.remove(studentChangeAccess);
+                            System.out.println("Enter the new access date in the format dd/MM/YYYY");
+                            String newAccessDate = sc.next();
+                            StaffChangeAccessPeriodCtrl scapc = new StaffChangeAccessPeriodCtrl();
+                            studentChangeAccess = scapc.changeAccessPeriod(studentChangeAccess, newAccessDate);
+                            studentList.add(studentChangeAccess);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+>>>>>>> 56fbac36b0d881a118d5341329b5894e966d5c9e
 
                             break;
 
@@ -452,9 +473,10 @@ public class UserInterface {
 
                         case 7:
                             System.out.println("Enter Course to change");
-                            String course4 = sc.next();
-                            ArrayList<CourseIndex> courseIndex4 = indexDBManager.getCourseIndexInfoArray(course4);
+                            String changeCourse = sc.next();
+                            ArrayList<CourseIndex> courses = indexDBManager.getCourseIndexInfoArray(changeCourse);
 
+<<<<<<< HEAD
                             if (!courseIndex4.isEmpty()) {
                                 System.out.println("Enter new Course Code");
                                 String courseCode4 = sc.next();
@@ -471,13 +493,52 @@ public class UserInterface {
                             }
                             else 
                                 System.out.println("Invalid Course code");
+=======
+                            System.out.println("Enter new Course Code");
+                            String newCourseCode = sc.next();
+
+                            // for (int i = 0; i < courses.size(); i++) {
+                            // // System.out.println(courseIndex1.size());
+                            // courseList.remove(courses.get(i));
+                            // if (courses.get(i).getCourseCode().equals(course))
+                            // c.get(i).setCourseCode(courseCode);
+                            // courseList.add(c.get(i));
+                            // }
+
+                            ArrayList<StudentAcc> studentAffected = new ArrayList<>();
+                            for (CourseIndex c : courses) {
+                                ArrayList<String> studentsInCourse = c.getRegisteredStudentMatricNo();
+                                for (String students : studentsInCourse) {
+                                    StudentAcc droppingStudents = studentDBManager.getStudentByMatricNo(students);
+                                    studentList.remove(droppingStudents);
+                                    studentAffected.add(droppingStudents);
+                                }
+                            }
+
+                            ChangeCourseCodeCtrl ccc = new ChangeCourseCodeCtrl();
+                            courseList = ccc.changeCourseCode(courseList, courses, changeCourse, newCourseCode);
+
+                            for (StudentAcc studentToAdd : studentAffected) {
+                                if (studentToAdd != null) {
+                                    studentToAdd.updateCourseHash(newCourseCode, changeCourse);
+                                    studentList.add(studentToAdd);
+                                }
+                            }
+
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+>>>>>>> 56fbac36b0d881a118d5341329b5894e966d5c9e
                             break;
 
                         case 8:
                             System.out.println("Enter Course");
-                            String course3 = sc.next();
-                            ArrayList<CourseIndex> courseIndex3 = indexDBManager.getCourseIndexInfoArray(course3);
+                            String course = sc.next();
+                            ArrayList<CourseIndex> c = indexDBManager.getCourseIndexInfoArray(course);
 
+<<<<<<< HEAD
                             if (!courseIndex3.isEmpty()) {
                                 System.out.println("Enter School");
                                 String school3 = sc.next();
@@ -495,6 +556,16 @@ public class UserInterface {
                             else {
                                 System.out.println("Invalid Course Code");
                             }
+=======
+                            System.out.println("Enter School");
+                            String school = sc.next();
+
+                            ChangeSchCtrl csc = new ChangeSchCtrl();
+                            courseList = csc.changeSchool(courseList, c, school, course);
+
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+>>>>>>> 56fbac36b0d881a118d5341329b5894e966d5c9e
                             break;
 
                         case 9:

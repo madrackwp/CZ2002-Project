@@ -2,7 +2,9 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "SendMailbygmail/activation.jar",
-        "SendMailbygmail/mail.jar"
+        "SendMailbygmail/mail.jar",
+        "Notification/activation.jar",
+        "Notification/mail.jar"
     ],
     "files.exclude": {
         "**/.classpath": true,

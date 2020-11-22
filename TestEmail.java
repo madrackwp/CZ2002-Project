@@ -22,6 +22,6 @@ public class TestEmail {
         l.add(newLesson);
         CourseIndex c = new CourseIndex("CZ1234", 1234, 3, "SCSE", allowedModType, i, 10, nullList, l);
 
-        n.sendEmail("student1bobtan", c);
+        n.sendEmail("student1", "bobtan", c);
     }
 }

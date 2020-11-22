@@ -11,9 +11,9 @@ public class NotificationManager {
 
     // }
 
-    public boolean sendEmail(String studentUserName, CourseIndex courseIndex) {
+    public boolean sendEmail(String studentUserName, String studentName, CourseIndex courseIndex) {
         EmailNotification emailNotification = new EmailNotification();
-        emailNotification.sendNotification(studentUserName, courseIndex);
+        emailNotification.sendNotification(studentUserName, studentName, courseIndex);
         return true;
     }
 
