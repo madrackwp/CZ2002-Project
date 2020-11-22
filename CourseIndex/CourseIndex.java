@@ -71,6 +71,11 @@ public class CourseIndex {
             }
             if (this.indexWaitList.getWaitList().isEmpty()) {
                 this.indexWaitList.addStudent("null");
+            } else if (!this.indexWaitList.getWaitList().isEmpty()) {
+                this.indexWaitList.getWaitList().remove(0);
+                if (this.indexWaitList.getWaitList().size() == 0) {
+                    this.indexWaitList.getWaitList().add("null");
+                }
             }
             // else {
             // this.indexWaitList.removeStudent(studentMatricNo);

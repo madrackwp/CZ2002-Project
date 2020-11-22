@@ -9,8 +9,9 @@ import Users.UserAcc;
 import CourseIndex.CourseIndex;
 import CourseIndex.ModType;
 
-public class StaffAddStudent {
-    public StaffAddStudent() {}
+public class StaffAddStudentCtrl {
+    public StaffAddStudentCtrl() {
+    }
 
     public StudentAcc AddStudent() {
         Scanner sc = new Scanner(System.in);
@@ -32,7 +33,8 @@ public class StaffAddStudent {
         String accessDate = sc.next();
 
         UserAcc user = new UserAcc(username, defaultPassword, name, school);
-        StudentAcc student = new StudentAcc(username, defaultPassword, name, school, matNo, yearOfStudy, accessDate, emptyArr, emptyHash);
+        StudentAcc student = new StudentAcc(username, defaultPassword, name, school, matNo, yearOfStudy, accessDate,
+                emptyArr, emptyHash);
         return student;
     }
 }
