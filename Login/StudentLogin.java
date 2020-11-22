@@ -25,7 +25,7 @@ public class StudentLogin {
         LocalDateTime now = LocalDateTime.now();
         currentDate = dtf.format(now);
 
-        System.out.println("Enter username");
+        System.out.println("Enter username: ");
         String userName = sc.nextLine();
         String password = null;
         if (cs != null) {
@@ -45,10 +45,11 @@ public class StudentLogin {
                 if (sa.getPassword().equals(password)) {
                     if (sa.getAccessDate().equals(currentDate)) {
                         System.out.println("Login Success!");
-                        // System.out.println(sa.getRegisteredCourseIndex());
+                        System.out.println("");
                         return sa;
                     } else {
                         System.out.println("Wrong access date");
+                        System.out.println("");
                         return null;
                     }
                 }
@@ -56,9 +57,12 @@ public class StudentLogin {
         }
         if (foundUser == true) {
             System.out.println("Invalid Password");
+            System.out.println("");
         } else {
             System.out.println("Invalid Username");
+            System.out.println("");
         }
+        System.out.println("");
         return null;
     }
 }
