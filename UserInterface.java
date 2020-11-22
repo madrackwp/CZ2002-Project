@@ -298,14 +298,14 @@ public class UserInterface {
                 boolean login_access_staff = true;
                 while (login_access_staff) {
                     System.out.println("Choose option:");
-                    System.out.println("1. Create New Student Account");
-                    System.out.println("2. Change Student Access period"); // done
+                    System.out.println("1. Create New Student Account"); // done
+                    System.out.println("2. Change Student Access period");
                     System.out.println("3. Change Vacancies"); // done
                     System.out.println("4. Print students by Index Number"); // done
                     System.out.println("5. Print students by Course"); // done
                     System.out.println("6. Add Course Code"); // done
-                    System.out.println("7. Change Course Code"); // done
-                    System.out.println("8. Change School"); // done
+                    System.out.println("7. Change Course Code");// done
+                    System.out.println("8. Change School");// done
                     System.out.println("9. Add index number");// done
                     System.out.println("10. Change index number");
                     System.out.println("11. Logout"); // done
@@ -339,8 +339,8 @@ public class UserInterface {
                             studentList.remove(studentChangeAccess);
                             System.out.println("Enter the new access date in the format dd/MM/YYYY");
                             String newAccessDate = sc.next();
-                            studentChangeAccess.setAccessDate(newAccessDate);
-
+                            StaffChangeAccessPeriodCtrl scapc = new StaffChangeAccessPeriodCtrl();
+                            studentChangeAccess = scapc.changeAccessPeriod(studentChangeAccess, newAccessDate);
                             studentList.add(studentChangeAccess);
                             studentDBManager.updateDatabase(studentList, studentDB);
                             studentWriter.writeFile(studentDBManager);
@@ -432,40 +432,58 @@ public class UserInterface {
 
                         case 7:
                             System.out.println("Enter Course to change");
-                            String course4 = sc.next();
-                            ArrayList<CourseIndex> courseIndex4 = indexDBManager.getCourseIndexInfoArray(course4);
+                            String changeCourse = sc.next();
+                            ArrayList<CourseIndex> courses = indexDBManager.getCourseIndexInfoArray(changeCourse);
 
                             System.out.println("Enter new Course Code");
-                            String courseCode4 = sc.next();
+                            String newCourseCode = sc.next();
 
-                            for (int i = 0; i < courseIndex4.size(); i++) {
-                                // System.out.println(courseIndex1.size());
-                                courseList.remove(courseIndex4.get(i));
-                                if (courseIndex4.get(i).getCourseCode().equals(course4))
-                                    courseIndex4.get(i).setCourseCode(courseCode4);
-                                courseList.add(courseIndex4.get(i));
+                            // for (int i = 0; i < courses.size(); i++) {
+                            // // System.out.println(courseIndex1.size());
+                            // courseList.remove(courses.get(i));
+                            // if (courses.get(i).getCourseCode().equals(course))
+                            // c.get(i).setCourseCode(courseCode);
+                            // courseList.add(c.get(i));
+                            // }
+
+                            ArrayList<StudentAcc> studentAffected = new ArrayList<>();
+                            for (CourseIndex c : courses) {
+                                ArrayList<String> studentsInCourse = c.getRegisteredStudentMatricNo();
+                                for (String students : studentsInCourse) {
+                                    StudentAcc droppingStudents = studentDBManager.getStudentByMatricNo(students);
+                                    studentList.remove(droppingStudents);
+                                    studentAffected.add(droppingStudents);
+                                }
                             }
-                            System.out.println(courseIndex4);
+
+                            ChangeCourseCodeCtrl ccc = new ChangeCourseCodeCtrl();
+                            courseList = ccc.changeCourseCode(courseList, courses, changeCourse, newCourseCode);
+
+                            for (StudentAcc studentToAdd : studentAffected) {
+                                if (studentToAdd != null) {
+                                    studentToAdd.updateCourseHash(newCourseCode, changeCourse);
+                                    studentList.add(studentToAdd);
+                                }
+                            }
+
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
                             break;
 
                         case 8:
                             System.out.println("Enter Course");
-                            String course3 = sc.next();
-                            ArrayList<CourseIndex> courseIndex3 = indexDBManager.getCourseIndexInfoArray(course3);
+                            String course = sc.next();
+                            ArrayList<CourseIndex> c = indexDBManager.getCourseIndexInfoArray(course);
 
                             System.out.println("Enter School");
-                            String school3 = sc.next();
+                            String school = sc.next();
 
-                            for (int i = 0; i < courseIndex3.size(); i++) {
-                                // System.out.println(courseIndex1.size());
-                                courseList.remove(courseIndex3.get(i));
-                                if (courseIndex3.get(i).getCourseCode().equals(course3))
-                                    courseIndex3.get(i).setSchool(school3);
-                                courseList.add(courseIndex3.get(i));
-                            }
-                            System.out.println(courseIndex3);
+                            ChangeSchCtrl csc = new ChangeSchCtrl();
+                            courseList = csc.changeSchool(courseList, c, school, course);
+
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
                             break;
