@@ -84,7 +84,7 @@ public class UserInterface {
                             courseIndexWriter.writeFile(indexDBManager);
                             break;
                         case 2:
-                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                            if (SA.getRegisteredCourseIndex().isEmpty()) {
                                 System.out.println("No Course Taken");
                                 break;
                             }
@@ -136,7 +136,7 @@ public class UserInterface {
                             System.out.println("");
                             break;
                         case 4:
-                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                            if (SA.getRegisteredCourseIndex().isEmpty()) {
                                 System.out.println("No Course Taken");
                                 break;
                             }
@@ -177,6 +177,7 @@ public class UserInterface {
                                 studentList.remove(waitingStudent);
                                 oldNewCourseIndex.get(0).getIndexWaitList().removeStudent(waitingStudent.getMatricNo());
                                 addDropCtrl.addCourse(waitingStudent, oldNewCourseIndex.get(0));
+                                // send notification
                                 studentList.add(waitingStudent);
                             }
 
@@ -196,7 +197,7 @@ public class UserInterface {
                             System.out.println("");
                             break;
                         case 5:
-                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                            if (SA.getRegisteredCourseIndex().isEmpty()) {
                                 System.out.println("No Course Taken");
                                 break;
                             }
@@ -206,9 +207,9 @@ public class UserInterface {
 
                             System.out.println("Enter Course Code to Swap: ");
                             String courseToSwap;
-                            while (true){
+                            while (true) {
                                 courseToSwap = sc.next();
-                                if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)){
+                                if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
                                     break;
                                 }
                                 System.out.println("Course Not Taken by Both Students");
@@ -383,12 +384,20 @@ public class UserInterface {
 
                             IndexWaitList iwl = courseToChangeVacancy.getIndexWaitList();
                             for (int i = 0; i < vacancy; i++) {
-
+                                if (iwl.getWaitList().size() == 0) {
+                                    break;
+                                }
                                 String matricNo = iwl.getWaitList().get(0);
                                 StudentAcc student = studentDBManager.getStudentByMatricNo(matricNo);
                                 studentList.remove(student);
-                                addDropCtrl.addCourse(student, courseToChangeVacancy);
-                                System.out.println("Student" + i);
+                                boolean boolCheck = addDropCtrl.addCourse(student, courseToChangeVacancy);
+                                if (boolCheck) {
+                                    notificationManager.sendEmail(student.getUserName(), student.getName(),
+                                            courseToChangeVacancy);
+                                } else {
+                                    System.out.println("Add fail");
+                                }
+
                                 // Send email here\
                                 studentList.add(student);
 
