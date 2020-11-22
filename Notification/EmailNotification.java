@@ -12,10 +12,10 @@ public class EmailNotification {
     public EmailNotification() {
     }
 
-    public static void sendNotification(String username, CourseIndex courseIndex) {
+    public static void sendNotification(String username, String studentName, CourseIndex courseIndex) {
         String courseCode = courseIndex.getCourseCode();
         int indexNo = courseIndex.getIndexNo();
-        String toemail = username + "@gmail.com";
+        String toemail = username + studentName + "@gmail.com";
         Mailer.send("staffaccntustar@gmail.com", "P@ssword12345", toemail, "Notification: Message from STARS Admin",
                 " You have been added to a course on your wait list.\nCourse Code: " + courseCode + "\nIndex: "
                         + Integer.toString(indexNo));
@@ -57,7 +57,7 @@ class Mailer {
             message.setText(msg);
             // send message
             Transport.send(message);
-            System.out.println("message sent successfully");
+            // System.out.println("Notification sent successfully");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

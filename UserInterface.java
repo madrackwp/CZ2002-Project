@@ -12,6 +12,7 @@ import DatabaseManager.StudentDBManager;
 import LocalDatabase.*;
 import Login.StaffLogin;
 import Login.StudentLogin;
+import Notification.NotificationManager;
 import ReadWriteFile.*;
 import Users.*;
 import StaffDuties.*;
@@ -34,6 +35,8 @@ public class UserInterface {
         StudentDBManager studentDBManager = new StudentDBManager(studentDB);
         StudentWriter studentWriter = new StudentWriter();
         CourseIndexWriter courseIndexWriter = new CourseIndexWriter();
+
+        NotificationManager notificationManager = new NotificationManager();
 
         System.out.println("Welcome to STARS");
         System.out.println("Select Login Domain: 1. STUDENT 2. STAFF");
@@ -84,9 +87,9 @@ public class UserInterface {
                             // SA.getTimetable().printTimetable();
                             String courseToDrop;
                             System.out.println("Enter Course to Drop: ");
-                            while (true){
+                            while (true) {
                                 courseToDrop = sc.next();
-                                if (SA.takingCourse(courseToDrop)){
+                                if (SA.takingCourse(courseToDrop)) {
                                     break;
                                 }
                                 System.out.println("Course Not Taken");
@@ -109,6 +112,8 @@ public class UserInterface {
                                 addDropCtrl.addCourse(waitingStudent, droppedCourse);
                                 studentList.add(waitingStudent);
                                 // send notification
+                                notificationManager.sendEmail(waitingStudent.getUserName(), waitingStudent.getName(),
+                                        droppedCourse);
 
                             }
 
@@ -131,9 +136,9 @@ public class UserInterface {
                             ChangeIndexCtrl cic = new ChangeIndexCtrl();
                             System.out.println("Enter Course Code to Change Index: ");
                             String courseToChange;
-                            while (true){
+                            while (true) {
                                 courseToChange = sc.next();
-                                if (SA.takingCourse(courseToChange)){
+                                if (SA.takingCourse(courseToChange)) {
                                     break;
                                 }
                                 System.out.println("Course Not Taken");
