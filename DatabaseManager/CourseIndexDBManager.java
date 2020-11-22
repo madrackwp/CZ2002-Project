@@ -63,6 +63,7 @@ public class CourseIndexDBManager implements DatabaseManager {
                 return courseIndex;
             }
         }
+        System.out.println("Course with course index do not exist!");
         return null;
     }
 

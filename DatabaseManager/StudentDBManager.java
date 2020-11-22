@@ -59,6 +59,7 @@ public class StudentDBManager implements DatabaseManager {
                 return sa;
             }
         }
+        System.out.println("No such matric no in the database!");
         return null;
     }
 

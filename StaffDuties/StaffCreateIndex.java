@@ -80,16 +80,6 @@ public class StaffCreateIndex {
             System.out.println("Course code does not exist, create new course!");
             return null;
         }
-
-        // for(CourseIndex courseIndex : indexDBManager.getCourseIndexes()){
-        // if(courseIndex.getCourseCode().equals(courseCode)){
-        // if(courseIndex.getIndexNo() == index){
-        // System.out.println("Index already exists in this course!");
-        // return null;
-        // }
-        // }
-        // }
-
     }
 
 }
