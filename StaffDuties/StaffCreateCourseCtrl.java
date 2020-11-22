@@ -58,6 +58,10 @@ public class StaffCreateCourseCtrl {
         System.out.println("How many indexes would you like to create?");
         int noOfIndexes = sc.nextInt();
 
+        boolean in = false;
+        Lesson lectureLesson = null;
+        String lessonStartTime, lessonEndTime;
+        Day lessonDay;
         for (int j = 0; j < noOfIndexes; j++) {
             System.out.println("Enter the index no to create: ");
             int indexNo = sc.nextInt();
@@ -66,39 +70,36 @@ public class StaffCreateCourseCtrl {
             System.out.println("No of vacancies for this index");
             int vacancies = sc.nextInt();
 
-            boolean in = false;
-            Lesson lectureLesson = null;
-            // for (Type type : lessonTypesInCourse) {
-            // String lessonStartTime, lessonEndTime;
-            // Day lessonDay;
-            // if (type.toString().equals("Lecture") && in == false) {
-            // System.out.print("For " + type.toString());
-            // System.out.println(" enter day");
-            // lessonDay = Day.valueOf(sc.next().toUpperCase());
-            // System.out.println("Enter start time in format HH:MM in 24Hr clock");
-            // lessonStartTime = sc.next();
-            // System.out.println("Enter end time in format HH:MM in 24Hr clock");
-            // lessonEndTime = sc.next();
-            // lectureLesson = new Lesson(lessonStartTime, lessonEndTime, type, lessonDay);
-            // lessons.add(lectureLesson);
-            // in = true;
-            // } else if (type.toString().equals("Lecture") && in == true) {
-            // lessons.add(lectureLesson);
-            // } else {
-            // System.out.print("For " + type.toString());
-            // System.out.println(" enter day");
-            // Day day = Day.valueOf(sc.next().toUpperCase());
+            for (Type type : lessonTypesInCourse) {
+                if ((type.toString().equals("Lecture")) && (in == false)) {
+                    System.out.print("For " + type.toString());
+                    System.out.println(" enter day");
+                    lessonDay = Day.valueOf(sc.next().toUpperCase());
+                    System.out.println("Enter start time in format HH:MM in 24Hr clock");
+                    lessonStartTime = sc.next();
+                    System.out.println("Enter end time in format HH:MM in 24Hr clock");
+                    lessonEndTime = sc.next();
+                    lectureLesson = new Lesson(lessonStartTime, lessonEndTime, type, lessonDay);
+                    lessons.add(lectureLesson);
+                    in = true;
+                } else if ((type.toString().equals("Lecture")) && (in == true)) {
+                    System.out.print(lectureLesson);
+                    lessons.add(lectureLesson);
+                } else {
+                    System.out.print("For " + type.toString());
+                    System.out.println(" enter day");
+                    Day day = Day.valueOf(sc.next().toUpperCase());
 
-            // System.out.println("Enter start time in format HH:MM in 24Hr clock");
-            // String startTime = sc.next();
+                    System.out.println("Enter start time in format HH:MM in 24Hr clock");
+                    String startTime = sc.next();
 
-            // System.out.println("Enter end time in format HH:MM in 24Hr clock");
-            // String endTime = sc.next();
+                    System.out.println("Enter end time in format HH:MM in 24Hr clock");
+                    String endTime = sc.next();
 
-            // Lesson lesson = new Lesson(startTime, endTime, type, day);
-            // lessons.add(lesson);
-            // }
-            // }
+                    Lesson lesson = new Lesson(startTime, endTime, type, day);
+                    lessons.add(lesson);
+                }
+            }
             ArrayList<String> nullList = new ArrayList<>();
             nullList.add("null");
 
