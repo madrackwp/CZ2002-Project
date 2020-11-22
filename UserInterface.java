@@ -89,8 +89,16 @@ public class UserInterface {
                             break;
                         case 2:
                             // SA.getTimetable().printTimetable();
+                            String courseToDrop;
                             System.out.println("Enter course to drop");
-                            String courseToDrop = sc.next();
+                            while (true){
+                                courseToDrop = sc.next();
+                                if (SA.takingCourse(courseToDrop)){
+                                    break;
+                                }
+                                System.out.println("You are not currently taking this course");
+                                System.out.println("Please re-enter course to drop");
+                            }
 
                             studentList.remove(SA);
 

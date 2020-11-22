@@ -155,6 +155,9 @@ public class Timetable {
 
     public void printTimetable() {
         int totalAU = 0;
+        System.out.println("");
+        System.out.println("Student Timetable");
+        System.out.println("----------------------------------------------");
         for (int i = 0; i < coursestaken.size(); i++) {
             totalAU += coursestaken.get(i).getAcademicUnits();
             System.out.print(coursestaken.get(i).getCourseCode() + " ");

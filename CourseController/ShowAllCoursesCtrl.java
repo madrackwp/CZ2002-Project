@@ -51,14 +51,15 @@ public class ShowAllCoursesCtrl {
             }
         }
         int input;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Select course to add:");
         while (true){
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Select course to add:");
             input = sc.nextInt();
             if (input > 0 && input < k){
                 break;
             }
             System.out.println("Invalid Input, your input should be between 1 and "+(k-1));
+            System.out.println("Please re-select course to add: ");
         }
         if (temp.isEmpty()) {
             System.out.println("All courses taken!");
