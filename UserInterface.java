@@ -481,8 +481,36 @@ public class UserInterface {
                             System.out.println("Enter the index no:");
                             int indexToChange = sc.nextInt();
 
+                            System.out.println("Enter the new index no:");
+                            int newIndexNo = sc.nextInt();
+
                             CourseIndex courseIndexToChangeIndexNo = indexDBManager.getCourseIndexInfo(courseCode,
                                     indexToChange);
+
+                            courseList.remove(courseIndexToChangeIndexNo);
+
+                            ArrayList<String> matricAffected = new ArrayList<>();
+                            matricAffected = courseIndexToChangeIndexNo.getRegisteredStudentMatricNo();
+
+                            ArrayList<StudentAcc> affectedStudents = new ArrayList<>();
+                            for (String matricNo : matricAffected) {
+                                StudentAcc affected = studentDBManager.getStudentByMatricNo(matricNo);
+                                studentList.remove(affected);
+                                affectedStudents.add(affected);
+                            }
+
+                            courseIndexToChangeIndexNo.setIndexNo(newIndexNo);
+
+                            courseList.add(courseIndexToChangeIndexNo);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
+                            for (StudentAcc student : affectedStudents) {
+                                studentList.add(student);
+                            }
+
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
 
                             break;
 
