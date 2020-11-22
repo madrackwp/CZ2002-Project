@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -53,7 +54,8 @@ public class UserInterface {
                     System.out.println("5. Swap Index With Peer");
                     System.out.println("6. Check Vacancies Available");
                     System.out.println("7. Reclassify Mod Type");
-                    System.out.println("8. Logout");
+                    System.out.println("8. Change Password");
+                    System.out.println("9. Logout");
                     System.out.println("===========================================");
 
                     userChoice = sc.nextInt();
@@ -255,6 +257,22 @@ public class UserInterface {
                             System.out.println("");
                             break;
                         case 8:
+                            studentList.remove(SA);
+                            System.out.println("Enter your new password");
+                            String newPassword = sc.next();
+                            System.out.println("Re-enter your new password");
+                            String renewPassword = sc.next();
+                            if (renewPassword.equals(newPassword)) {
+                                SA.setPassword(newPassword);
+                                studentList.add(SA);
+                                studentDBManager.updateDatabase(studentList, studentDB);
+                                studentWriter.writeFile(studentDBManager);
+                            }
+                            else {
+                                System.out.println("Unsucessful");
+                            }
+                            break;
+                        case 9:
                             System.out.println("Bye bye!");
                             login_access_student = false;
                             break;
