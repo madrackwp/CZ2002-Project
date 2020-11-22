@@ -89,8 +89,16 @@ public class UserInterface {
                             break;
                         case 2:
                             // SA.getTimetable().printTimetable();
+                            String courseToDrop;
                             System.out.println("Enter course to drop");
-                            String courseToDrop = sc.next();
+                            while (true){
+                                courseToDrop = sc.next();
+                                if (SA.takingCourse(courseToDrop)){
+                                    break;
+                                }
+                                System.out.println("You are not currently taking this course");
+                                System.out.println("Please re-enter course to drop");
+                            }
 
                             studentList.remove(SA);
 
@@ -108,6 +116,7 @@ public class UserInterface {
                                 addDropCtrl.addCourse(waitingStudent, droppedCourse);
                                 studentList.add(waitingStudent);
                                 // send notification
+
                             }
 
                             studentList.add(SA);
@@ -267,8 +276,7 @@ public class UserInterface {
                                 studentList.add(SA);
                                 studentDBManager.updateDatabase(studentList, studentDB);
                                 studentWriter.writeFile(studentDBManager);
-                            }
-                            else {
+                            } else {
                                 System.out.println("Unsucessful");
                             }
                             break;
@@ -299,13 +307,13 @@ public class UserInterface {
                 while (login_access_staff) {
                     System.out.println("Choose option:");
                     System.out.println("1. Create New Student Account");
-                    System.out.println("2. Drop course"); // done
-                    System.out.println("3. Overwrite Vacancies"); // done
+                    System.out.println("2. Change Student Access period"); // done
+                    System.out.println("3. Change Vacancies"); // done
                     System.out.println("4. Print students by Index Number"); // done
                     System.out.println("5. Print students by Course"); // done
                     System.out.println("6. Add Course Code"); // done
-                    System.out.println("7. Update Course Code"); // done
-                    System.out.println("8. Update School"); // done
+                    System.out.println("7. Change Course Code"); // done
+                    System.out.println("8. Change School"); // done
                     System.out.println("9. Add index number");// done
                     System.out.println("10. Change index number");
                     System.out.println("11. Logout"); // done
@@ -319,19 +327,32 @@ public class UserInterface {
 
                     switch (userChoice) {
                         case 1:
-                            StaffAddStudent addStu = new StaffAddStudent();
+                            StaffAddStudentCtrl addStu = new StaffAddStudentCtrl();
                             StudentAcc newStudent = addStu.AddStudent();
                             studentList.add(newStudent);
                             studentDBManager.updateDatabase(studentList, studentDB);
                             studentWriter.writeFile(studentDBManager);
                             break;
                         case 2:
+                            // // SA.getTimetable().printTimetable();
+                            // System.out.println("Enter course to drop");
+                            // String courseToDrop = sc.next();
+                            // addDropCtrl.dropCourse(SA, courseToDrop);
                             // SA.getTimetable().printTimetable();
-                            System.out.println("Enter course to drop");
-                            String courseToDrop = sc.next();
-                            addDropCtrl.dropCourse(SA, courseToDrop);
-                            SA.getTimetable().printTimetable();
-                            System.out.println("");
+                            // System.out.println("");
+                            System.out.println("Enter Student Matric No to change access period:");
+                            String studentMatric = sc.next();
+                            StudentAcc studentChangeAccess = studentDBManager.getStudentByMatricNo(studentMatric);
+
+                            studentList.remove(studentChangeAccess);
+                            System.out.println("Enter the new access date in the format dd/MM/YYYY");
+                            String newAccessDate = sc.next();
+                            studentChangeAccess.setAccessDate(newAccessDate);
+
+                            studentList.add(studentChangeAccess);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
                             break;
 
                         case 3:
@@ -350,11 +371,25 @@ public class UserInterface {
                             StaffChangeVacancyCtrl staffChangeVacancyCtrl = new StaffChangeVacancyCtrl();
                             staffChangeVacancyCtrl.changeVacancies(courseToChangeVacancy, vacancy);
 
+                            IndexWaitList iwl = courseToChangeVacancy.getIndexWaitList();
+                            for (int i = 0; i < vacancy; i++) {
+
+                                String matricNo = iwl.getWaitList().get(0);
+                                StudentAcc student = studentDBManager.getStudentByMatricNo(matricNo);
+                                studentList.remove(student);
+                                addDropCtrl.addCourse(student, courseToChangeVacancy);
+                                System.out.println("Student" + i);
+                                // Send email here\
+                                studentList.add(student);
+
+                            }
+
                             courseList.add(courseToChangeVacancy);
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
-                            // indexDB.print();
-                            // System.out.println("");
+
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
                             break;
 
                         case 4:
@@ -391,24 +426,7 @@ public class UserInterface {
                             break;
 
                         case 6:
-                            // System.out.println("Add Course");
-                            // String course5 = sc.next();
-                            // System.out.println("Course AU:");
-                            // int au5 = sc.nextInt();
-                            // System.out.println("Course School");
-                            // String school5 = sc.next();
-                            // System.out.println("Course Type: CORE, UE, GERPE_LA, GERPE_BM, GERPE_STS,
-                            // MPE");
-                            // ModType type5 = ModType.valueOf(sc.next());
-                            // ArrayList<ModType> temp5 = new ArrayList<ModType>();
-                            // temp5.add(type5);
-                            // IndexWaitList temp5_0 = new IndexWaitList(new ArrayList<String>());
-                            // ArrayList<String> temp5_1 = new ArrayList<String>();
-                            // ArrayList<Lesson> temp5_2 = new ArrayList<Lesson>();
-                            // CourseIndex index4 = new CourseIndex(course5, 0, au5, school5, temp5,
-                            // temp5_0, 0, temp5_1,
-                            // temp5_2);
-                            // courseList.add(index4);
+
                             StaffCreateCourseCtrl staffCreateCourseCtrl = new StaffCreateCourseCtrl();
                             ArrayList<CourseIndex> newCourseIndexes = staffCreateCourseCtrl.createCourse();
 

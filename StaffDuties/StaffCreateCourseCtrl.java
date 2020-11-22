@@ -92,6 +92,10 @@ public class StaffCreateCourseCtrl {
                     lessons.add(lectureLesson);
                     in = true;
                 } else if ((type.toString().equals("Lecture")) && (in == true)) {
+<<<<<<< HEAD
+=======
+                    // System.out.print(lectureLesson);
+>>>>>>> e52e96b1279accc228965cece9a9201af31177db
                     lessons.add(lectureLesson);
                 } else {
                     System.out.print("For " + type.toString());
