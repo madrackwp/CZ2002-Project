@@ -280,7 +280,7 @@ public class UserInterface {
                 boolean login_access_staff = true;
                 while (login_access_staff) {
                     System.out.println("Choose option:");
-                    System.out.println("1. Register course for student");
+                    System.out.println("1. Create New Student Account");
                     System.out.println("2. Drop course"); // done
                     System.out.println("3. Overwrite Vacancies"); // done
                     System.out.println("4. Print students by Index Number"); // done
@@ -301,35 +301,11 @@ public class UserInterface {
 
                     switch (userChoice) {
                         case 1:
-                            System.out.println("Enter username");
-                            String userName = sc.next();
-
-                            for (StudentAcc saZ : studentList) {
-                                SA = saZ;
-                                if (SA.getUserName().equals(userName)) {
-                                    System.out.println("User Found");
-                                    break;
-                                }
-                            }
-                            if (SA == null) {
-                                System.out.println("Invalid User");
-                                break;
-                            }
-
-                            studentList.remove(SA);
-                            CourseIndex toAdd = showAllCoursesCtrl.selectCourseThatStudentNotTaking(SA, indexDBManager);
-                            courseList.remove(toAdd);
-                            addDropStaff.addCourse(SA, toAdd);
-                            SA.getTimetable().printTimetable();
-                            System.out.println("");
-
-                            studentList.add(SA);
+                            StaffAddStudent addStu = new StaffAddStudent();
+                            StudentAcc newStudent = addStu.AddStudent();
+                            studentList.add(newStudent);
                             studentDBManager.updateDatabase(studentList, studentDB);
                             studentWriter.writeFile(studentDBManager);
-
-                            courseList.add(toAdd);
-                            indexDBManager.updateDatabase(courseList, indexDB);
-                            courseIndexWriter.writeFile(indexDBManager);
                             break;
                         case 2:
                             // SA.getTimetable().printTimetable();
