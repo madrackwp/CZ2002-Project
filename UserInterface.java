@@ -12,6 +12,8 @@ import CourseIndex.ModType;
 import DatabaseManager.CourseIndexDBManager;
 import DatabaseManager.StudentDBManager;
 import LocalDatabase.*;
+import Login.StaffLogin;
+import Login.StudentLogin;
 import ReadWriteFile.*;
 import Users.*;
 import StaffDuties.*;
@@ -40,7 +42,8 @@ public class UserInterface {
         Scanner sc = new Scanner(System.in);
         userChoice = sc.nextInt();
         if (userChoice == 1) {
-            SA = this.studentLogin(studentList);
+            StudentLogin studentLogin = new StudentLogin();
+            SA = studentLogin.login(studentList);
             // System.out.println(SA.getUserName());
             if (SA != null) {
                 boolean login = true;
@@ -194,7 +197,7 @@ public class UserInterface {
                             SA.getTimetable().printTimetable();
                             break;
                         case 5:
-                            StudentAcc student2 = studentLogin(studentList);
+                            StudentAcc student2 = studentLogin.login(studentList);
                             studentList.remove(student2);
                             studentList.remove(SA);
 
@@ -281,7 +284,8 @@ public class UserInterface {
                 // }
             }
         } else if (userChoice == 2) {
-            StA = this.staffLogin();
+            StaffLogin staffLogin = new StaffLogin();
+            StA = staffLogin.login();
             if (StA != null) {
                 boolean login = true;
                 while (login) {
@@ -483,81 +487,81 @@ public class UserInterface {
         }
     }
 
-    public StudentAcc studentLogin(ArrayList<StudentAcc> studentList) {
-        // CourseIndexReader CIR = new CourseIndexReader();
-        // ArrayList<CourseIndex> temp = CIR.ReadFile();
-        // CourseIndexDB indexDB = new CourseIndexDB(temp);
-        // CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
+    // public StudentAcc studentLogin(ArrayList<StudentAcc> studentList) {
+    // // CourseIndexReader CIR = new CourseIndexReader();
+    // // ArrayList<CourseIndex> temp = CIR.ReadFile();
+    // // CourseIndexDB indexDB = new CourseIndexDB(temp);
+    // // CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
 
-        // StudentReader ur = new StudentReader();
-        // ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
+    // // StudentReader ur = new StudentReader();
+    // // ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
 
-        Scanner sc = new Scanner(System.in);
-        Console cs = System.console();
-        StudentAcc sa;
-        String currentDate;
-        boolean foundUser = false;
+    // Scanner sc = new Scanner(System.in);
+    // Console cs = System.console();
+    // StudentAcc sa;
+    // String currentDate;
+    // boolean foundUser = false;
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDateTime now = LocalDateTime.now();
-        currentDate = dtf.format(now);
+    // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    // LocalDateTime now = LocalDateTime.now();
+    // currentDate = dtf.format(now);
 
-        System.out.println("Enter username");
-        String userName = sc.nextLine();
-        String password = null;
-        if (cs != null) {
-            // cs.printf("Testing password%n");
-            char[] passwordArray = cs.readPassword("Enter your password: ");
-            String newString = new String(passwordArray);
-            // cs.printf("Password entered was: %s%n", newString);
-            password = Integer.toString(newString.hashCode());
-        }
-        // System.out.println("Enter password");
-        // String password = Integer.toString(passwordArray.hashCode());
+    // System.out.println("Enter username");
+    // String userName = sc.nextLine();
+    // String password = null;
+    // if (cs != null) {
+    // // cs.printf("Testing password%n");
+    // char[] passwordArray = cs.readPassword("Enter your password: ");
+    // String newString = new String(passwordArray);
+    // // cs.printf("Password entered was: %s%n", newString);
+    // password = Integer.toString(newString.hashCode());
+    // }
+    // // System.out.println("Enter password");
+    // // String password = Integer.toString(passwordArray.hashCode());
 
-        for (StudentAcc saZ : studentList) {
-            sa = saZ;
-            if (sa.getUserName().equals(userName)) {
-                foundUser = true;
-                if (sa.getPassword().equals(password)) {
-                    if (sa.getAccessDate().equals(currentDate)) {
-                        System.out.println("Login Success!");
-                        // System.out.println(sa.getRegisteredCourseIndex());
-                        return sa;
-                    } else {
-                        System.out.println("Wrong access date");
-                    }
-                }
-            }
-        }
-        if (foundUser == true) {
-            System.out.println("Invalid Password");
-        } else {
-            System.out.println("Invalid Username");
-        }
-        return null;
-    }
+    // for (StudentAcc saZ : studentList) {
+    // sa = saZ;
+    // if (sa.getUserName().equals(userName)) {
+    // foundUser = true;
+    // if (sa.getPassword().equals(password)) {
+    // if (sa.getAccessDate().equals(currentDate)) {
+    // System.out.println("Login Success!");
+    // // System.out.println(sa.getRegisteredCourseIndex());
+    // return sa;
+    // } else {
+    // System.out.println("Wrong access date");
+    // }
+    // }
+    // }
+    // }
+    // if (foundUser == true) {
+    // System.out.println("Invalid Password");
+    // } else {
+    // System.out.println("Invalid Username");
+    // }
+    // return null;
+    // }
 
-    public StaffAcc staffLogin() {
-        StaffReader s = new StaffReader();
-        ArrayList<StaffAcc> staffList = s.ReadFile();
-        Scanner sc = new Scanner(System.in);
-        StaffAcc sa;
+    // public StaffAcc staffLogin() {
+    // StaffReader s = new StaffReader();
+    // ArrayList<StaffAcc> staffList = s.ReadFile();
+    // Scanner sc = new Scanner(System.in);
+    // StaffAcc sa;
 
-        System.out.println("Enter Username: ");
-        String userName = sc.nextLine();
-        System.out.println("Enter Password: ");
-        String password = Integer.toString(sc.nextLine().hashCode());
+    // System.out.println("Enter Username: ");
+    // String userName = sc.nextLine();
+    // System.out.println("Enter Password: ");
+    // String password = Integer.toString(sc.nextLine().hashCode());
 
-        for (StaffAcc saZ : staffList) {
-            sa = saZ;
-            if (sa.getUserName().equals(userName) && sa.getPassword().equals(password)) {
-                System.out.println("Login Successful!");
-                return sa;
-            }
-        }
-        System.out.println("Login Failed");
-        return null;
-    }
+    // for (StaffAcc saZ : staffList) {
+    // sa = saZ;
+    // if (sa.getUserName().equals(userName) && sa.getPassword().equals(password)) {
+    // System.out.println("Login Successful!");
+    // return sa;
+    // }
+    // }
+    // System.out.println("Login Failed");
+    // return null;
+    // }
 
 }
