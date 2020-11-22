@@ -51,7 +51,7 @@ public class StudentWriter extends TextFileWriter {
                 writer.write("\n".getBytes());
             }
             writer.close();
-            System.out.println("Writing done");
+            // System.out.println("Writing done");
         } catch (Exception e) {
             System.out.println("An error occured when writing students to txt file");
             e.printStackTrace();

@@ -35,6 +35,8 @@ public class ShowAllCoursesCtrl {
         int k = 1;
         boolean found;
         ArrayList<CourseIndex> temp = new ArrayList<>();
+        System.out.println("");
+        System.out.println("Courses Available: ");
         for (CourseIndex courseIndex : dbManager.getCourseIndexes()) {
             found = false;
             for (int i = 0; i < studentAcc.getRegisteredCourseIndex().size(); i++) {
@@ -50,12 +52,19 @@ public class ShowAllCoursesCtrl {
                 k++;
             }
         }
-
+        int input;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Select course to add:");
-        int input = sc.nextInt();
+        System.out.println("Select Course to Add: ");
+        while (true){
+            input = sc.nextInt();
+            if (input > 0 && input < k){
+                break;
+            }
+            System.out.println("Invalid Input (Input should be between 1 and "+(k-1)+")");
+            System.out.println("Please Re-select Course to Add: ");
+        }
         if (temp.isEmpty()) {
-            System.out.println("All courses taken!");
+            System.out.println("All Courses Taken!");
             return null;
         } else {
             return temp.get(input - 1);
