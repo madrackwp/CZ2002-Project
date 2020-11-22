@@ -83,7 +83,7 @@ public class StaffCreateCourseCtrl {
                     lessons.add(lectureLesson);
                     in = true;
                 } else if ((type.toString().equals("Lecture")) && (in == true)) {
-                    System.out.print(lectureLesson);
+                    // System.out.print(lectureLesson);
                     lessons.add(lectureLesson);
                 } else {
                     System.out.print("For " + type.toString());

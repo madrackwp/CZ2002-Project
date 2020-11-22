@@ -300,13 +300,12 @@ public class UserInterface {
                     System.out.println("Choose option:");
                     System.out.println("1. Create New Student Account");
                     System.out.println("2. Change Student Access period"); // done
-
-                    System.out.println("3. Overwrite Vacancies"); // done
+                    System.out.println("3. Change Vacancies"); // done
                     System.out.println("4. Print students by Index Number"); // done
                     System.out.println("5. Print students by Course"); // done
                     System.out.println("6. Add Course Code"); // done
-                    System.out.println("7. Update Course Code"); // done
-                    System.out.println("8. Update School"); // done
+                    System.out.println("7. Change Course Code"); // done
+                    System.out.println("8. Change School"); // done
                     System.out.println("9. Add index number");// done
                     System.out.println("10. Change index number");
                     System.out.println("11. Logout"); // done
@@ -320,7 +319,7 @@ public class UserInterface {
 
                     switch (userChoice) {
                         case 1:
-                            StaffAddStudent addStu = new StaffAddStudent();
+                            StaffAddStudentCtrl addStu = new StaffAddStudentCtrl();
                             StudentAcc newStudent = addStu.AddStudent();
                             studentList.add(newStudent);
                             studentDBManager.updateDatabase(studentList, studentDB);
@@ -364,11 +363,25 @@ public class UserInterface {
                             StaffChangeVacancyCtrl staffChangeVacancyCtrl = new StaffChangeVacancyCtrl();
                             staffChangeVacancyCtrl.changeVacancies(courseToChangeVacancy, vacancy);
 
+                            IndexWaitList iwl = courseToChangeVacancy.getIndexWaitList();
+                            for (int i = 0; i < vacancy; i++) {
+
+                                String matricNo = iwl.getWaitList().get(0);
+                                StudentAcc student = studentDBManager.getStudentByMatricNo(matricNo);
+                                studentList.remove(student);
+                                addDropCtrl.addCourse(student, courseToChangeVacancy);
+                                System.out.println("Student" + i);
+                                // Send email here\
+                                studentList.add(student);
+
+                            }
+
                             courseList.add(courseToChangeVacancy);
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
-                            // indexDB.print();
-                            // System.out.println("");
+
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
                             break;
 
                         case 4:
