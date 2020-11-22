@@ -8,8 +8,8 @@ public class CourseIndexDB implements Database {
 
     private ArrayList<CourseIndex> courseIndexes;
 
-    public CourseIndexDB(ArrayList<CourseIndex> c) {
-        this.courseIndexes = c;
+    public CourseIndexDB(ArrayList<CourseIndex> courseList) {
+        this.courseIndexes = courseList;
     }
 
     @Override
