@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -53,7 +54,8 @@ public class UserInterface {
                     System.out.println("5. Swap Index With Peer");
                     System.out.println("6. Check Vacancies Available");
                     System.out.println("7. Reclassify Mod Type");
-                    System.out.println("8. Logout");
+                    System.out.println("8. Change Password");
+                    System.out.println("9. Logout");
                     System.out.println("===========================================");
 
                     userChoice = sc.nextInt();
@@ -256,6 +258,21 @@ public class UserInterface {
                             System.out.println("");
                             break;
                         case 8:
+                            studentList.remove(SA);
+                            System.out.println("Enter your new password");
+                            String newPassword = sc.next();
+                            System.out.println("Re-enter your new password");
+                            String renewPassword = sc.next();
+                            if (renewPassword.equals(newPassword)) {
+                                SA.setPassword(newPassword);
+                                studentList.add(SA);
+                                studentDBManager.updateDatabase(studentList, studentDB);
+                                studentWriter.writeFile(studentDBManager);
+                            } else {
+                                System.out.println("Unsucessful");
+                            }
+                            break;
+                        case 9:
                             System.out.println("Bye bye!");
                             login_access_student = false;
                             break;
@@ -281,8 +298,9 @@ public class UserInterface {
                 boolean login_access_staff = true;
                 while (login_access_staff) {
                     System.out.println("Choose option:");
-                    System.out.println("1. Register course for student");
+                    System.out.println("1. Create New Student Account");
                     System.out.println("2. Change Student Access period"); // done
+
                     System.out.println("3. Overwrite Vacancies"); // done
                     System.out.println("4. Print students by Index Number"); // done
                     System.out.println("5. Print students by Course"); // done
@@ -302,35 +320,11 @@ public class UserInterface {
 
                     switch (userChoice) {
                         case 1:
-                            System.out.println("Enter username");
-                            String userName = sc.next();
-
-                            for (StudentAcc saZ : studentList) {
-                                SA = saZ;
-                                if (SA.getUserName().equals(userName)) {
-                                    System.out.println("User Found");
-                                    break;
-                                }
-                            }
-                            if (SA == null) {
-                                System.out.println("Invalid User");
-                                break;
-                            }
-
-                            studentList.remove(SA);
-                            CourseIndex toAdd = showAllCoursesCtrl.selectCourseThatStudentNotTaking(SA, indexDBManager);
-                            courseList.remove(toAdd);
-                            addDropStaff.addCourse(SA, toAdd);
-                            SA.getTimetable().printTimetable();
-                            System.out.println("");
-
-                            studentList.add(SA);
+                            StaffAddStudent addStu = new StaffAddStudent();
+                            StudentAcc newStudent = addStu.AddStudent();
+                            studentList.add(newStudent);
                             studentDBManager.updateDatabase(studentList, studentDB);
                             studentWriter.writeFile(studentDBManager);
-
-                            courseList.add(toAdd);
-                            indexDBManager.updateDatabase(courseList, indexDB);
-                            courseIndexWriter.writeFile(indexDBManager);
                             break;
                         case 2:
                             // // SA.getTimetable().printTimetable();
