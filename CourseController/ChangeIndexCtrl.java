@@ -1,6 +1,10 @@
 package CourseController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 import CourseIndex.CourseIndex;
 import Users.StudentAcc;
 import DatabaseManager.CourseIndexDBManager;
@@ -11,18 +15,34 @@ public class ChangeIndexCtrl {
 
     }
 
-    public void displayValidCourseToChange(String course, CourseIndexDBManager dbManager, StudentAcc student) {
+    public int displayValidCourseToChange(String course, CourseIndexDBManager dbManager, StudentAcc student) {
         CourseIndex currentCourse = student.getCourseIndex(course);
         ArrayList<CourseIndex> validCourseIndexes = new ArrayList<>();
+        List <Integer> listOfIndexes = new ArrayList<Integer>();
 
         for (CourseIndex i : dbManager.getCourseIndexes()) {
             if (i.getCourseCode().equals(course) && (!i.equals(currentCourse))) {
                 validCourseIndexes.add(i);
             }
         }
+        System.out.println("");
+        System.out.println("Other Course Indexes: ");
         for (CourseIndex j : validCourseIndexes) {
             System.out.println(j.getIndexNo());
+            listOfIndexes.add(j.getIndexNo());
         }
+        System.out.println("Enter New Course Index: ");
+        int newCourseIndex;
+        while (true){
+            Scanner sc = new Scanner(System.in);
+            newCourseIndex = sc.nextInt();
+            if (listOfIndexes.contains(newCourseIndex)){
+                break;
+            }
+            System.out.println("Invalid Course Index");
+            System.out.println("Please Re-enter New Course Index: ");
+        }
+        return newCourseIndex;
     }
 
     public ArrayList<CourseIndex> changeIndex(CourseIndex newCourseIndex, StudentAcc student,
@@ -33,7 +53,7 @@ public class ChangeIndexCtrl {
         Timetable timetable = student.getTimetable();
         if (timetable.checkEmptySlot(newCourseIndex)) {
             addDropCtrl.addCourse(student, newCourseIndex);
-            System.out.println("Change successful");
+            System.out.println("Change Successful");
         } else {
             System.out.println("Timing Clash");
             addDropCtrl.addCourse(student, oldCourseIndex);
