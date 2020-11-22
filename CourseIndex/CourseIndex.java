@@ -191,4 +191,8 @@ public class CourseIndex {
     public IndexWaitList getIndexWaitList() {
         return this.indexWaitList;
     }
+
+    public void setIndexNo(int newIndex) {
+        this.indexNo = newIndex;
+    }
 }
