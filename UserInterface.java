@@ -477,6 +477,7 @@ public class UserInterface {
                             ArrayList<CourseIndex> courses = indexDBManager.getCourseIndexInfoArray(changeCourse);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                             if (!courseIndex4.isEmpty()) {
                                 System.out.println("Enter new Course Code");
                                 String courseCode4 = sc.next();
@@ -494,6 +495,8 @@ public class UserInterface {
                             else 
                                 System.out.println("Invalid Course code");
 =======
+=======
+>>>>>>> 56fbac36b0d881a118d5341329b5894e966d5c9e
                             System.out.println("Enter new Course Code");
                             String newCourseCode = sc.next();
 
@@ -539,6 +542,7 @@ public class UserInterface {
                             ArrayList<CourseIndex> c = indexDBManager.getCourseIndexInfoArray(course);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                             if (!courseIndex3.isEmpty()) {
                                 System.out.println("Enter School");
                                 String school3 = sc.next();
@@ -557,6 +561,8 @@ public class UserInterface {
                                 System.out.println("Invalid Course Code");
                             }
 =======
+=======
+>>>>>>> 56fbac36b0d881a118d5341329b5894e966d5c9e
                             System.out.println("Enter School");
                             String school = sc.next();
 
