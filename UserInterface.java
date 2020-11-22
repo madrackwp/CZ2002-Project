@@ -285,7 +285,7 @@ public class UserInterface {
                     System.out.println("3. Overwrite Vacancies"); // done
                     System.out.println("4. Print students by Index Number"); // done
                     System.out.println("5. Print students by Course"); // done
-                    System.out.println("6. Add Course Code");
+                    System.out.println("6. Add Course Code"); // done
                     System.out.println("7. Update Course Code"); // done
                     System.out.println("8. Update School"); // done
                     System.out.println("9. Add index number");
@@ -467,8 +467,11 @@ public class UserInterface {
                             break;
 
                         case 9:
-                            System.out.println("Add Index Number");
-
+                            StaffCreateIndex staffCreateIndex = new StaffCreateIndex();
+                            CourseIndex newIndex = staffCreateIndex.createIndex(indexDBManager);
+                            courseList.add(newIndex);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
                             break;
 
                         case 10:

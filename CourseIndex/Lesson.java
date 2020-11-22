@@ -36,4 +36,5 @@ public class Lesson {
     public String getDayToString() {
         return this.day.toString();
     }
+
 }
