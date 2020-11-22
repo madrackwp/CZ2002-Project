@@ -4,8 +4,6 @@ import Users.StudentAcc;
 
 import java.util.ArrayList;
 
-import javax.print.attribute.standard.RequestingUserName;
-
 public class CourseIndex {
     String courseCode;
     int indexNo;

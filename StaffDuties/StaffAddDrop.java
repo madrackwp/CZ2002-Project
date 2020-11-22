@@ -1,9 +1,6 @@
 package StaffDuties;
 
 import CourseIndex.*;
-import DatabaseManager.CourseIndexDBManager;
-import LocalDatabase.CourseIndexDB;
-import ReadWriteFile.CourseIndexReader;
 import Timetable.Timetable;
 import Users.*;
 
@@ -28,13 +25,4 @@ public class StaffAddDrop {
         }
     }
 
-    public boolean changeVacancies(CourseIndex course, int vacancies) {
-        try {
-            course.setVacancy(vacancies);
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
 }

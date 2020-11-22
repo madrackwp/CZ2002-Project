@@ -1,6 +1,3 @@
-import java.io.Console;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,8 +43,8 @@ public class UserInterface {
             SA = studentLogin.login(studentList);
             // System.out.println(SA.getUserName());
             if (SA != null) {
-                boolean login = true;
-                while (login) {
+                boolean login_access_student = true;
+                while (login_access_student) {
                     System.out.println("Choose option:");
                     System.out.println("1. Add course");
                     System.out.println("2. Drop course");
@@ -60,21 +57,14 @@ public class UserInterface {
                     System.out.println("===========================================");
 
                     userChoice = sc.nextInt();
-
-                    AddDropCtrl addDropCtrl = new AddDropCtrl();
+                    AddDropCtrl addDropCtrl = new AddDropCtrl(); // AddDropCtrl is created here as it is used in
+                                                                 // multiple places and not just inside add/drop
                     ShowAllCoursesCtrl showAllCoursesCtrl = new ShowAllCoursesCtrl();
 
                     switch (userChoice) {
                         case 1:
-                            // SA.getTimetable().printTimetable();
-
-                            // for (StudentAcc s : studentList) {
-                            // System.out.println(s.getName());
-                            // }
-
                             studentList.remove(SA);
-
-                            CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
+                            CourseIndex toAdd = showAllCoursesCtrl.selectCourseThatStudentNotTaking(SA, indexDBManager);
                             courseList.remove(toAdd);
                             addDropCtrl.addCourse(SA, toAdd);
                             SA.getTimetable().printTimetable();
@@ -266,7 +256,7 @@ public class UserInterface {
                             break;
                         case 8:
                             System.out.println("Bye bye!");
-                            login = false;
+                            login_access_student = false;
                             break;
                         default:
                             System.out.println("Invalid option, try again idiot");
@@ -287,8 +277,8 @@ public class UserInterface {
             StaffLogin staffLogin = new StaffLogin();
             StA = staffLogin.login();
             if (StA != null) {
-                boolean login = true;
-                while (login) {
+                boolean login_access_staff = true;
+                while (login_access_staff) {
                     System.out.println("Choose option:");
                     System.out.println("1. Register course for student");
                     System.out.println("2. Drop course"); // done
@@ -327,7 +317,7 @@ public class UserInterface {
                             }
 
                             studentList.remove(SA);
-                            CourseIndex toAdd = showAllCoursesCtrl.selectCourse(indexDBManager);
+                            CourseIndex toAdd = showAllCoursesCtrl.selectCourseThatStudentNotTaking(SA, indexDBManager);
                             courseList.remove(toAdd);
                             addDropStaff.addCourse(SA, toAdd);
                             SA.getTimetable().printTimetable();
@@ -363,8 +353,8 @@ public class UserInterface {
                             int vacancy = sc.nextInt();
 
                             courseList.remove(courseToChangeVacancy);
-
-                            addDropStaff.changeVacancies(courseToChangeVacancy, vacancy);
+                            StaffChangeVacancyCtrl staffChangeVacancyCtrl = new StaffChangeVacancyCtrl();
+                            staffChangeVacancyCtrl.changeVacancies(courseToChangeVacancy, vacancy);
 
                             courseList.add(courseToChangeVacancy);
                             indexDBManager.updateDatabase(courseList, indexDB);
@@ -407,22 +397,31 @@ public class UserInterface {
                             break;
 
                         case 6:
-                            System.out.println("Add Course");
-                            String course5 = sc.next();
-                            System.out.println("Course AU:");
-                            int au5 = sc.nextInt();
-                            System.out.println("Course School");
-                            String school5 = sc.next();
-                            System.out.println("Course Type: CORE, UE, GERPE_LA, GERPE_BM, GERPE_STS, MPE");
-                            ModType type5 = ModType.valueOf(sc.next());
-                            ArrayList<ModType> temp5 = new ArrayList<ModType>();
-                            temp5.add(type5);
-                            IndexWaitList temp5_0 = new IndexWaitList(new ArrayList<String>());
-                            ArrayList<String> temp5_1 = new ArrayList<String>();
-                            ArrayList<Lesson> temp5_2 = new ArrayList<Lesson>();
-                            CourseIndex index4 = new CourseIndex(course5, 0, au5, school5, temp5, temp5_0, 0, temp5_1,
-                                    temp5_2);
-                            courseList.add(index4);
+                            // System.out.println("Add Course");
+                            // String course5 = sc.next();
+                            // System.out.println("Course AU:");
+                            // int au5 = sc.nextInt();
+                            // System.out.println("Course School");
+                            // String school5 = sc.next();
+                            // System.out.println("Course Type: CORE, UE, GERPE_LA, GERPE_BM, GERPE_STS,
+                            // MPE");
+                            // ModType type5 = ModType.valueOf(sc.next());
+                            // ArrayList<ModType> temp5 = new ArrayList<ModType>();
+                            // temp5.add(type5);
+                            // IndexWaitList temp5_0 = new IndexWaitList(new ArrayList<String>());
+                            // ArrayList<String> temp5_1 = new ArrayList<String>();
+                            // ArrayList<Lesson> temp5_2 = new ArrayList<Lesson>();
+                            // CourseIndex index4 = new CourseIndex(course5, 0, au5, school5, temp5,
+                            // temp5_0, 0, temp5_1,
+                            // temp5_2);
+                            // courseList.add(index4);
+                            StaffCreateCourseCtrl staffCreateCourseCtrl = new StaffCreateCourseCtrl();
+                            ArrayList<CourseIndex> newCourseIndexes = staffCreateCourseCtrl.createCourse();
+
+                            for (CourseIndex newCourse : newCourseIndexes) {
+                                courseList.add(newCourse);
+                            }
+
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
                             break;
@@ -479,89 +478,12 @@ public class UserInterface {
 
                         case 11:
                             System.out.println("Logout");
-                            login = false;
+                            login_access_staff = false;
                             break;
                     }
                 }
             }
         }
     }
-
-    // public StudentAcc studentLogin(ArrayList<StudentAcc> studentList) {
-    // // CourseIndexReader CIR = new CourseIndexReader();
-    // // ArrayList<CourseIndex> temp = CIR.ReadFile();
-    // // CourseIndexDB indexDB = new CourseIndexDB(temp);
-    // // CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
-
-    // // StudentReader ur = new StudentReader();
-    // // ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
-
-    // Scanner sc = new Scanner(System.in);
-    // Console cs = System.console();
-    // StudentAcc sa;
-    // String currentDate;
-    // boolean foundUser = false;
-
-    // DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    // LocalDateTime now = LocalDateTime.now();
-    // currentDate = dtf.format(now);
-
-    // System.out.println("Enter username");
-    // String userName = sc.nextLine();
-    // String password = null;
-    // if (cs != null) {
-    // // cs.printf("Testing password%n");
-    // char[] passwordArray = cs.readPassword("Enter your password: ");
-    // String newString = new String(passwordArray);
-    // // cs.printf("Password entered was: %s%n", newString);
-    // password = Integer.toString(newString.hashCode());
-    // }
-    // // System.out.println("Enter password");
-    // // String password = Integer.toString(passwordArray.hashCode());
-
-    // for (StudentAcc saZ : studentList) {
-    // sa = saZ;
-    // if (sa.getUserName().equals(userName)) {
-    // foundUser = true;
-    // if (sa.getPassword().equals(password)) {
-    // if (sa.getAccessDate().equals(currentDate)) {
-    // System.out.println("Login Success!");
-    // // System.out.println(sa.getRegisteredCourseIndex());
-    // return sa;
-    // } else {
-    // System.out.println("Wrong access date");
-    // }
-    // }
-    // }
-    // }
-    // if (foundUser == true) {
-    // System.out.println("Invalid Password");
-    // } else {
-    // System.out.println("Invalid Username");
-    // }
-    // return null;
-    // }
-
-    // public StaffAcc staffLogin() {
-    // StaffReader s = new StaffReader();
-    // ArrayList<StaffAcc> staffList = s.ReadFile();
-    // Scanner sc = new Scanner(System.in);
-    // StaffAcc sa;
-
-    // System.out.println("Enter Username: ");
-    // String userName = sc.nextLine();
-    // System.out.println("Enter Password: ");
-    // String password = Integer.toString(sc.nextLine().hashCode());
-
-    // for (StaffAcc saZ : staffList) {
-    // sa = saZ;
-    // if (sa.getUserName().equals(userName) && sa.getPassword().equals(password)) {
-    // System.out.println("Login Successful!");
-    // return sa;
-    // }
-    // }
-    // System.out.println("Login Failed");
-    // return null;
-    // }
 
 }

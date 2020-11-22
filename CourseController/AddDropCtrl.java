@@ -12,10 +12,7 @@ public class AddDropCtrl {
 
     public boolean addCourse(StudentAcc student, CourseIndex courseToAdd) {
         Timetable timetable = student.getTimetable();
-        // System.out.println(courseToAdd.getVacancies());
         for (CourseIndex courseIndex : student.getRegisteredCourseIndex()) {
-            // System.out.println("Inside for loop " + courseIndex);
-            // System.out.println("Watashi is here!");
             if (courseIndex.getCourseCode().equals(courseToAdd.getCourseCode())) {
                 System.out.println("Already taking course");
                 return false;
