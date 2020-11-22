@@ -288,7 +288,7 @@ public class UserInterface {
                     System.out.println("6. Add Course Code"); // done
                     System.out.println("7. Update Course Code"); // done
                     System.out.println("8. Update School"); // done
-                    System.out.println("9. Add index number");
+                    System.out.println("9. Add index number");// done
                     System.out.println("10. Change index number");
                     System.out.println("11. Logout"); // done
                     System.out.println("===========================================");
@@ -476,6 +476,13 @@ public class UserInterface {
 
                         case 10:
                             System.out.println("Change Index Number");
+                            System.out.println("Enter the course code:");
+                            String courseCode = sc.next();
+                            System.out.println("Enter the index no:");
+                            int indexToChange = sc.nextInt();
+
+                            CourseIndex courseIndexToChangeIndexNo = indexDBManager.getCourseIndexInfo(courseCode,
+                                    indexToChange);
 
                             break;
 
