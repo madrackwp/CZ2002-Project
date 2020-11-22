@@ -81,7 +81,10 @@ public class UserInterface {
                             courseIndexWriter.writeFile(indexDBManager);
                             break;
                         case 2:
-                            // SA.getTimetable().printTimetable();
+                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                                System.out.println("No Course Taken");
+                                break;
+                            }
                             String courseToDrop;
                             System.out.println("Enter Course to Drop: ");
                             while (true){
@@ -128,6 +131,10 @@ public class UserInterface {
                             System.out.println("");
                             break;
                         case 4:
+                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                                System.out.println("No Course Taken");
+                                break;
+                            }
                             ChangeIndexCtrl cic = new ChangeIndexCtrl();
                             System.out.println("Enter Course Code to Change Index: ");
                             String courseToChange;
@@ -184,13 +191,24 @@ public class UserInterface {
                             System.out.println("");
                             break;
                         case 5:
+                            if (SA.getRegisteredCourseIndex().isEmpty()){
+                                System.out.println("No Course Taken");
+                                break;
+                            }
                             StudentAcc student2 = studentLogin.login(studentList);
                             studentList.remove(student2);
                             studentList.remove(SA);
 
-                            System.out.println("Enter course code to swap");
-                            String courseToSwap = sc.next();
-
+                            System.out.println("Enter Course Code to Swap: ");
+                            String courseToSwap;
+                            while (true){
+                                courseToSwap = sc.next();
+                                if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)){
+                                    break;
+                                }
+                                System.out.println("Course Not Taken by Both Students");
+                                System.out.println("Please Re-enter Course Code to Swap: ");
+                            }
                             CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
                             CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
 
@@ -211,10 +229,11 @@ public class UserInterface {
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
 
-                            System.out.println("Student1 timetable");
+                            System.out.println("");
+                            System.out.println("Student 1");
                             SA.getTimetable().printTimetable();
                             System.out.println("");
-                            System.out.println("Student2 timetable");
+                            System.out.println("Student 2");
                             student2.getTimetable().printTimetable();
                             System.out.println("");
                             break;
@@ -271,7 +290,7 @@ public class UserInterface {
                             login_access_student = false;
                             break;
                         default:
-                            System.out.println("Invalid option, try again idiot");
+                            System.out.println("Invalid Option, Try Again! ");
                             break;
 
                     }
