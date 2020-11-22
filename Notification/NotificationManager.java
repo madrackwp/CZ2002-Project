@@ -2,18 +2,19 @@ package Notification;
 
 import java.util.Scanner;
 
+import CourseIndex.CourseIndex;
+
 public class NotificationManager {
+    public NotificationManager() {
+    }
     // public static void notify(){
-        
+
     // }
 
-    public static void main (String[] args){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the student's username: ");
-        String username=sc.nextLine();
-        EmailNotification.sendNotification(username); 
-
+    public boolean sendEmail(String studentUserName, CourseIndex courseIndex) {
+        EmailNotification emailNotification = new EmailNotification();
+        emailNotification.sendNotification(studentUserName, courseIndex);
+        return true;
     }
 
-    
 }
