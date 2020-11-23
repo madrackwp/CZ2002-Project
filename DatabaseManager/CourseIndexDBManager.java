@@ -106,7 +106,8 @@ public class CourseIndexDBManager implements DatabaseManager {
 
     public void printIndexes() {
         for (CourseIndex courseIndex : this.courseIndexes) {
-            System.out.println(courseIndex);
+            System.out.println("CourseCode: " + courseIndex.getCourseCode() + " | School: " + courseIndex.getSchool()
+                    + " | IndexNo: " + courseIndex.getIndexNo() + " | Vacancy: " + courseIndex.getVacancies());
         }
     }
 

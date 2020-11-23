@@ -86,6 +86,8 @@ public class StudentUI {
                         courseIndexWriter.writeFile(indexDBManager);
                         break;
                     case 2:
+                        SA.getTimetable().printTimetable();
+                        System.out.println("");
                         if (SA.getRegisteredCourseIndex().isEmpty()) {
                             System.out.println("No Course Taken");
                             break;
@@ -93,7 +95,7 @@ public class StudentUI {
                         String courseToDrop;
                         System.out.println("Enter Course to Drop: ");
                         while (true) {
-                            courseToDrop = sc.next();
+                            courseToDrop = sc.next().toUpperCase();
                             if (SA.takingCourse(courseToDrop)) {
                                 break;
                             }
@@ -137,6 +139,8 @@ public class StudentUI {
                         System.out.println("");
                         break;
                     case 4:
+                        SA.getTimetable().printTimetable();
+                        System.out.println("");
                         if (SA.getRegisteredCourseIndex().isEmpty()) {
                             System.out.println("No Course Taken");
                             break;
@@ -145,7 +149,7 @@ public class StudentUI {
                         System.out.println("Enter Course Code to Change Index: ");
                         String courseToChange;
                         while (true) {
-                            courseToChange = sc.next();
+                            courseToChange = sc.next().toUpperCase();
                             if (SA.takingCourse(courseToChange)) {
                                 break;
                             }
@@ -199,6 +203,9 @@ public class StudentUI {
                         System.out.println("");
                         break;
                     case 5:
+                        System.out.println("STUDENT1:");
+                        SA.getTimetable().printTimetable();
+                        System.out.println("");
                         if (SA.getRegisteredCourseIndex().isEmpty()) {
                             System.out.println("No Course Taken");
                             break;
@@ -206,11 +213,13 @@ public class StudentUI {
                         StudentAcc student2 = studentLogin.login(studentList);
                         studentList.remove(student2);
                         studentList.remove(SA);
-
+                        System.out.println("STUDENT2:");
+                        student2.getTimetable().printTimetable();
+                        System.out.println("");
                         System.out.println("Enter Course Code to Swap: ");
                         String courseToSwap;
                         while (true) {
-                            courseToSwap = sc.next();
+                            courseToSwap = sc.next().toUpperCase();
                             if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
                                 break;
                             }
@@ -238,35 +247,20 @@ public class StudentUI {
                         courseIndexWriter.writeFile(indexDBManager);
 
                         System.out.println("");
-                        System.out.println("Student 1: ");
+                        System.out.println("STUDENT1:");
                         SA.getTimetable().printTimetable();
                         System.out.println("");
-                        System.out.println("Student 2: ");
+                        System.out.println("STUDENT2:");
                         student2.getTimetable().printTimetable();
                         System.out.println("");
                         break;
                     case 6:
-                        System.out.println("Enter Course Code to Check: ");
-                        String ccCheck = sc.next();
-                        System.out.println("Enter Index Number to Check: ");
-                        while (!sc.hasNextInt()) {
-                            System.out.println("Only Integers Allowed");
-                            sc.next();
-                        }
-                        int iCheck = sc.nextInt();
-                        CheckVacancyCtrl cvc = new CheckVacancyCtrl();
-                        int vacancy = cvc.getVacancies(ccCheck, iCheck, indexDBManager);
-                        if (vacancy == -1) {
-                            System.out.println("Invalid Course/Index");
-                        } else {
-                            System.out.println("Number of Vacancies: " + vacancy);
-                        }
-                        System.out.println("");
+                        indexDBManager.printIndexes();
                         break;
                     case 7:
                         ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
                         System.out.println("Enter Course Code to Reclassify:");
-                        String userInput = sc.next();
+                        String userInput = sc.next().toUpperCase();
 
                         studentList.remove(SA);
 

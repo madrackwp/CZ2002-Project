@@ -19,6 +19,7 @@ public class Timetable {
     }
 
     public boolean checkEmptySlot(CourseIndex c) {
+        this.timetable = new String[5][14];
         for (int i = 0; i < coursestaken.size(); i++) {
             this.addIndex(this.coursestaken.get(i));
         }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import CourseController.AddDropCtrl;
-import CourseController.ShowAllCoursesCtrl;
+import CourseController.CheckVacancyCtrl;
 import CourseIndex.CourseIndex;
 import CourseIndex.IndexWaitList;
 import DatabaseManager.CourseIndexDBManager;
@@ -16,7 +16,6 @@ import Notification.NotificationManager;
 import ReadWriteFile.*;
 import StaffDuties.ChangeCourseCodeCtrl;
 import StaffDuties.ChangeSchCtrl;
-import StaffDuties.StaffAddDrop;
 import StaffDuties.StaffAddStudentCtrl;
 import StaffDuties.StaffChangeAccessPeriodCtrl;
 import StaffDuties.StaffChangeIndexCtrl;
@@ -61,24 +60,22 @@ public class AdminUI {
                 System.out.println("Choose option:");
                 System.out.println("1. Create New Student Account"); // EH,CC done
                 System.out.println("2. Change Student Access period"); // EH,CC done
-                System.out.println("3. Change Vacancies"); // EH,CC done
-                System.out.println("4. Print students by Index Number"); // EH done, no CC needed
-                System.out.println("5. Print students by Course"); // EH done, no CC needed
-                System.out.println("6. Add Course Code"); // EH, CC done
-                System.out.println("7. Change Course Code");// EH, CC done
-                System.out.println("8. Change School");// EH, CC done
-                System.out.println("9. Add index number");// CC done, EH not done
-                System.out.println("10. Change index number");
-                System.out.println("11. Logout"); // done
+                System.out.println("3. View course index vacancy"); // EH,CC done
+                System.out.println("4. Change Vacancies"); // EH,CC done
+                System.out.println("5. Print students by Index Number"); // EH done, no CC needed
+                System.out.println("6. Print students by Course"); // EH done, no CC needed
+                System.out.println("7. Add Course Code"); // EH, CC done
+                System.out.println("8. Change Course Code");// EH, CC done
+                System.out.println("9. Change School");// EH, CC done
+                System.out.println("10. Add index number");// CC done, EH not done
+                System.out.println("11. Change index number");
+                System.out.println("12. Logout"); // done
                 System.out.println("===========================================");
                 System.out.println("\n");
 
                 userChoice = sc.nextInt();
 
                 AddDropCtrl addDropCtrl = new AddDropCtrl();
-                StaffAddDrop addDropStaff = new StaffAddDrop();
-                ShowAllCoursesCtrl showAllCoursesCtrl = new ShowAllCoursesCtrl();
-
                 switch (userChoice) {
                     case 1:
                         StaffAddStudentCtrl addStu = new StaffAddStudentCtrl();
@@ -113,6 +110,26 @@ public class AdminUI {
                         break;
 
                     case 3:
+                        indexDBManager.printIndexes();
+                        // System.out.println("Enter Course Code to Check: ");
+                        // String ccCheck = sc.next();
+                        // System.out.println("Enter Index Number to Check: ");
+                        // while (!sc.hasNextInt()) {
+                        // System.out.println("Only Integers Allowed");
+                        // sc.next();
+                        // }
+                        // int iCheck = sc.nextInt();
+                        // CheckVacancyCtrl cvc = new CheckVacancyCtrl();
+                        // int vacancyCheck = cvc.getVacancies(ccCheck, iCheck, indexDBManager);
+                        // if (vacancyCheck == -1) {
+                        // System.out.println("Invalid Course/Index");
+                        // } else {
+                        // System.out.println("Number of Vacancies: " + vacancyCheck);
+                        // }
+                        // System.out.println("");
+                        break;
+
+                    case 4:
                         indexDB.print();
 
                         // To find the course
@@ -204,7 +221,7 @@ public class AdminUI {
                         }
                         break;
 
-                    case 4:
+                    case 5:
                         // Display all courseIndexes
                         indexDB.print();
 
@@ -238,7 +255,7 @@ public class AdminUI {
                         }
                         break;
 
-                    case 5:
+                    case 6:
                         // Display all courseIndexes
                         indexDB.print();
 
@@ -264,7 +281,7 @@ public class AdminUI {
                         }
                         break;
 
-                    case 6:
+                    case 7:
                         System.out.println("Enter the course code you would like to create: ");
                         String courseCodeToCreate = sc.next().toUpperCase();
                         ArrayList<CourseIndex> checkIfCourseExist = indexDBManager
@@ -290,7 +307,7 @@ public class AdminUI {
 
                         break;
 
-                    case 7:
+                    case 8:
 
                         indexDBManager.printCourses();
                         // Getting user input for the course to chagnge
@@ -345,7 +362,7 @@ public class AdminUI {
 
                         break;
 
-                    case 8:
+                    case 9:
                         indexDBManager.printCourses();
                         System.out.println("Enter Course to change school");
                         String course = sc.next();
@@ -366,7 +383,7 @@ public class AdminUI {
                         }
                         break;
 
-                    case 9:
+                    case 10:
                         System.out.println("Input the course code to add an index to:");
                         String courseCodeToAddIndex = sc.next().toUpperCase();
 
@@ -412,7 +429,7 @@ public class AdminUI {
                         }
                         break;
 
-                    case 10:
+                    case 11:
                         // Getting the course
                         System.out.println("Change Index Number");
                         System.out.println("Enter the course code:");
@@ -501,7 +518,7 @@ public class AdminUI {
 
                         break;
 
-                    case 11:
+                    case 12:
                         System.out.println("Logout");
                         login_access_staff = false;
                         break;
