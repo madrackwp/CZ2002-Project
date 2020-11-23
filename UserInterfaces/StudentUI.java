@@ -62,7 +62,6 @@ public class StudentUI {
                 System.out.println("8. Change Password");
                 System.out.println("9. Logout");
                 System.out.println("===========================================");
-                System.out.println("\n");
 
                 int userChoice = sc.nextInt();
                 AddDropCtrl addDropCtrl = new AddDropCtrl(); // AddDropCtrl is created here as it is used in
@@ -71,234 +70,237 @@ public class StudentUI {
 
                 switch (userChoice) {
                     case 1:
-                        studentList.remove(SA);
-                        CourseIndex toAdd = showAllCoursesCtrl.selectCourseThatStudentNotTaking(SA, indexDBManager);
-                        courseList.remove(toAdd);
-                        addDropCtrl.addCourse(SA, toAdd);
-                        SA.getTimetable().printTimetable();
-                        System.out.println("");
+                            studentList.remove(SA);
+                            CourseIndex toAdd = showAllCoursesCtrl.selectCourseThatStudentNotTaking(SA, indexDBManager);
+                            courseList.remove(toAdd);
+                            addDropCtrl.addCourse(SA, toAdd);
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
 
-                        studentList.add(SA);
-                        studentDBManager.updateDatabase(studentList, studentDB);
-                        studentWriter.writeFile(studentDBManager);
-
-                        courseList.add(toAdd);
-                        indexDBManager.updateDatabase(courseList, indexDB);
-                        courseIndexWriter.writeFile(indexDBManager);
-                        break;
-                    case 2:
-                        if (SA.getRegisteredCourseIndex().isEmpty()) {
-                            System.out.println("No Course Taken");
-                            break;
-                        }
-                        String courseToDrop;
-                        System.out.println("Enter Course to Drop: ");
-                        while (true) {
-                            courseToDrop = sc.next();
-                            if (SA.takingCourse(courseToDrop)) {
-                                break;
-                            }
-                            System.out.println("Course Not Taken");
-                            System.out.println("Please Re-enter Course to Drop: ");
-                        }
-
-                        studentList.remove(SA);
-
-                        CourseIndex toDrop = SA.getCourseIndex(courseToDrop);
-                        courseList.remove(toDrop);
-                        CourseIndex droppedCourse = addDropCtrl.dropCourse(SA, courseToDrop);
-
-                        ArrayList<String> indexWaitList = toDrop.getIndexWaitList().getWaitList();
-                        if (!indexWaitList.get(0).equals("null")) {
-                            String indexWaitListMatricNo = indexWaitList.remove(0);
-                            System.out.println(indexWaitList);
-                            StudentAcc waitingStudent = studentDBManager.getStudentByMatricNo(indexWaitListMatricNo);
-                            studentList.remove(waitingStudent);
-                            addDropCtrl.addCourse(waitingStudent, droppedCourse);
-                            studentList.add(waitingStudent);
-                            // send notification
-                            notificationManager.sendEmail(waitingStudent.getUserName(), waitingStudent.getName(),
-                                    droppedCourse);
-
-                        }
-
-                        studentList.add(SA);
-                        studentDBManager.updateDatabase(studentList, studentDB);
-                        studentWriter.writeFile(studentDBManager);
-
-                        courseList.add(droppedCourse);
-                        indexDBManager.updateDatabase(courseList, indexDB);
-                        courseIndexWriter.writeFile(indexDBManager);
-
-                        SA.getTimetable().printTimetable();
-                        System.out.println("");
-                        break;
-                    case 3:
-                        SA.getTimetable().printTimetable();
-                        System.out.println("");
-                        break;
-                    case 4:
-                        if (SA.getRegisteredCourseIndex().isEmpty()) {
-                            System.out.println("No Course Taken");
-                            break;
-                        }
-                        ChangeIndexCtrl cic = new ChangeIndexCtrl();
-                        System.out.println("Enter Course Code to Change Index: ");
-                        String courseToChange;
-                        while (true) {
-                            courseToChange = sc.next();
-                            if (SA.takingCourse(courseToChange)) {
-                                break;
-                            }
-                            System.out.println("Course Not Taken");
-                            System.out.println("Please Re-enter Course Code to Change Index: ");
-                        }
-
-                        CourseIndex indexToDrop = SA.getCourseIndex(courseToChange);
-                        int newCourseIndex = cic.displayValidCourseToChange(courseToChange, indexDBManager, SA);
-                        CourseIndex indexToChangeTo = indexDBManager.getCourseIndexInfo(courseToChange, newCourseIndex);
-
-                        studentList.remove(SA);
-                        courseList.remove(indexToDrop);
-                        courseList.remove(indexToChangeTo);
-
-                        ArrayList<String> IndexWaitList = indexToDrop.getIndexWaitList().getWaitList();
-                        StudentAcc waitingStudent = null;
-                        if (!IndexWaitList.get(0).equals("null")) {
-                            String indexWaitListMatricNo = IndexWaitList.get(0);
-                            waitingStudent = studentDBManager.getStudentByMatricNo(indexWaitListMatricNo);
-                        }
-
-                        ArrayList<CourseIndex> oldNewCourseIndex = cic.changeIndex(indexToChangeTo, SA, indexToDrop,
-                                indexDBManager, addDropCtrl);
-                        // check old course if SA is still inside
-                        // if no, add waitingStudent into old course
-                        if (!oldNewCourseIndex.get(0).getRegisteredStudentMatricNo().contains(SA.getMatricNo())
-                                && waitingStudent != null) {
-                            studentList.remove(waitingStudent);
-                            oldNewCourseIndex.get(0).getIndexWaitList().removeStudent(waitingStudent.getMatricNo());
-                            addDropCtrl.addCourse(waitingStudent, oldNewCourseIndex.get(0));
-                            // send notification
-                            studentList.add(waitingStudent);
-                        }
-
-                        CourseIndex toChange_Drop = oldNewCourseIndex.get(0);
-                        CourseIndex toChange_Add = oldNewCourseIndex.get(1);
-
-                        studentList.add(SA);
-                        studentDBManager.updateDatabase(studentList, studentDB);
-                        studentWriter.writeFile(studentDBManager);
-
-                        courseList.add(toChange_Drop);
-                        courseList.add(toChange_Add);
-                        indexDBManager.updateDatabase(courseList, indexDB);
-                        courseIndexWriter.writeFile(indexDBManager);
-
-                        SA.getTimetable().printTimetable();
-                        System.out.println("");
-                        break;
-                    case 5:
-                        if (SA.getRegisteredCourseIndex().isEmpty()) {
-                            System.out.println("No Course Taken");
-                            break;
-                        }
-                        StudentAcc student2 = studentLogin.login(studentList);
-                        studentList.remove(student2);
-                        studentList.remove(SA);
-
-                        System.out.println("Enter Course Code to Swap: ");
-                        String courseToSwap;
-                        while (true) {
-                            courseToSwap = sc.next();
-                            if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
-                                break;
-                            }
-                            System.out.println("Course Not Taken by Both Students");
-                            System.out.println("Please Re-enter Course Code to Swap: ");
-                        }
-                        CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
-                        CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
-
-                        courseList.remove(student2Course);
-                        courseList.remove(SACourse);
-
-                        SwapIndexCtrl sic = new SwapIndexCtrl();
-                        ArrayList<CourseIndex> courseIndexes = sic.swapIndex(SA, student2, SACourse, student2Course,
-                                addDropCtrl);
-
-                        studentList.add(SA);
-                        studentList.add(student2);
-                        studentDBManager.updateDatabase(studentList, studentDB);
-                        studentWriter.writeFile(studentDBManager);
-
-                        courseList.add(courseIndexes.get(0));
-                        courseList.add(courseIndexes.get(1));
-                        indexDBManager.updateDatabase(courseList, indexDB);
-                        courseIndexWriter.writeFile(indexDBManager);
-
-                        System.out.println("");
-                        System.out.println("Student 1");
-                        SA.getTimetable().printTimetable();
-                        System.out.println("");
-                        System.out.println("Student 2");
-                        student2.getTimetable().printTimetable();
-                        System.out.println("");
-                        break;
-                    case 6:
-                        System.out.println("Enter course code to check: ");
-                        String ccCheck = sc.next();
-                        System.out.println("Enter index number to check: ");
-                        int iCheck = sc.nextInt();
-                        CheckVacancyCtrl cvc = new CheckVacancyCtrl();
-                        int vacancy = cvc.getVacancies(ccCheck, iCheck, indexDBManager);
-                        if (vacancy == -1) {
-                            System.out.println("Invalid Course/Index");
-                        } else {
-                            System.out.println("Number of vacancies: " + vacancy);
-                        }
-                        System.out.println("");
-                        break;
-                    case 7:
-                        ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
-
-                        SA.getTimetable().printTimetable();
-                        System.out.println("=====================================");
-                        System.out.println("Select mod to reclassify:");
-                        String userInput = sc.next();
-
-                        studentList.remove(SA);
-
-                        reclassifyCtrl.reclassifyCourse(userInput, SA);
-
-                        studentList.add(SA);
-                        studentDBManager.updateDatabase(studentList, studentDB);
-                        studentWriter.writeFile(studentDBManager);
-
-                        SA.getTimetable().printTimetable();
-                        System.out.println("");
-                        break;
-                    case 8:
-                        studentList.remove(SA);
-                        System.out.println("Enter your new password");
-                        String newPassword = sc.next();
-                        System.out.println("Re-enter your new password");
-                        String renewPassword = sc.next();
-                        if (renewPassword.equals(newPassword)) {
-                            SA.setPassword(newPassword);
                             studentList.add(SA);
                             studentDBManager.updateDatabase(studentList, studentDB);
                             studentWriter.writeFile(studentDBManager);
-                        } else {
-                            System.out.println("Unsucessful");
-                        }
-                        break;
-                    case 9:
-                        System.out.println("Bye bye!");
-                        login_access_student = false;
-                        break;
-                    default:
-                        System.out.println("Invalid Option, Try Again! ");
-                        break;
+
+                            courseList.add(toAdd);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+                            break;
+                        case 2:
+                            if (SA.getRegisteredCourseIndex().isEmpty()) {
+                                System.out.println("No Course Taken");
+                                break;
+                            }
+                            String courseToDrop;
+                            System.out.println("Enter Course to Drop: ");
+                            while (true) {
+                                courseToDrop = sc.next();
+                                if (SA.takingCourse(courseToDrop)) {
+                                    break;
+                                }
+                                System.out.println("Course Not Taken");
+                                System.out.println("Please Re-enter Course to Drop: ");
+                            }
+
+                            studentList.remove(SA);
+
+                            CourseIndex toDrop = SA.getCourseIndex(courseToDrop);
+                            courseList.remove(toDrop);
+                            CourseIndex droppedCourse = addDropCtrl.dropCourse(SA, courseToDrop);
+
+                            ArrayList<String> indexWaitList = toDrop.getIndexWaitList().getWaitList();
+                            if (!indexWaitList.get(0).equals("null")) {
+                                String indexWaitListMatricNo = indexWaitList.remove(0);
+                                System.out.println(indexWaitList);
+                                StudentAcc waitingStudent = studentDBManager
+                                        .getStudentByMatricNo(indexWaitListMatricNo);
+                                studentList.remove(waitingStudent);
+                                addDropCtrl.addCourse(waitingStudent, droppedCourse);
+                                studentList.add(waitingStudent);
+                                // send notification
+                                notificationManager.sendEmail(waitingStudent.getUserName(), waitingStudent.getName(),
+                                        droppedCourse);
+
+                            }
+
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(droppedCourse);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 3:
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 4:
+                            if (SA.getRegisteredCourseIndex().isEmpty()) {
+                                System.out.println("No Course Taken");
+                                break;
+                            }
+                            ChangeIndexCtrl cic = new ChangeIndexCtrl();
+                            System.out.println("Enter Course Code to Change Index: ");
+                            String courseToChange;
+                            while (true) {
+                                courseToChange = sc.next();
+                                if (SA.takingCourse(courseToChange)) {
+                                    break;
+                                }
+                                System.out.println("Course Not Taken");
+                                System.out.println("Please Re-enter Course Code to Change Index: ");
+                            }
+
+                            CourseIndex indexToDrop = SA.getCourseIndex(courseToChange);
+                            int newCourseIndex = cic.displayValidCourseToChange(courseToChange, indexDBManager, SA);
+                            CourseIndex indexToChangeTo = indexDBManager.getCourseIndexInfo(courseToChange,
+                                    newCourseIndex);
+
+                            studentList.remove(SA);
+                            courseList.remove(indexToDrop);
+                            courseList.remove(indexToChangeTo);
+
+                            ArrayList<String> IndexWaitList = indexToDrop.getIndexWaitList().getWaitList();
+                            StudentAcc waitingStudent = null;
+                            if (!IndexWaitList.get(0).equals("null")) {
+                                String indexWaitListMatricNo = IndexWaitList.get(0);
+                                waitingStudent = studentDBManager.getStudentByMatricNo(indexWaitListMatricNo);
+                            }
+
+                            ArrayList<CourseIndex> oldNewCourseIndex = cic.changeIndex(indexToChangeTo, SA, indexToDrop,
+                                    indexDBManager, addDropCtrl);
+                            // check old course if SA is still inside
+                            // if no, add waitingStudent into old course
+                            if (!oldNewCourseIndex.get(0).getRegisteredStudentMatricNo().contains(SA.getMatricNo())
+                                    && waitingStudent != null) {
+                                studentList.remove(waitingStudent);
+                                oldNewCourseIndex.get(0).getIndexWaitList().removeStudent(waitingStudent.getMatricNo());
+                                addDropCtrl.addCourse(waitingStudent, oldNewCourseIndex.get(0));
+                                // send notification
+                                studentList.add(waitingStudent);
+                            }
+
+                            CourseIndex toChange_Drop = oldNewCourseIndex.get(0);
+                            CourseIndex toChange_Add = oldNewCourseIndex.get(1);
+
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(toChange_Drop);
+                            courseList.add(toChange_Add);
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 5:
+                            if (SA.getRegisteredCourseIndex().isEmpty()) {
+                                System.out.println("No Course Taken");
+                                break;
+                            }
+                            StudentAcc student2 = studentLogin.login(studentList);
+                            studentList.remove(student2);
+                            studentList.remove(SA);
+
+                            System.out.println("Enter Course Code to Swap: ");
+                            String courseToSwap;
+                            while (true) {
+                                courseToSwap = sc.next();
+                                if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
+                                    break;
+                                }
+                                System.out.println("Course Not Taken by Both Students");
+                                System.out.println("Please Re-enter Course Code to Swap: ");
+                            }
+                            CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
+                            CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
+
+                            courseList.remove(student2Course);
+                            courseList.remove(SACourse);
+
+                            SwapIndexCtrl sic = new SwapIndexCtrl();
+                            ArrayList<CourseIndex> courseIndexes = sic.swapIndex(SA, student2, SACourse, student2Course,
+                                    addDropCtrl);
+
+                            studentList.add(SA);
+                            studentList.add(student2);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(courseIndexes.get(0));
+                            courseList.add(courseIndexes.get(1));
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
+                            System.out.println("");
+                            System.out.println("Student 1: ");
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            System.out.println("Student 2: ");
+                            student2.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 6:
+                            System.out.println("Enter Course Code to Check: ");
+                            String ccCheck = sc.next();
+                            System.out.println("Enter Index Number to Check: ");
+                            while (!sc.hasNextInt()) {
+                                System.out.println("Only Integers Allowed");
+                                sc.next();
+                            }
+                            int iCheck = sc.nextInt();
+                            CheckVacancyCtrl cvc = new CheckVacancyCtrl();
+                            int vacancy = cvc.getVacancies(ccCheck, iCheck, indexDBManager);
+                            if (vacancy == -1) {
+                                System.out.println("Invalid Course/Index");
+                            } else {
+                                System.out.println("Number of Vacancies: " + vacancy);
+                            }
+                            System.out.println("");
+                            break;
+                        case 7:
+                            ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
+                            System.out.println("Enter Course Code to Reclassify:");
+                            String userInput = sc.next();
+
+                            studentList.remove(SA);
+
+                            reclassifyCtrl.reclassifyCourse(userInput, SA);
+
+                            studentList.add(SA);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            break;
+                        case 8:
+                            studentList.remove(SA);
+                            System.out.println("Enter your new password");
+                            String newPassword = sc.next();
+                            System.out.println("Re-enter your new password");
+                            String renewPassword = sc.next();
+                            if (renewPassword.equals(newPassword)) {
+                                SA.setPassword(newPassword);
+                                studentList.add(SA);
+                                studentDBManager.updateDatabase(studentList, studentDB);
+                                studentWriter.writeFile(studentDBManager);
+                            } else {
+                                System.out.println("Password Chanage Unsuccessful");
+                            }
+                            break;
+                        case 9:
+                            System.out.println("Bye bye!");
+                            login_access_student = false;
+                            break;
+                        default:
+                            System.out.println("Invalid Option, Try Again! ");
+                            break;
 
                 }
 
