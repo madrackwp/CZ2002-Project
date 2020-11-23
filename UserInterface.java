@@ -1,14 +1,10 @@
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.lang.model.util.ElementScanner6;
 
 import CourseController.*;
 import CourseIndex.CourseIndex;
 import CourseIndex.IndexWaitList;
-import CourseIndex.Lesson;
-import CourseIndex.ModType;
+
 import DatabaseManager.CourseIndexDBManager;
 import DatabaseManager.StudentDBManager;
 import LocalDatabase.*;
@@ -393,27 +389,28 @@ public class UserInterface {
                                 // This is the look for anyone that is on the waitlist and add them into the
                                 // courseIndex
                                 IndexWaitList iwl = courseToChangeVacancy.getIndexWaitList();
-                                for (int i = 0; i < vacancy; i++) {
-                                    if (iwl.getWaitList().size() == 0) {
-                                        break;
-                                    }
-                                    String matricNo = iwl.getWaitList().get(0);
-                                    StudentAcc student = studentDBManager.getStudentByMatricNo(matricNo);
-                                    studentList.remove(student);
-                                    boolean boolCheck = addDropCtrl.addCourse(student, courseToChangeVacancy);
-                                    if (boolCheck) {
-                                        notificationManager.sendEmail(student.getUserName(), student.getName(),
-                                                courseToChangeVacancy);
-                                    } else {
-                                        System.out.println("Add fail");
-                                    }
+                                if (iwl.getWaitList().size() != 0) {
+                                    for (int i = 0; i < vacancy; i++) {
 
-                                    // Send email here
-                                    studentList.add(student);
+                                        String matricNo = iwl.getWaitList().get(0);
+                                        StudentAcc student = studentDBManager.getStudentByMatricNo(matricNo);
+                                        studentList.remove(student);
+                                        boolean boolCheck = addDropCtrl.addCourse(student, courseToChangeVacancy);
+                                        if (boolCheck) {
+                                            notificationManager.sendEmail(student.getUserName(), student.getName(),
+                                                    courseToChangeVacancy);
+                                        } else {
+                                            System.out.println("Add fail");
+                                        }
 
-                                    studentDBManager.updateDatabase(studentList, studentDB);
-                                    studentWriter.writeFile(studentDBManager);
+                                        // Send email here
+                                        studentList.add(student);
+
+                                        studentDBManager.updateDatabase(studentList, studentDB);
+                                        studentWriter.writeFile(studentDBManager);
+                                    }
                                 }
+
                             } else {
                                 System.out.println("This course and index number does not exist.");
                             }
@@ -570,8 +567,35 @@ public class UserInterface {
                             break;
 
                         case 9:
+                            System.out.println("Input the course code to add an index to:");
+                            String courseCodeToAddIndex = sc.next().toUpperCase();
+
+                            // Checking if the course exists
+                            ArrayList<CourseIndex> doesCourseExist = indexDBManager
+                                    .getCourseIndexInfoArray(courseCodeToAddIndex);
+                            if (doesCourseExist.isEmpty()) {
+                                System.out.println("ERROR: Course does not exist");
+                                break;
+                            }
+                            // Getting the new course index number to add
+                            System.out.println("Enter the indexNo you would like to add:");
+                            while (!sc.hasNextInt()) {
+                                System.out.println("ERROR: Course indexes are integers!");
+                                sc.next();
+                            }
+                            int indexToAdd = sc.nextInt();
+
+                            // Check if the course index already exists
+                            CourseIndex courseIndexToAdd = indexDBManager.getCourseIndexInfo(courseCodeToAddIndex,
+                                    indexToAdd);
+                            if (courseIndexToAdd != null) {
+                                System.out.println("Course index already exists");
+                                break;
+                            }
+
                             StaffCreateIndex staffCreateIndex = new StaffCreateIndex();
-                            CourseIndex newIndex = staffCreateIndex.createIndex(indexDBManager);
+                            CourseIndex newIndex = staffCreateIndex.createIndex(indexDBManager, courseCodeToAddIndex,
+                                    indexToAdd);
                             if (newIndex != null) {
                                 courseList.add(newIndex);
                                 indexDBManager.updateDatabase(courseList, indexDB);
@@ -583,7 +607,7 @@ public class UserInterface {
                             // Getting the course
                             System.out.println("Change Index Number");
                             System.out.println("Enter the course code:");
-                            String courseCode = sc.next();
+                            String courseCode = sc.next().toUpperCase();
 
                             ArrayList<CourseIndex> courseToChangeIndexNo = indexDBManager
                                     .getCourseIndexInfoArray(courseCode);

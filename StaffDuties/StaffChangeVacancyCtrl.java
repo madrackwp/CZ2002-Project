@@ -7,13 +7,13 @@ public class StaffChangeVacancyCtrl {
     public StaffChangeVacancyCtrl() {
     }
 
-    public boolean changeVacancies(CourseIndex courseIndex, int vacancies) {
+    public CourseIndex changeVacancies(CourseIndex courseIndex, int vacancies) {
         try {
             courseIndex.setVacancy(vacancies);
-            return true;
+            return courseIndex;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
+            return null;
         }
     }
 }

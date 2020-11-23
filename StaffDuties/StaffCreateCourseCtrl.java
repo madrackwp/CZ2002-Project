@@ -40,8 +40,8 @@ public class StaffCreateCourseCtrl {
                 sc.next();
             }
             noOfModTypes = sc.nextInt();
-            if (noOfModTypes >= 7) {
-                System.out.println("ERROR: Integers of at most 6 only");
+            if (noOfModTypes >= 7 || noOfModTypes < 0) {
+                System.out.println("ERROR: Positive integers of at most 6 only");
             } else {
                 break;
             }
@@ -70,12 +70,12 @@ public class StaffCreateCourseCtrl {
         int noOfLessons;
         while (true) {
             while (!sc.hasNextInt()) {
-                System.out.println("ERROR: Integers of at most 3 only");
+                System.out.println("ERROR: Positive integers of at most 3 only");
                 sc.next();
             }
             noOfLessons = sc.nextInt();
-            if (noOfLessons >= 3) {
-                System.out.println("ERROR: Integers of at most 3 only");
+            if (noOfLessons >= 3 || noOfLessons < 0) {
+                System.out.println("ERROR: Positive integers of at most 3 only");
             } else {
                 break;
             }
