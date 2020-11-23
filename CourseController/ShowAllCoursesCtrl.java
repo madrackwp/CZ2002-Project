@@ -56,6 +56,10 @@ public class ShowAllCoursesCtrl {
         Scanner sc = new Scanner(System.in);
         System.out.println("Select Course to Add: ");
         while (true){
+            while (!sc.hasNextInt()) {
+                System.out.println("Only Integers between 1 and "+(k-1)+" Accepted");
+                sc.next();
+            }
             input = sc.nextInt();
             if (input > 0 && input < k){
                 break;

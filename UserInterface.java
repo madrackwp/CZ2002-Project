@@ -43,7 +43,6 @@ public class UserInterface {
         if (userChoice == 1) {
             StudentLogin studentLogin = new StudentLogin();
             SA = studentLogin.login(studentList);
-            // System.out.println(SA.getUserName());
             if (SA != null) {
                 boolean login_access_student = true;
                 while (login_access_student) {
@@ -60,7 +59,6 @@ public class UserInterface {
                     System.out.println("8. Change Password");
                     System.out.println("9. Logout");
                     System.out.println("===========================================");
-                    System.out.println("\n");
 
                     userChoice = sc.nextInt();
                     AddDropCtrl addDropCtrl = new AddDropCtrl(); // AddDropCtrl is created here as it is used in
@@ -237,33 +235,34 @@ public class UserInterface {
                             courseIndexWriter.writeFile(indexDBManager);
 
                             System.out.println("");
-                            System.out.println("Student 1");
+                            System.out.println("Student 1: ");
                             SA.getTimetable().printTimetable();
                             System.out.println("");
-                            System.out.println("Student 2");
+                            System.out.println("Student 2: ");
                             student2.getTimetable().printTimetable();
                             System.out.println("");
                             break;
                         case 6:
-                            System.out.println("Enter course code to check: ");
+                            System.out.println("Enter Course Code to Check: ");
                             String ccCheck = sc.next();
-                            System.out.println("Enter index number to check: ");
+                            System.out.println("Enter Index Number to Check: ");
+                            while (!sc.hasNextInt()) {
+                                System.out.println("Only Integers Allowed");
+                                sc.next();
+                            }
                             int iCheck = sc.nextInt();
                             CheckVacancyCtrl cvc = new CheckVacancyCtrl();
                             int vacancy = cvc.getVacancies(ccCheck, iCheck, indexDBManager);
                             if (vacancy == -1) {
                                 System.out.println("Invalid Course/Index");
                             } else {
-                                System.out.println("Number of vacancies: " + vacancy);
+                                System.out.println("Number of Vacancies: " + vacancy);
                             }
                             System.out.println("");
                             break;
                         case 7:
                             ReclassifyCtrl reclassifyCtrl = new ReclassifyCtrl();
-
-                            SA.getTimetable().printTimetable();
-                            System.out.println("=====================================");
-                            System.out.println("Select mod to reclassify:");
+                            System.out.println("Enter Course Code to Reclassify:");
                             String userInput = sc.next();
 
                             studentList.remove(SA);
@@ -289,7 +288,7 @@ public class UserInterface {
                                 studentDBManager.updateDatabase(studentList, studentDB);
                                 studentWriter.writeFile(studentDBManager);
                             } else {
-                                System.out.println("Unsucessful");
+                                System.out.println("Password Chanage Unsuccessful");
                             }
                             break;
                         case 9:
