@@ -17,6 +17,7 @@ public class StaffCreateIndex {
 
     public CourseIndex createIndex(CourseIndexDBManager indexDBManager) {
         Scanner sc = new Scanner(System.in);
+
         System.out.println("Enter course code to add index: ");
         String courseCode = sc.next();
         System.out.println("Enter new index to add: ");
@@ -77,19 +78,9 @@ public class StaffCreateIndex {
 
             return newIndex;
         } else {
-            System.out.println("Course code does not exist, create new course!");
+            System.out.println("ERROR: Course code does not exist, create new course!");
             return null;
         }
-
-        // for(CourseIndex courseIndex : indexDBManager.getCourseIndexes()){
-        // if(courseIndex.getCourseCode().equals(courseCode)){
-        // if(courseIndex.getIndexNo() == index){
-        // System.out.println("Index already exists in this course!");
-        // return null;
-        // }
-        // }
-        // }
-
     }
 
 }

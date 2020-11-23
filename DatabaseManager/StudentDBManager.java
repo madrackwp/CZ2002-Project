@@ -54,11 +54,12 @@ public class StudentDBManager implements DatabaseManager {
     }
 
     public StudentAcc getStudentByMatricNo(String matricNo) {
-        for (StudentAcc sa: studentAccs) {
+        for (StudentAcc sa : studentAccs) {
             if (sa.getMatricNo().equals(matricNo)) {
                 return sa;
             }
         }
+        // System.out.println("No such matric no in the database!");
         return null;
     }
 

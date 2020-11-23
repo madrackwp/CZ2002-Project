@@ -44,8 +44,7 @@ public class StudentLogin {
                 foundUser = true;
                 if (sa.getPassword().equals(password)) {
                     if (sa.getAccessDate().equals(currentDate)) {
-                        System.out.println("Login Success!");
-                        System.out.println("");
+                        System.out.println("Login Successful!");
                         return sa;
                     } else {
                         System.out.println("Wrong access date");

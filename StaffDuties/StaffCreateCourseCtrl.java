@@ -14,54 +14,105 @@ public class StaffCreateCourseCtrl {
     public StaffCreateCourseCtrl() {
     }
 
-    public ArrayList<CourseIndex> createCourse() {
+    public ArrayList<CourseIndex> createCourse(String courseCodeToCreate) {
         ArrayList<CourseIndex> newCourseIndexes = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        boolean checker4ModType = true;
 
-        System.out.println("Add Course");
-        String courseCode = sc.next();
-
-        System.out.println("Course AU:");
+        // Getting the number of AUs for this course
+        System.out.println("Course AU, integers only");
+        while (!sc.hasNextInt()) {
+            System.out.println("Integers only");
+            sc.next();
+        }
         int noOfAUs = sc.nextInt();
 
+        // Getting the school for this course
         System.out.println("Course School");
-        String school = sc.next();
+        String school = sc.next().toUpperCase();
 
-        System.out.println("How many allowed mod types?");
-        int noOfModTypes = sc.nextInt();
-
-        ArrayList<ModType> allowedModTypes = new ArrayList<ModType>();
-        for (int i = 0; i < noOfModTypes; i++) {
-            System.out.println("Course Type: CORE, UE, GERPE_LA, GERPE_BM, GERPE_STS, MPE");
-            ModType modType = ModType.valueOf(sc.next());
-            if (allowedModTypes.contains(modType)) {
-                System.out.println("Mod Type already added!");
-                i--;
+        // Getting the number of modtypes
+        System.out.println("No. of allowed mod types, integers only (CORE, UE, GERPE_LA, GERPE_BM, GERPE_STS, MPE)");
+        int noOfModTypes;
+        while (true) {
+            while (!sc.hasNextInt()) {
+                System.out.println("ERROR: Integers of at most 6 only");
+                sc.next();
             }
-            allowedModTypes.add(modType);
+            noOfModTypes = sc.nextInt();
+            if (noOfModTypes >= 7) {
+                System.out.println("ERROR: Integers of at most 6 only");
+            } else {
+                break;
+            }
         }
 
-        System.out.println("How many different lesson types?");
-        int noOfLessons = sc.nextInt();
+        // Getting the modtypes
+        ArrayList<ModType> allowedModTypes = new ArrayList<ModType>();
+        for (int i = 0; i < noOfModTypes; i++) {
+            try {
+                System.out.println("Course Type: CORE, UE, GERPE_LA, GERPE_BM, GERPE_STS, MPE");
+                ModType modType = ModType.valueOf(sc.next().toUpperCase());
+                if (allowedModTypes.contains(modType)) {
+                    System.out.println("Mod Type already added!");
+                    i--;
+                }
+                allowedModTypes.add(modType);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid Mod Input, follow examples above!");
+                i--;
+            }
+        }
 
+        // Getting the number of different lesson types
+        System.out.println("No. of different lesson types, integers only (Lecture, Tutorial, Lab)");
+
+        int noOfLessons;
+        while (true) {
+            while (!sc.hasNextInt()) {
+                System.out.println("ERROR: Integers of at most 3 only");
+                sc.next();
+            }
+            noOfLessons = sc.nextInt();
+            if (noOfLessons >= 3) {
+                System.out.println("ERROR: Integers of at most 3 only");
+            } else {
+                break;
+            }
+        }
+
+        // Getting the lessontypes
         ArrayList<Type> lessonTypesInCourse = new ArrayList<>();
         for (int x = 0; x < noOfLessons; x++) {
-            System.out.println("Enter lesson types that this course has");
-            Type lessonType = Type.valueOf(sc.next());
-            if (lessonTypesInCourse.contains(lessonType)) {
-                System.out.println("Lesson Type already added!");
+            try {
+                System.out.println("Enter lesson types that this course has: Lecture, Tutorial or Lab");
+                // This is to check that only the first letter is capitalised
+                String lessonInput = sc.next();
+                String lessonInputFormatted = lessonInput.substring(0, 1).toUpperCase() + lessonInput.substring(1);
+                Type lessonType = Type.valueOf(lessonInputFormatted);
+                if (lessonTypesInCourse.contains(lessonType)) {
+                    System.out.println("Lesson Type already added!");
+                    x--;
+                }
+                lessonTypesInCourse.add(lessonType);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid Lesson Type");
                 x--;
             }
-            lessonTypesInCourse.add(lessonType);
         }
 
         System.out.println("How many indexes would you like to create?");
+        while (!sc.hasNextInt()) {
+            System.out.println("Integers only");
+            sc.next();
+        }
         int noOfIndexes = sc.nextInt();
 
         boolean in = false;
         Lesson lectureLesson = null;
-        String lessonStartTime, lessonEndTime;
-        Day lessonDay;
+        String lessonStartTime = "08:30", lessonEndTime = "08:30", startTime = "08:30", endTime = "08:30";
+        Day lessonDay = Day.MONDAY, day = Day.MONDAY;
+
         for (int j = 0; j < noOfIndexes; j++) {
             System.out.println("Enter the index no to create: ");
             int indexNo = sc.nextInt();
@@ -72,29 +123,77 @@ public class StaffCreateCourseCtrl {
 
             for (Type type : lessonTypesInCourse) {
                 if ((type.toString().equals("Lecture")) && (in == false)) {
-                    System.out.print("For " + type.toString());
-                    System.out.println(" enter day");
-                    lessonDay = Day.valueOf(sc.next().toUpperCase());
-                    System.out.println("Enter start time in format HH:MM in 24Hr clock");
-                    lessonStartTime = sc.next();
-                    System.out.println("Enter end time in format HH:MM in 24Hr clock");
-                    lessonEndTime = sc.next();
+                    boolean inside = true;
+                    while (inside == true) {
+                        try {
+                            System.out.print("For " + type.toString());
+                            System.out.println(" enter day");
+                            lessonDay = Day.valueOf(sc.next().toUpperCase());
+                            inside = false;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid Day");
+                            System.out.println(inside);
+                        }
+                    }
+                    boolean inside1 = true;
+                    while (inside1 == true) {
+                        System.out.println("Enter start time in format HH:MM in 24Hr clock");
+                        lessonStartTime = sc.next();
+                        String tokens[] = lessonStartTime.split(":");
+                        if ((tokens.length == 2))
+                            inside1 = false;
+                        else
+                            System.out.println("Invalid time format");
+                    }
+                    boolean inside2 = true;
+                    while (inside2 == true) {
+                        System.out.println("Enter end time in format HH:MM in 24Hr clock");
+                        lessonEndTime = sc.next();
+                        String[] tokeners = lessonEndTime.split(":");
+                        if ((tokeners.length == 2))
+                            inside2 = false;
+                        else
+                            System.out.println("Invalid time format");
+                    }
                     lectureLesson = new Lesson(lessonStartTime, lessonEndTime, type, lessonDay);
                     lessons.add(lectureLesson);
                     in = true;
                 } else if ((type.toString().equals("Lecture")) && (in == true)) {
-                    // System.out.print(lectureLesson);
                     lessons.add(lectureLesson);
                 } else {
-                    System.out.print("For " + type.toString());
-                    System.out.println(" enter day");
-                    Day day = Day.valueOf(sc.next().toUpperCase());
+                    boolean inside3 = true;
+                    while (inside3 == true) {
+                        try {
+                            System.out.print("For " + type.toString());
+                            System.out.println(" enter day");
+                            day = Day.valueOf(sc.next().toUpperCase());
+                            inside3 = false;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid Day");
+                        }
+                    }
 
-                    System.out.println("Enter start time in format HH:MM in 24Hr clock");
-                    String startTime = sc.next();
+                    boolean inside4 = true;
+                    while (inside4 == true) {
+                        System.out.println("Enter start time in format HH:MM in 24Hr clock");
+                        startTime = sc.next();
+                        String tokens[] = startTime.split(":");
+                        if ((tokens.length == 2))
+                            inside4 = false;
+                        else
+                            System.out.println("Invalid time format");
+                    }
 
-                    System.out.println("Enter end time in format HH:MM in 24Hr clock");
-                    String endTime = sc.next();
+                    boolean inside5 = true;
+                    while (inside5 == true) {
+                        System.out.println("Enter end time in format HH:MM in 24Hr clock");
+                        endTime = sc.next();
+                        String[] tokeners = endTime.split(":");
+                        if ((tokeners.length == 2))
+                            inside5 = false;
+                        else
+                            System.out.println("Invalid time format");
+                    }
 
                     Lesson lesson = new Lesson(startTime, endTime, type, day);
                     lessons.add(lesson);
@@ -105,12 +204,10 @@ public class StaffCreateCourseCtrl {
 
             IndexWaitList indexWaitList = new IndexWaitList(nullList);
 
-            CourseIndex newCourseIndex = new CourseIndex(courseCode, indexNo, noOfAUs, school, allowedModTypes,
+            CourseIndex newCourseIndex = new CourseIndex(courseCodeToCreate, indexNo, noOfAUs, school, allowedModTypes,
                     indexWaitList, vacancies, nullList, lessons);
             newCourseIndexes.add(newCourseIndex);
         }
-
         return newCourseIndexes;
-
     }
 }

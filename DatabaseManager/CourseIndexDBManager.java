@@ -63,6 +63,7 @@ public class CourseIndexDBManager implements DatabaseManager {
                 return courseIndex;
             }
         }
+        // System.out.println("Course with course index do not exist!");
         return null;
     }
 
@@ -90,4 +91,23 @@ public class CourseIndexDBManager implements DatabaseManager {
             return false;
         }
     }
+
+    public void printCourses() {
+        ArrayList<String> printedCourses = new ArrayList<>();
+        for (CourseIndex courseIndex : this.courseIndexes) {
+            String courseCodeToPrint = courseIndex.getCourseCode();
+            if (!printedCourses.contains(courseCodeToPrint)) {
+                printedCourses.add(courseCodeToPrint);
+                System.out.println("CourseCode: " + courseCodeToPrint + " | School: " + courseIndex.getSchool()
+                        + " | AUs: " + courseIndex.getAcademicUnits());
+            }
+        }
+    }
+
+    public void printIndexes() {
+        for (CourseIndex courseIndex : this.courseIndexes) {
+            System.out.println(courseIndex);
+        }
+    }
+
 }

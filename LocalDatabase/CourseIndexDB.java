@@ -12,7 +12,6 @@ public class CourseIndexDB implements Database {
         this.courseIndexes = courseList;
     }
 
-    @Override
     public void print() {
         for (CourseIndex courseIndex : this.courseIndexes) {
             System.out.println(courseIndex.getSchool() + " " + courseIndex.getCourseCode() + " "
