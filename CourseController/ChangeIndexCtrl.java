@@ -2,6 +2,7 @@ package CourseController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,6 +36,10 @@ public class ChangeIndexCtrl {
         int newCourseIndex;
         while (true){
             Scanner sc = new Scanner(System.in);
+            while (!sc.hasNextInt()) {
+                System.out.println("Only Integers Accepted");
+                sc.next();
+            }
             newCourseIndex = sc.nextInt();
             if (listOfIndexes.contains(newCourseIndex)){
                 break;
@@ -55,7 +60,7 @@ public class ChangeIndexCtrl {
             addDropCtrl.addCourse(student, newCourseIndex);
             System.out.println("Change Successful");
         } else {
-            System.out.println("Timing Clash");
+            System.out.println("Timing Clash, Change Unsuccessful");
             addDropCtrl.addCourse(student, oldCourseIndex);
         }
         courseIndexes.add(oldCourseIndex);

@@ -48,7 +48,6 @@ public class StudentLogin {
                         return sa;
                     } else {
                         System.out.println("Wrong access date");
-                        System.out.println("");
                         return null;
                     }
                 }
@@ -56,12 +55,9 @@ public class StudentLogin {
         }
         if (foundUser == true) {
             System.out.println("Invalid Password");
-            System.out.println("");
         } else {
             System.out.println("Invalid Username");
-            System.out.println("");
         }
-        System.out.println("");
         return null;
     }
 }

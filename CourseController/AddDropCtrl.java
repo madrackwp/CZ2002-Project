@@ -21,14 +21,14 @@ public class AddDropCtrl {
         if (timetable.checkEmptySlot(courseToAdd)) {
             if (courseToAdd.getVacancies() == 0) {
                 courseToAdd.addToWaitList(student.getMatricNo());
-                System.out.println("No vacancies, added to waitlist");
+                System.out.println("No Vacancies, Added to Waitlist");
                 return false;
             }
             student.addNewCourse(courseToAdd);
             courseToAdd.addStudent(student.getMatricNo());
             return true;
         } else {
-            System.out.println("Time clash!");
+            System.out.println("Time Clash, Add Unsuccessful! ");
             return false;
         }
     }
