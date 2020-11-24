@@ -79,7 +79,7 @@ CZ2003 10130 3 SCSE CORE null 3 U1997741M 10:30,11:30,Tutorial,TUESDAY 11:30,12:
 
 #### Start state for studentData.txt:
 student1 966610007 bobtan SCSE U1945797A 2 25/11/2020 null <br/>
-student2 966610968 Luke SCSE U1960617B 2 24/11/2020 LJ9001,11333,UE CZ2002,10201,CORE EE8086,18481,GERPE_STS CZ2003,10129,CORE CZ2001,10102,CORE <br/>
+student2 966610968 Luke SCSE U1960617B 2 24/11/2020 LJ9001,11333,UE <br/> CZ2002,10201,CORE EE8086,18481,GERPE_STS CZ2003,10129,CORE CZ2001,10102,CORE <br/>
 student3 966611929 Atticus SPMS U1970579C 2 24/11/2020 null <br/>
 student4 966612890 Mark SCSE U1953115D 2 22/11/2020 null <br/>
 student5 966613851 Clarence SCSE U1933490E 2 22/11/2020 null <br/>
@@ -105,8 +105,6 @@ Password: P@ssword12345
 #### For the student:
 Email address: student1bobtan@gmail.com <br/>
 Password: P@ssword12345
-<<<<<<< HEAD
-=======
 
 #### On adding relevant .jar files for email notification:
 *Using the project manager for java extension in VScode, 
