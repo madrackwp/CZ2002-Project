@@ -56,7 +56,6 @@ public class AdminUI implements UserUI {
         if (StA != null) {
             boolean login_access_staff = true;
             while (login_access_staff) {
-
                 System.out.println("");
                 System.out.println("=================MAIN MENU=================");
                 System.out.println("Choose option:");
@@ -73,7 +72,7 @@ public class AdminUI implements UserUI {
                 System.out.println("11. Change index number");
                 System.out.println("12. Logout"); // done
                 System.out.println("===========================================");
-                System.out.println("\n");
+                System.out.println("");
 
                 userChoice = sc.nextInt();
 
@@ -532,7 +531,7 @@ public class AdminUI implements UserUI {
                         break;
 
                     case 12:
-                        System.out.println("Logout");
+                        System.out.println("Bye bye! ");
                         login_access_staff = false;
                         break;
                 }

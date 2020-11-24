@@ -26,7 +26,7 @@ public class StaffLogin implements UserLogin {
 
         if (cs != null) {
             // cs.printf("Testing password%n");
-            char[] passwordArray = cs.readPassword("Enter your password: ");
+            char[] passwordArray = cs.readPassword("Enter Password: ");
             String newString = new String(passwordArray);
             // cs.printf("Password entered was: %s%n", newString);
             password = Integer.toString(newString.hashCode());
