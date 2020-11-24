@@ -210,6 +210,10 @@ public class StudentUI implements UserUI {
                             break;
                         }
                         StudentAcc student2 = studentLogin.login(studentList);
+                        if (student2 == null) {
+                            System.out.println("Student 2 login failed");
+                            break;
+                        }
                         studentList.remove(student2);
                         studentList.remove(SA);
                         System.out.println("STUDENT2:");
