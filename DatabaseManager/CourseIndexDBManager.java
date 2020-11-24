@@ -20,7 +20,7 @@ public class CourseIndexDBManager implements DatabaseManager {
             courseIndexes.add((CourseIndex) courseIndex);
             return true;
         } catch (Exception e) {
-            System.out.println("FOR DEBUGGING: " + e.getMessage());
+            // System.out.println("FOR DEBUGGING: " + e.getMessage());
             return false;
         }
 

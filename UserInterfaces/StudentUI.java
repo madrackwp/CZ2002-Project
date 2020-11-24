@@ -111,7 +111,7 @@ public class StudentUI implements UserUI {
                         ArrayList<String> indexWaitList = toDrop.getIndexWaitList().getWaitList();
                         if (!indexWaitList.get(0).equals("null")) {
                             String indexWaitListMatricNo = indexWaitList.remove(0);
-                            System.out.println(indexWaitList);
+                            // System.out.println(indexWaitList);
                             StudentAcc waitingStudent = studentDBManager.getStudentByMatricNo(indexWaitListMatricNo);
                             studentList.remove(waitingStudent);
                             addDropCtrl.addCourse(waitingStudent, droppedCourse);

@@ -11,15 +11,15 @@ public class IndexWaitList {
 
     public void addStudent(String s) {
         this.waitList.add(s);
-        System.out.println("StudentAcc added successfully!");
+        // System.out.println("StudentAcc added successfully!");
     }
 
     public void removeStudent(String s) {
         boolean check = this.waitList.remove(s);
         if (check) {
-            System.out.println("StudentAcc removed!");
+            // System.out.println("StudentAcc removed!");
         } else {
-            System.out.println("Removal unsuccessful");
+            // System.out.println("Removal unsuccessful");
         }
     }
 

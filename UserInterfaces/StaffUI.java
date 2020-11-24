@@ -161,7 +161,7 @@ public class StaffUI implements UserUI {
 
                         CourseIndex courseToChangeVacancy = indexDBManager.getCourseIndexInfo(courseToChange,
                                 courseIndexToChange);
-                        System.out.println("DEBUG: " + courseToChangeVacancy);
+                        // System.out.println("DEBUG: " + courseToChangeVacancy);
                         // If the course exists
                         int vacancy;
                         if (courseToChangeVacancy != null) {

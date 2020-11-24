@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"CourseController"},{"l":"CourseIndex"},{"l":"DatabaseManager"},{"l":"LocalDatabase"},{"l":"Login"},{"l":"ReadWriteFile"},{"l":"StaffDuties"},{"l":"Timetable"},{"l":"UserInterfaces"},{"l":"Users"}]

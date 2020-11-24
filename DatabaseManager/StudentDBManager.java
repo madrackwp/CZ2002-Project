@@ -19,7 +19,7 @@ public class StudentDBManager implements DatabaseManager {
             studentAccs.add((StudentAcc) studentAcc);
             return true;
         } catch (Exception e) {
-            System.out.println("FOR DEBUGGING: " + e.getMessage());
+            // System.out.println("FOR DEBUGGING: " + e.getMessage());
             return false;
         }
     }

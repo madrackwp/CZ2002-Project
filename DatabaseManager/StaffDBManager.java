@@ -18,7 +18,7 @@ public class StaffDBManager implements DatabaseManager {
             staffAccs.add((StaffAcc) staffAcc);
             return true;
         } catch (Exception e) {
-            System.out.println("FOR DEBUGGING: " + e.getMessage());
+            // System.out.println("FOR DEBUGGING: " + e.getMessage());
             return false;
         }
     }
