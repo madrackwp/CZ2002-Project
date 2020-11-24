@@ -17,16 +17,10 @@ laboratory sessions.
 *Students on waitlist will be placed in a queue whereby when there is available slot,
 the first in queue will be allocated the slot. A notification will be sent to the student.
 
-<<<<<<< HEAD
 The images below show the console displays when logged in as a student and a staff respectively.
-=======
-The images below show the console displays when logged in as a student and a staff respectively. 
-<<<<<<< HEAD
 **Use STARSUI.java to run the program!**
->>>>>>> 6573d82d8ebab887e67dc63ef536fb6d21cfaefc
-=======
+
 ### Use STARSUI.java to run the program!
->>>>>>> 1be2f244084fccb54172818adc22e933f50d4aaa
 ### Student Console ###
 ![StudentConsole](https://user-images.githubusercontent.com/70562873/100107529-b4eedf80-2ea4-11eb-9c60-d644fd2b956a.JPG)
 ### Staff Console ###
@@ -53,11 +47,8 @@ The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Pr
 |student12|	P@ssword1200|
 |student13|	P@ssword1300|
 |student14|	P@ssword1400|
-<<<<<<< HEAD
 |student15|	P@ssword1500|
-=======
 |bgoh015|	P@ssword1500|
->>>>>>> 6573d82d8ebab887e67dc63ef536fb6d21cfaefc
 |staff1| 12345|
 |staff2| helloworld|
 |staff3| 12345|
@@ -101,11 +92,8 @@ student11 -99859846 Melvin SCSE U1932008L 2 22/11/2020 null <br/>
 student12 -99858885 Alicia SCSE U1997741M 2 23/11/2020 CZ2003,10130,CORE <br/>
 student13 -99857924 JunXiong SCSE U1910439N 2 22/11/2020 null <br/>
 student14 -99856963 Nicolette SCSE U1992616P 2 22/11/2020 null <br/>
-<<<<<<< HEAD
 bgoh015 1509442 Bryann WKW U1920609E 1 22/11/2020 null <br/>
-=======
 bgoh015 -99856002 Bryann WKW U1920609E 1 22/11/2020 null <br/>
->>>>>>> 6573d82d8ebab887e67dc63ef536fb6d21cfaefc
 
 ### Email notification
 These are the log in details for the dummy gmail accounts created so that you are able to log in into both these accounts to verify that the email notification has been sent/received.
@@ -121,13 +109,9 @@ Password: P@ssword12345
 =======
 
 #### On adding relevant .jar files for email notification:
-<<<<<<< HEAD
 *Using the project manager for java extension in VScode, 
 *Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
 *If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
->>>>>>> 6573d82d8ebab887e67dc63ef536fb6d21cfaefc
-=======
 * Using the project manager for java extension in VScode, 
 * Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
 * If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
->>>>>>> 1be2f244084fccb54172818adc22e933f50d4aaa
