@@ -74,7 +74,6 @@ public class CourseIndexDBManager implements DatabaseManager {
                 temp.add(courseIndex);
             }
         }
-        System.out.println("Invalid Course Code");
         return temp;
     }
 
