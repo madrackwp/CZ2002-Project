@@ -107,9 +107,6 @@ Email address: student1bobtan@gmail.com <br/>
 Password: P@ssword12345
 
 #### On adding relevant .jar files for email notification:
-*Using the project manager for java extension in VScode, 
-*Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
-*If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
 * Using the project manager for java extension in VScode, 
 * Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
 * If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
