@@ -140,10 +140,18 @@ public class StaffCreateCourseCtrl {
 
         for (int j = 0; j < noOfIndexes; j++) {
             System.out.println("Enter the index no to create: ");
+            while (!sc.hasNextInt()) {
+                System.out.println("Integers only");
+                sc.next();
+            }
             int indexNo = sc.nextInt();
             ArrayList<Lesson> lessons = new ArrayList<>();
 
             System.out.println("No of vacancies for this index");
+            while (!sc.hasNextInt()) {
+                System.out.println("Integers only");
+                sc.next();
+            }
             int vacancies = sc.nextInt();
 
             for (Type type : lessonTypesInCourse) {
