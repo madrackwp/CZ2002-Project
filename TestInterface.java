@@ -9,10 +9,10 @@ public class TestInterface {
         // System.out.println("P@ssword100".hashCode());
         // System.out.println("cz2001".toUpperCase());
 
-        // AdminUI adminUI = new AdminUI();
-        // adminUI.runUi();
-        StudentUI studentUI = new StudentUI();
-        studentUI.runUI();
+        AdminUI adminUI = new AdminUI();
+        adminUI.runUI();
+        // StudentUI studentUI = new StudentUI();
+        // studentUI.runUI();
         // ArrayList<Integer> test = new ArrayList<>();
         // test.add(1);
         // test.add(2);

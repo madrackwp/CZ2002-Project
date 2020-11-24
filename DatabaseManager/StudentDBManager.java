@@ -2,11 +2,9 @@ package DatabaseManager;
 
 import CourseIndex.CourseIndex;
 import LocalDatabase.StudentDB;
-import ReadWriteFile.StudentWriter;
 import Users.StudentAcc;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class StudentDBManager implements DatabaseManager {
     private ArrayList<StudentAcc> studentAccs;
@@ -63,6 +61,11 @@ public class StudentDBManager implements DatabaseManager {
         return null;
     }
 
+    public void printAllStudents() {
+        for (StudentAcc student : this.studentAccs) {
+            System.out.println(student);
+        }
+    }
     // public boolean changeAccess(String matricNo){
     // for(int i=0; i<this.studentAccs.size(); i++){
     // if(matricNo.equals(studentAccs.get(i).getMatricNo())){

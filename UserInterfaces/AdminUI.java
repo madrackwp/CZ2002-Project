@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import CourseController.AddDropCtrl;
-import CourseController.CheckVacancyCtrl;
 import CourseIndex.CourseIndex;
 import CourseIndex.IndexWaitList;
 import DatabaseManager.CourseIndexDBManager;
@@ -25,12 +24,12 @@ import StaffDuties.StaffCreateIndex;
 import Users.StaffAcc;
 import Users.StudentAcc;
 
-public class AdminUI {
+public class AdminUI implements UserUI {
 
     public AdminUI() {
     }
 
-    public void runUi() {
+    public void runUI() {
         int userChoice;
         StaffAcc StA = null;
 
@@ -41,6 +40,9 @@ public class AdminUI {
 
         StudentReader ur = new StudentReader();
         ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
+
+        StaffReader staffReader = new StaffReader();
+        ArrayList<StaffAcc> staffList = staffReader.ReadFile();
         StudentDB studentDB = new StudentDB(studentList);
         StudentDBManager studentDBManager = new StudentDBManager(studentDB);
         StudentWriter studentWriter = new StudentWriter();
@@ -50,7 +52,7 @@ public class AdminUI {
         Scanner sc = new Scanner(System.in);
 
         StaffLogin staffLogin = new StaffLogin();
-        StA = staffLogin.login();
+        StA = staffLogin.login(staffList);
         if (StA != null) {
             boolean login_access_staff = true;
             while (login_access_staff) {
@@ -81,9 +83,17 @@ public class AdminUI {
                         StaffAddStudentCtrl addStu = new StaffAddStudentCtrl();
                         StudentAcc newStudent = addStu.AddStudent();
 
+                        StudentAcc studentCheck = studentDBManager.getStudentByMatricNo(newStudent.getMatricNo());
+                        if (studentCheck != null) {
+                            System.out.println("Student already exists!");
+                            break;
+                        }
+
                         studentList.add(newStudent);
                         studentDBManager.updateDatabase(studentList, studentDB);
                         studentWriter.writeFile(studentDBManager);
+
+                        studentDBManager.printAllStudents();
 
                         break;
 
@@ -359,6 +369,7 @@ public class AdminUI {
                         } else {
                             System.out.println("Course does not exist");
                         }
+                        indexDBManager.printCourses();
 
                         break;
 
@@ -381,6 +392,7 @@ public class AdminUI {
                         } else {
                             System.out.println("ERROR: Course does not exist!");
                         }
+                        indexDBManager.printCourses();
                         break;
 
                     case 10:
@@ -409,7 +421,6 @@ public class AdminUI {
                                 break;
                             }
                         }
-                        indexToAdd = sc.nextInt();
 
                         // Check if the course index already exists
                         CourseIndex courseIndexToAdd = indexDBManager.getCourseIndexInfo(courseCodeToAddIndex,
@@ -427,6 +438,7 @@ public class AdminUI {
                             indexDBManager.updateDatabase(courseList, indexDB);
                             courseIndexWriter.writeFile(indexDBManager);
                         }
+                        indexDBManager.printIndexes();
                         break;
 
                     case 11:
@@ -457,7 +469,6 @@ public class AdminUI {
                                 break;
                             }
                         }
-                        indexToChange = sc.nextInt();
 
                         CourseIndex courseIndexToChangeIndexNo = indexDBManager.getCourseIndexInfo(courseCode,
                                 indexToChange);
@@ -515,6 +526,8 @@ public class AdminUI {
 
                         studentDBManager.updateDatabase(studentList, studentDB);
                         studentWriter.writeFile(studentDBManager);
+
+                        indexDBManager.printIndexes();
 
                         break;
 

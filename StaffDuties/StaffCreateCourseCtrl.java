@@ -17,7 +17,6 @@ public class StaffCreateCourseCtrl {
     public ArrayList<CourseIndex> createCourse(String courseCodeToCreate) {
         ArrayList<CourseIndex> newCourseIndexes = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
-        boolean checker4ModType = true;
 
         // Getting the number of AUs for this course
         System.out.println("Course AU, integers only");

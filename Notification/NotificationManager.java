@@ -1,7 +1,5 @@
 package Notification;
 
-import java.util.Scanner;
-
 import CourseIndex.CourseIndex;
 
 public class NotificationManager {

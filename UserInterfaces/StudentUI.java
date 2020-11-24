@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import CourseController.AddDropCtrl;
 import CourseController.ChangeIndexCtrl;
-import CourseController.CheckVacancyCtrl;
 import CourseController.ReclassifyCtrl;
 import CourseController.ShowAllCoursesCtrl;
 import CourseController.SwapIndexCtrl;
@@ -22,7 +21,7 @@ import ReadWriteFile.StudentReader;
 import ReadWriteFile.StudentWriter;
 import Users.StudentAcc;
 
-public class StudentUI {
+public class StudentUI implements UserUI {
     public StudentUI() {
     }
 

@@ -1,7 +1,5 @@
 package CourseIndex;
 
-import Users.StudentAcc;
-
 import java.util.ArrayList;
 
 public class CourseIndex {

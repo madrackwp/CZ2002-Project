@@ -1,6 +1,5 @@
 package CourseController;
 
-import DatabaseManager.CourseIndexDBManager;
 import Users.StudentAcc;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class ReclassifyCtrl {
         }
         ArrayList<ModType> allowedModTypes = new ArrayList<ModType>();
         System.out.println("Select Desired Course Type: ");
-        int i=1;
+        int i = 1;
         for (CourseIndex courseIndex : studentAcc.getRegisteredCourseIndex()) {
             if (courseIndex.getCourseCode().equals(courseCode)) {
                 allowedModTypes = courseIndex.getAllowedModTypes();
@@ -37,16 +36,16 @@ public class ReclassifyCtrl {
             }
         }
         int anotherUserInput;
-        while (true){
+        while (true) {
             while (!sc.hasNextInt()) {
-                System.out.println("Only Integers between 1 and "+(i-1)+" Accepted");
+                System.out.println("Only Integers between 1 and " + (i - 1) + " Accepted");
                 sc.next();
             }
             anotherUserInput = sc.nextInt();
-            if (anotherUserInput > 0 && anotherUserInput < i){
+            if (anotherUserInput > 0 && anotherUserInput < i) {
                 break;
             }
-            System.out.println("Invalid Input (Input should be between 1 and "+(i-1)+")");
+            System.out.println("Invalid Input (Input should be between 1 and " + (i - 1) + ")");
             System.out.println("Please Re-select Reclassification: ");
         }
         ModType newModType = allowedModTypes.get(anotherUserInput - 1);

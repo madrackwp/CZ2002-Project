@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 import Users.StudentAcc;
 
-public class StudentLogin {
+public class StudentLogin implements UserLogin {
 
     public StudentLogin() {
     }
 
-    public StudentAcc login(ArrayList<StudentAcc> studentList) {
+    public StudentAcc login(Object studentList) {
 
         Scanner sc = new Scanner(System.in);
         Console cs = System.console();
@@ -29,16 +29,12 @@ public class StudentLogin {
         String userName = sc.nextLine();
         String password = null;
         if (cs != null) {
-            // cs.printf("Testing password%n");
             char[] passwordArray = cs.readPassword("Enter your password: ");
             String newString = new String(passwordArray);
-            // cs.printf("Password entered was: %s%n", newString);
             password = Integer.toString(newString.hashCode());
         }
-        // System.out.println("Enter password");
-        // String password = Integer.toString(passwordArray.hashCode());
 
-        for (StudentAcc saZ : studentList) {
+        for (StudentAcc saZ : (ArrayList<StudentAcc>) studentList) {
             sa = saZ;
             if (sa.getUserName().equals(userName)) {
                 foundUser = true;
@@ -47,7 +43,7 @@ public class StudentLogin {
                         System.out.println("Login Successful!");
                         return sa;
                     } else {
-                        System.out.println("Wrong access date");
+                        System.out.println("Wrong access date, access date: " + sa.getAccessDate());
                         return null;
                     }
                 }

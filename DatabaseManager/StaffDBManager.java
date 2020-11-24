@@ -2,10 +2,7 @@ package DatabaseManager;
 
 import CourseIndex.CourseIndex;
 import LocalDatabase.StaffDB;
-import LocalDatabase.StudentDB;
 import Users.StaffAcc;
-import Users.StudentAcc;
-
 import java.util.ArrayList;
 
 public class StaffDBManager implements DatabaseManager {

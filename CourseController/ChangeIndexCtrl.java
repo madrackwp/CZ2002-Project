@@ -1,8 +1,6 @@
 package CourseController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +17,7 @@ public class ChangeIndexCtrl {
     public int displayValidCourseToChange(String course, CourseIndexDBManager dbManager, StudentAcc student) {
         CourseIndex currentCourse = student.getCourseIndex(course);
         ArrayList<CourseIndex> validCourseIndexes = new ArrayList<>();
-        List <Integer> listOfIndexes = new ArrayList<Integer>();
+        List<Integer> listOfIndexes = new ArrayList<Integer>();
 
         for (CourseIndex i : dbManager.getCourseIndexes()) {
             if (i.getCourseCode().equals(course) && (!i.equals(currentCourse))) {
@@ -34,14 +32,14 @@ public class ChangeIndexCtrl {
         }
         System.out.println("Enter New Course Index: ");
         int newCourseIndex;
-        while (true){
+        while (true) {
             Scanner sc = new Scanner(System.in);
             while (!sc.hasNextInt()) {
                 System.out.println("Only Integers Accepted");
                 sc.next();
             }
             newCourseIndex = sc.nextInt();
-            if (listOfIndexes.contains(newCourseIndex)){
+            if (listOfIndexes.contains(newCourseIndex)) {
                 break;
             }
             System.out.println("Invalid Course Index");

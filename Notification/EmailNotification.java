@@ -6,8 +6,6 @@ import javax.mail.internet.*;
 
 import CourseIndex.CourseIndex;
 
-import java.util.Scanner;
-
 public class EmailNotification {
     public EmailNotification() {
     }

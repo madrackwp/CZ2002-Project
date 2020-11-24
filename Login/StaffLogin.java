@@ -4,16 +4,17 @@ import java.io.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ReadWriteFile.StaffReader;
 import Users.StaffAcc;
+import Users.UserAcc;
 
-public class StaffLogin {
+public class StaffLogin implements UserLogin {
     public StaffLogin() {
     }
 
-    public StaffAcc login() {
-        StaffReader s = new StaffReader();
-        ArrayList<StaffAcc> staffList = s.ReadFile();
+    @Override
+    public StaffAcc login(Object staffList) {
+        // StaffReader s = new StaffReader();
+        // ArrayList<StaffAcc> staffList = s.ReadFile();
         Scanner sc = new Scanner(System.in);
         Console cs = System.console();
         StaffAcc sa;
@@ -31,7 +32,7 @@ public class StaffLogin {
             password = Integer.toString(newString.hashCode());
         }
 
-        for (StaffAcc saZ : staffList) {
+        for (StaffAcc saZ : (ArrayList<StaffAcc>) staffList) {
             sa = saZ;
             if (sa.getUserName().equals(userName)) {
                 foundUser = true;

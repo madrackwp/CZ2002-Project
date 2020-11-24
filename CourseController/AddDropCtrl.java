@@ -1,7 +1,5 @@
 package CourseController;
 
-import java.util.Scanner;
-
 import CourseIndex.*;
 import Timetable.Timetable;
 import Users.*;
@@ -13,10 +11,10 @@ public class AddDropCtrl {
     public boolean addCourse(StudentAcc student, CourseIndex courseToAdd) {
         Timetable timetable = student.getTimetable();
         // for (CourseIndex courseIndex : student.getRegisteredCourseIndex()) {
-        //     if (courseIndex.getCourseCode().equals(courseToAdd.getCourseCode())) {
-        //         System.out.println("Already taking course");
-        //         return false;
-        //     }
+        // if (courseIndex.getCourseCode().equals(courseToAdd.getCourseCode())) {
+        // System.out.println("Already taking course");
+        // return false;
+        // }
         // }
         if (timetable.checkEmptySlot(courseToAdd)) {
             if (courseToAdd.getVacancies() == 0) {
