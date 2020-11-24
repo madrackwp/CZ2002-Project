@@ -25,11 +25,11 @@ public class StudentLogin implements UserLogin {
         LocalDateTime now = LocalDateTime.now();
         currentDate = dtf.format(now);
 
-        System.out.println("Enter username: ");
+        System.out.println("Enter Username: ");
         String userName = sc.nextLine();
         String password = null;
         if (cs != null) {
-            char[] passwordArray = cs.readPassword("Enter your password: ");
+            char[] passwordArray = cs.readPassword("Enter Password: ");
             String newString = new String(passwordArray);
             password = Integer.toString(newString.hashCode());
         }
