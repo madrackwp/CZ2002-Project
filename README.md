@@ -100,3 +100,7 @@ Password: P@ssword12345
 #### For the student:
 Email address: student1bobtan@gmail.com <br/>
 Password: P@ssword12345
+
+#### On email notification:
+*When first opening the code, right-click on CZ2002-Project, click add Folder to Java Source Path
+*
