@@ -14,13 +14,13 @@ for their courses. Each course (subject) will have its course code, its correspo
 index number information, the class schedules and venue, and available vacancy.
 * Courses may have lectures only, lectures and tutorial only or lectures, tutorial and
 laboratory sessions.
-*Students on waitlist will be placed in a queue whereby when there is available slot,
+* Students on waitlist will be placed in a queue whereby when there is available slot,
 the first in queue will be allocated the slot. A notification will be sent to the student.
 
 The images below show the console displays when logged in as a student and a staff respectively.
-**Use STARSUI.java to run the program!**
 
 ### Use STARSUI.java to run the program!
+
 ### Student Console ###
 ![StudentConsole](https://user-images.githubusercontent.com/70562873/100107529-b4eedf80-2ea4-11eb-9c60-d644fd2b956a.JPG)
 ### Staff Console ###
@@ -47,7 +47,6 @@ The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Pr
 |student12|	P@ssword1200|
 |student13|	P@ssword1300|
 |student14|	P@ssword1400|
-|student15|	P@ssword1500|
 |bgoh015|	P@ssword1500|
 |staff1| 12345|
 |staff2| helloworld|
@@ -92,7 +91,6 @@ student11 -99859846 Melvin SCSE U1932008L 2 22/11/2020 null <br/>
 student12 -99858885 Alicia SCSE U1997741M 2 23/11/2020 CZ2003,10130,CORE <br/>
 student13 -99857924 JunXiong SCSE U1910439N 2 22/11/2020 null <br/>
 student14 -99856963 Nicolette SCSE U1992616P 2 22/11/2020 null <br/>
-bgoh015 1509442 Bryann WKW U1920609E 1 22/11/2020 null <br/>
 bgoh015 -99856002 Bryann WKW U1920609E 1 22/11/2020 null <br/>
 
 ### Email notification
