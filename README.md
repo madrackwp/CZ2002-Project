@@ -48,9 +48,7 @@ The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Pr
 |student13|	P@ssword1300|
 |student14|	P@ssword1400|
 |bgoh015|	P@ssword1500|
-|staff1| 12345|
 |staff2| helloworld|
-|staff3| 12345|
 
 ### NOTE:
 Our project was done on VS code so there might be some incompatibility errors when opening it on other platforms such as Eclipse.
