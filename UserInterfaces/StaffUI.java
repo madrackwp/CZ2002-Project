@@ -271,7 +271,7 @@ public class StaffUI implements UserUI {
                         System.out.println("Enter Course");
                         String course2 = sc.next();
                         ArrayList<CourseIndex> courseIndexToPrint = indexDBManager.getCourseIndexInfoArray(course2);
-                        if (courseIndexToPrint != null) {
+                        if (!courseIndexToPrint.isEmpty()) {
                             ArrayList<String> mat1 = new ArrayList<String>();
                             for (int i = 0; i < courseIndexToPrint.size(); i++) {
                                 for (int j = 0; j < courseIndexToPrint.get(i).getRegisteredStudentMatricNo()
