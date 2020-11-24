@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import UserInterfaces.AdminUI;
+import UserInterfaces.StaffUI;
 import UserInterfaces.StudentUI;
 
 // import java.util.ArrayList;
@@ -20,7 +20,7 @@ import UserInterfaces.StudentUI;
 // import Users.*;
 // import StaffDuties.*;
 
-public class UserInterface {
+public class STARSUI {
 
     public static void main(String[] args) {
         boolean run = true;
@@ -55,8 +55,8 @@ public class UserInterface {
                     studentUI.runUI();
                     break;
                 case 2:
-                    AdminUI adminUI = new AdminUI();
-                    adminUI.runUI();
+                    StaffUI staffUI = new StaffUI();
+                    staffUI.runUI();
                     break;
                 case 3:
                     System.out.println("Logging off~");

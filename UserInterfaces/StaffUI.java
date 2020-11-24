@@ -24,9 +24,9 @@ import StaffDuties.StaffCreateIndex;
 import Users.StaffAcc;
 import Users.StudentAcc;
 
-public class AdminUI implements UserUI {
+public class StaffUI implements UserUI {
 
-    public AdminUI() {
+    public StaffUI() {
     }
 
     public void runUI() {
