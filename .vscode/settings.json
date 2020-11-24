@@ -3,8 +3,8 @@
         "lib/**/*.jar",
         "SendMailbygmail/activation.jar",
         "SendMailbygmail/mail.jar",
-        "Notification/activation.jar",
-        "Notification/mail.jar"
+        "Notification/mail.jar",
+        "Notification/activation.jar"
     ],
     "files.exclude": {
         "**/.classpath": true,
