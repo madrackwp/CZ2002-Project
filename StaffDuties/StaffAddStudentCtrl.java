@@ -37,13 +37,20 @@ public class StaffAddStudentCtrl {
         int yearOfStudy = sc.nextInt();
         
         while (true) {
-            System.out.println("Enter access date of student (format dd/mm/yyyy)");
-            accessDate = sc.next();
-            String[] tokens = accessDate.split("/");
-            if ((tokens.length == 3) && (tokens[0].length() == 2) && (tokens[1].length() == 2) && (tokens[2].length() == 4)) 
-                break;
-            else 
+            try {
+                System.out.println("Enter access date of student (format dd/mm/yyyy)");
+                accessDate = sc.next();
+                String[] tokens = accessDate.split("/");
+                if ((tokens.length == 3) && (tokens[0].length() == 2) && (tokens[1].length() == 2) && (tokens[2].length() == 4) &&
+                (Integer.parseInt(tokens[0]) > 0) && (Integer.parseInt(tokens[0]) < 32) &&
+                (Integer.parseInt(tokens[1]) > 0) && (Integer.parseInt(tokens[1]) < 13) &&
+                (Integer.parseInt(tokens[2]) > 0) && (Integer.parseInt(tokens[2]) < 9999)) 
+                    break;
+                else 
+                    System.out.println("Invalid date input");
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid date input");
+            }
         }
 
         StudentAcc student = new StudentAcc(username, defaultPassword, name, school, matNo, yearOfStudy, accessDate,
