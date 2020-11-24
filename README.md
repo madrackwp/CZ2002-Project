@@ -17,9 +17,9 @@ laboratory sessions.
 * Students on waitlist will be placed in a queue whereby when there is available slot,
 the first in queue will be allocated the slot. A notification will be sent to the student.
 
-The images below show the console displays when logged in as a student and a staff respectively.
+# Use STARSUI.java to run the program!
 
-### Use STARSUI.java to run the program!
+The images below show the console displays when logged in as a student and a staff respectively.
 
 ### Student Console ###
 ![StudentConsole](https://user-images.githubusercontent.com/70562873/100107529-b4eedf80-2ea4-11eb-9c60-d644fd2b956a.JPG)
