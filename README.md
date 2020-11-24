@@ -18,7 +18,7 @@ laboratory sessions.
 the first in queue will be allocated the slot. A notification will be sent to the student.
 
 The images below show the console displays when logged in as a student and a staff respectively. 
-**Use STARSUI.java to run the program!**
+### Use STARSUI.java to run the program!
 ### Student Console ###
 ![StudentConsole](https://user-images.githubusercontent.com/70562873/100107529-b4eedf80-2ea4-11eb-9c60-d644fd2b956a.JPG)
 ### Staff Console ###
@@ -103,6 +103,6 @@ Email address: student1bobtan@gmail.com <br/>
 Password: P@ssword12345
 
 #### On adding relevant .jar files for email notification:
-*Using the project manager for java extension in VScode, 
-*Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
-*If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
+* Using the project manager for java extension in VScode, 
+* Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
+* If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
