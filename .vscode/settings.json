@@ -4,7 +4,9 @@
         "SendMailbygmail/activation.jar",
         "SendMailbygmail/mail.jar",
         "Notification/mail.jar",
-        "Notification/activation.jar"
+        "Notification/activation.jar",
+        "JarFiles/activation.jar",
+        "JarFiles/mail.jar"
     ],
     "files.exclude": {
         "**/.classpath": true,

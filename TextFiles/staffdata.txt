@@ -1,0 +1,3 @@
+staff1 12345 name1 SCSE StaffID123
+staff2 -1524582912 name2 SCSE StaffID234
+staff3 12345 name3 SCSE StaffID345
