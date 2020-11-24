@@ -44,7 +44,7 @@ The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Pr
 |student12|	P@ssword1200|
 |student13|	P@ssword1300|
 |student14|	P@ssword1400|
-|student15|	P@ssword1500|
+|bgoh015|	P@ssword1500|
 |staff1| 12345|
 |staff2| helloworld|
 |staff3| 12345|
