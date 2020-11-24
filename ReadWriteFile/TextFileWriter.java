@@ -1,6 +1,6 @@
 package ReadWriteFile;
 
-abstract class TextFileWriter {
+public interface TextFileWriter {
 	abstract void writeFile(Object object);
 	// abstract void WriteDirect();
 }

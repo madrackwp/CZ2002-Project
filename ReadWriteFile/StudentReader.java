@@ -11,7 +11,7 @@ import CourseIndex.ModType;
 import DatabaseManager.CourseIndexDBManager;
 import Users.StudentAcc;
 
-public class StudentReader extends TextFileReader {
+public class StudentReader implements TextFileReader {
 
 	public StudentReader() {
 	}

@@ -1,6 +1,6 @@
 package ReadWriteFile;
 
-public abstract class TextFileReader {
+public interface TextFileReader {
 
 	public abstract Object ReadFile();
 

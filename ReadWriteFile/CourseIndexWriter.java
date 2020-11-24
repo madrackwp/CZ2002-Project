@@ -7,7 +7,7 @@ import CourseIndex.CourseIndex;
 import LocalDatabase.CourseIndexDB;
 import DatabaseManager.*;
 
-public class CourseIndexWriter extends TextFileWriter {
+public class CourseIndexWriter implements TextFileWriter {
 
     public CourseIndexWriter() {
     }

@@ -9,7 +9,7 @@ import DatabaseManager.*;
 import LocalDatabase.CourseIndexDB;
 import LocalDatabase.StudentDB;
 
-public class StudentWriter extends TextFileWriter {
+public class StudentWriter implements TextFileWriter {
 
     StudentReader reader = new StudentReader();
 

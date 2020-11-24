@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import CourseIndex.CourseIndex;
 import CourseIndex.*;
 
-public class CourseIndexReader extends TextFileReader {
+public class CourseIndexReader implements TextFileReader {
 
     public ArrayList<CourseIndex> ReadFile() {
 
