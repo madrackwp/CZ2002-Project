@@ -209,7 +209,7 @@ public class StudentUI implements UserUI {
                             System.out.println("No Course Taken");
                             break;
                         }
-                        
+
                         StudentAcc student2 = studentLogin.login(studentList);
                         if (student2 == null) {
                             System.out.println("Student 2 login failed");
@@ -225,12 +225,16 @@ public class StudentUI implements UserUI {
                         student2.getTimetable().printTimetable();
                         System.out.println("");
                         System.out.println("Enter Course Code to Swap: ");
-                        String courseToSwap;
-                        while (true) {
-                            courseToSwap = sc.next().toUpperCase();
-                            if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
-                                break;
-                            }
+                        String courseToSwap = sc.next().toUpperCase();
+                        boolean check = false;
+                        if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
+                            check = true;
+                        }
+
+                        if (!check) {
+                            System.out.println("Not a common course between both students");
+                            break;
+                        } else {
                             CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
                             CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
 
@@ -259,7 +263,8 @@ public class StudentUI implements UserUI {
                             student2.getTimetable().printTimetable();
                             System.out.println("");
                         }
-                            break;
+
+                        break;
                     case 6:
                         indexDBManager.printIndexes();
                         break;

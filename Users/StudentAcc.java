@@ -1,15 +1,23 @@
 package Users;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import CourseIndex.CourseIndex;
 import CourseIndex.ModType;
 import Timetable.Timetable;
 
+/**
+ * This represents a student that has access to the STARS system One student can
+ * be enrolled into many courses
+ * 
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class StudentAcc extends UserAcc {
+    /**
+     * matricNo uniquely identifies a student
+     */
     private String matricNo;
     private int yearOfStudy;
     private String accessDate;

@@ -9,6 +9,9 @@ public class UserAcc {
      * userName is will be used to log into the system name will be the name of the
      * user school will be the school/faculty the user belongs to password here will
      * be a hashed value of the actual password the user inputs
+     * 
+     * @version 1.0
+     * @since 2020-11-25
      */
     private String userName, name, school;
     private String password;
