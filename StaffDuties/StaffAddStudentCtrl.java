@@ -22,14 +22,18 @@ public class StaffAddStudentCtrl {
         HashMap<String, ModType> emptyHash = new HashMap<>();
         
         System.out.println("Enter username of student");
-        String username = sc.next();
+        String username = sc.nextLine();
         System.out.println("Enter name of student");
-        String name = sc.next();
+        String name = sc.nextLine();
         System.out.println("Enter school of student");
         String school = sc.next().toUpperCase();
         System.out.println("Enter matric no. of student");
         String matNo = sc.next().toUpperCase();
         System.out.println("Enter year of study of student");
+        while (!sc.hasNextInt()) {
+            System.out.println("Integers Only");
+            sc.next();
+        }
         int yearOfStudy = sc.nextInt();
         
         while (true) {

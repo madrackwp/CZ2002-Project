@@ -2,6 +2,7 @@ package StaffDuties;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.*;
 
 import CourseIndex.CourseIndex;
 import CourseIndex.Day;
@@ -13,6 +14,31 @@ import CourseIndex.Type;
 public class StaffCreateCourseCtrl {
     public StaffCreateCourseCtrl() {
     }
+
+    public static boolean isValidTime(String time) 
+    { 
+  
+        // Regex to check valid time in 24-hour format. 
+        String regex = "(0[8-9]|1[0-9]|2[0-3]):30"; 
+  
+        // Compile the ReGex 
+        Pattern p = Pattern.compile(regex); 
+  
+        // If the time is empty 
+        // return false 
+        if (time == null) { 
+            return false; 
+        } 
+  
+        // Pattern class contains matcher() method 
+        // to find matching between given time 
+        // and regular expression. 
+        Matcher m = p.matcher(time); 
+  
+        // Return if the time 
+        // matched the ReGex 
+        return m.matches(); 
+    } 
 
     public ArrayList<CourseIndex> createCourse(String courseCodeToCreate) {
         ArrayList<CourseIndex> newCourseIndexes = new ArrayList<>();
@@ -73,7 +99,7 @@ public class StaffCreateCourseCtrl {
                 sc.next();
             }
             noOfLessons = sc.nextInt();
-            if (noOfLessons >= 3 || noOfLessons < 0) {
+            if (noOfLessons > 3 || noOfLessons < 1) {
                 System.out.println("ERROR: Positive integers of at most 3 only");
             } else {
                 break;
@@ -131,28 +157,25 @@ public class StaffCreateCourseCtrl {
                             inside = false;
                         } catch (IllegalArgumentException e) {
                             System.out.println("Invalid Day");
-                            System.out.println(inside);
                         }
                     }
                     boolean inside1 = true;
                     while (inside1 == true) {
                         System.out.println("Enter start time in format HH:MM in 24Hr clock");
                         lessonStartTime = sc.next();
-                        String tokens[] = lessonStartTime.split(":");
-                        if ((tokens.length == 2))
+                        if (isValidTime(lessonStartTime))
                             inside1 = false;
                         else
-                            System.out.println("Invalid time format");
+                            System.out.println("Time should be between 08:30 to 23:30");
                     }
                     boolean inside2 = true;
                     while (inside2 == true) {
                         System.out.println("Enter end time in format HH:MM in 24Hr clock");
                         lessonEndTime = sc.next();
-                        String[] tokeners = lessonEndTime.split(":");
-                        if ((tokeners.length == 2))
+                        if (isValidTime(lessonEndTime))
                             inside2 = false;
                         else
-                            System.out.println("Invalid time format");
+                            System.out.println("Time should be between 08:30 to 23:30");
                     }
                     lectureLesson = new Lesson(lessonStartTime, lessonEndTime, type, lessonDay);
                     lessons.add(lectureLesson);
@@ -176,22 +199,20 @@ public class StaffCreateCourseCtrl {
                     while (inside4 == true) {
                         System.out.println("Enter start time in format HH:MM in 24Hr clock");
                         startTime = sc.next();
-                        String tokens[] = startTime.split(":");
-                        if ((tokens.length == 2))
+                        if (isValidTime(startTime))
                             inside4 = false;
                         else
-                            System.out.println("Invalid time format");
+                            System.out.println("Time should be between 08:30 to 23:30");
                     }
 
                     boolean inside5 = true;
                     while (inside5 == true) {
                         System.out.println("Enter end time in format HH:MM in 24Hr clock");
                         endTime = sc.next();
-                        String[] tokeners = endTime.split(":");
-                        if ((tokeners.length == 2))
+                        if (isValidTime(endTime))
                             inside5 = false;
                         else
-                            System.out.println("Invalid time format");
+                            System.out.println("Time should be between 08:30 and 23:30");
                     }
 
                     Lesson lesson = new Lesson(startTime, endTime, type, day);
