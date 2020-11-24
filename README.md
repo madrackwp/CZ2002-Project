@@ -17,7 +17,8 @@ laboratory sessions.
 *Students on waitlist will be placed in a queue whereby when there is available slot,
 the first in queue will be allocated the slot. A notification will be sent to the student.
 
-The images below show the console displays when logged in as a student and a staff respectively.
+The images below show the console displays when logged in as a student and a staff respectively. 
+**Use STARSUI.java to run the program!**
 ### Student Console ###
 ![StudentConsole](https://user-images.githubusercontent.com/70562873/100107529-b4eedf80-2ea4-11eb-9c60-d644fd2b956a.JPG)
 ### Staff Console ###
@@ -101,6 +102,7 @@ Password: P@ssword12345
 Email address: student1bobtan@gmail.com <br/>
 Password: P@ssword12345
 
-#### On email notification:
-*When first opening the code, right-click on CZ2002-Project, click add Folder to Java Source Path
-*
+#### On adding relevant .jar files for email notification:
+*Using the project manager for java extension in VScode, 
+*Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
+*If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
