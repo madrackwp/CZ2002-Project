@@ -209,49 +209,58 @@ public class StudentUI implements UserUI {
                             System.out.println("No Course Taken");
                             break;
                         }
+                        
                         StudentAcc student2 = studentLogin.login(studentList);
-                        studentList.remove(student2);
-                        studentList.remove(SA);
-                        System.out.println("STUDENT2:");
-                        student2.getTimetable().printTimetable();
-                        System.out.println("");
-                        System.out.println("Enter Course Code to Swap: ");
-                        String courseToSwap;
-                        while (true) {
-                            courseToSwap = sc.next().toUpperCase();
-                            if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
-                                break;
+                        if (!SA.equals(student2) && (student2 != null)) {
+                            studentList.remove(student2);
+                            studentList.remove(SA);
+                            System.out.println("STUDENT2:");
+                            student2.getTimetable().printTimetable();
+                            System.out.println("");
+                            System.out.println("Enter Course Code to Swap: ");
+                            String courseToSwap;
+                            while (true) {
+                                courseToSwap = sc.next().toUpperCase();
+                                if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
+                                    break;
+                                }
+                                System.out.println("Course Not Taken by Both Students");
+                                System.out.println("Please Re-enter Course Code to Swap: ");
                             }
-                            System.out.println("Course Not Taken by Both Students");
-                            System.out.println("Please Re-enter Course Code to Swap: ");
+                            CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
+                            CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
+
+                            courseList.remove(student2Course);
+                            courseList.remove(SACourse);
+
+                            SwapIndexCtrl sic = new SwapIndexCtrl();
+                            ArrayList<CourseIndex> courseIndexes = sic.swapIndex(SA, student2, SACourse, student2Course,
+                                    addDropCtrl);
+
+                            studentList.add(SA);
+                            studentList.add(student2);
+                            studentDBManager.updateDatabase(studentList, studentDB);
+                            studentWriter.writeFile(studentDBManager);
+
+                            courseList.add(courseIndexes.get(0));
+                            courseList.add(courseIndexes.get(1));
+                            indexDBManager.updateDatabase(courseList, indexDB);
+                            courseIndexWriter.writeFile(indexDBManager);
+
+                            System.out.println("");
+                            System.out.println("STUDENT1:");
+                            SA.getTimetable().printTimetable();
+                            System.out.println("");
+                            System.out.println("STUDENT2:");
+                            student2.getTimetable().printTimetable();
+                            System.out.println("");
                         }
-                        CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
-                        CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
-
-                        courseList.remove(student2Course);
-                        courseList.remove(SACourse);
-
-                        SwapIndexCtrl sic = new SwapIndexCtrl();
-                        ArrayList<CourseIndex> courseIndexes = sic.swapIndex(SA, student2, SACourse, student2Course,
-                                addDropCtrl);
-
-                        studentList.add(SA);
-                        studentList.add(student2);
-                        studentDBManager.updateDatabase(studentList, studentDB);
-                        studentWriter.writeFile(studentDBManager);
-
-                        courseList.add(courseIndexes.get(0));
-                        courseList.add(courseIndexes.get(1));
-                        indexDBManager.updateDatabase(courseList, indexDB);
-                        courseIndexWriter.writeFile(indexDBManager);
-
-                        System.out.println("");
-                        System.out.println("STUDENT1:");
-                        SA.getTimetable().printTimetable();
-                        System.out.println("");
-                        System.out.println("STUDENT2:");
-                        student2.getTimetable().printTimetable();
-                        System.out.println("");
+                        else if (SA.equals(student2)){
+                            System.out.println("Same User cannot swap with each other");
+                        }
+                        // else if (student2 == null) {
+                        //     System.out.println("Invalid user");
+                        // }
                         break;
                     case 6:
                         indexDBManager.printIndexes();
