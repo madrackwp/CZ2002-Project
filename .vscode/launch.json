@@ -9,6 +9,13 @@
             "name": "CodeLens (Launch) - STARSUI",
             "request": "launch",
             "mainClass": "STARSUI",
+            "projectName": "CZ2002-Project_f51fed69"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - STARSUI",
+            "request": "launch",
+            "mainClass": "STARSUI",
             "projectName": "CZ2002-Project_9fe51382"
         },
         {

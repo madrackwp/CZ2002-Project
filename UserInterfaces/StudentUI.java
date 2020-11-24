@@ -211,21 +211,25 @@ public class StudentUI implements UserUI {
                         }
                         
                         StudentAcc student2 = studentLogin.login(studentList);
-                        if (!SA.equals(student2) && (student2 != null)) {
-                            studentList.remove(student2);
-                            studentList.remove(SA);
-                            System.out.println("STUDENT2:");
-                            student2.getTimetable().printTimetable();
-                            System.out.println("");
-                            System.out.println("Enter Course Code to Swap: ");
-                            String courseToSwap;
-                            while (true) {
-                                courseToSwap = sc.next().toUpperCase();
-                                if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
-                                    break;
-                                }
-                                System.out.println("Course Not Taken by Both Students");
-                                System.out.println("Please Re-enter Course Code to Swap: ");
+                        if (student2 == null) {
+                            System.out.println("Student 2 login failed");
+                            break;
+                        }
+                        if (student2.equals(SA)) {
+                            System.out.println("Cannot swap same user");
+                            break;
+                        }
+                        studentList.remove(student2);
+                        studentList.remove(SA);
+                        System.out.println("STUDENT2:");
+                        student2.getTimetable().printTimetable();
+                        System.out.println("");
+                        System.out.println("Enter Course Code to Swap: ");
+                        String courseToSwap;
+                        while (true) {
+                            courseToSwap = sc.next().toUpperCase();
+                            if (SA.takingCourse(courseToSwap) && student2.takingCourse(courseToSwap)) {
+                                break;
                             }
                             CourseIndex SACourse = SA.getCourseIndex(courseToSwap);
                             CourseIndex student2Course = student2.getCourseIndex(courseToSwap);
@@ -255,13 +259,7 @@ public class StudentUI implements UserUI {
                             student2.getTimetable().printTimetable();
                             System.out.println("");
                         }
-                        else if (SA.equals(student2)){
-                            System.out.println("Same User cannot swap with each other");
-                        }
-                        // else if (student2 == null) {
-                        //     System.out.println("Invalid user");
-                        // }
-                        break;
+                            break;
                     case 6:
                         indexDBManager.printIndexes();
                         break;
