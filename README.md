@@ -5,7 +5,6 @@ My STudent Automated Registration System (MySTARS)
 ## Overview
 
 The following are information about the application:
-<<<<<<< HEAD
 
 - It is a university application meant for each School’s academic staff and
   undergraduate students.
@@ -17,34 +16,15 @@ The following are information about the application:
   index number information, the class schedules and venue, and available vacancy.
 - Courses may have lectures only, lectures and tutorial only or lectures, tutorial and
   laboratory sessions.
-  \*Students on waitlist will be placed in a queue whereby when there is available slot,
+- Students on waitlist will be placed in a queue whereby when there is available slot,
   the first in queue will be allocated the slot. A notification will be sent to the student.
-
-The images below show the console displays when logged in as a student and a staff respectively.
-**Use STARSUI.java to run the program!**
-
-### Student Console
-
-=======
-* It is a university application meant for each School’s academic staff and
-undergraduate students.
-* The application allows the creation of courses and adding of student records as well
-as registration of courses and students. There will be an administrator mode for
-academic staff and user mode for students.
-* At the start of each semester registration period, students will be required to register
-for their courses. Each course (subject) will have its course code, its corresponding
-index number information, the class schedules and venue, and available vacancy.
-* Courses may have lectures only, lectures and tutorial only or lectures, tutorial and
-laboratory sessions.
-* Students on waitlist will be placed in a queue whereby when there is available slot,
-the first in queue will be allocated the slot. A notification will be sent to the student.
 
 # Use STARSUI.java to run the program!
 
 The images below show the console displays when logged in as a student and a staff respectively.
 
-### Student Console ###
->>>>>>> cb89b7e94443ec7e6653b45fb223404d13005f1b
+### Student Console
+
 ![StudentConsole](https://user-images.githubusercontent.com/70562873/100107529-b4eedf80-2ea4-11eb-9c60-d644fd2b956a.JPG)
 
 ### Staff Console
@@ -56,7 +36,6 @@ The images below show the console displays when logged in as a student and a sta
 The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Project/tree/main/html)
 
 ### These are the following usernames and respective passwords for each student/staff:
-<<<<<<< HEAD
 
 | username  | password     |
 | --------- | ------------ |
@@ -75,29 +54,7 @@ The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Pr
 | student13 | P@ssword1300 |
 | student14 | P@ssword1400 |
 | bgoh015   | P@ssword1500 |
-| staff1    | 12345        |
 | staff2    | helloworld   |
-| staff3    | 12345        |
-=======
-|username|	password|
-|---------|---------|
-|student1|	P@ssword100|
-|student2|	P@ssword200|
-|student3|	P@ssword300|
-|student4|	P@ssword400|
-|student5|	P@ssword500|
-|student6|	P@ssword600|
-|student7|	P@ssword700|
-|student8|	P@ssword800|
-|student9|	P@ssword900|
-|student10|	P@ssword1000|
-|student11|	P@ssword1100|
-|student12|	P@ssword1200|
-|student13|	P@ssword1300|
-|student14|	P@ssword1400|
-|bgoh015|	P@ssword1500|
-|staff2| helloworld|
->>>>>>> cb89b7e94443ec7e6653b45fb223404d13005f1b
 
 ### NOTE:
 
@@ -143,11 +100,6 @@ student12 -99858885 Alicia SCSE U1997741M 2 23/11/2020 CZ2003,10130,CORE <br/>
 student13 -99857924 JunXiong SCSE U1910439N 2 22/11/2020 null <br/>
 student14 -99856963 Nicolette SCSE U1992616P 2 22/11/2020 null <br/>
 bgoh015 -99856002 Bryann WKW U1920609E 1 22/11/2020 null <br/>
-<<<<<<< HEAD
-
-> > > > > > > 6573d82d8ebab887e67dc63ef536fb6d21cfaefc
-=======
->>>>>>> cb89b7e94443ec7e6653b45fb223404d13005f1b
 
 ### Email notification
 
@@ -164,15 +116,7 @@ Email address: student1bobtan@gmail.com <br/>
 Password: P@ssword12345
 
 #### On adding relevant .jar files for email notification:
-<<<<<<< HEAD
 
-*Using the project manager for java extension in VScode,
-*Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
-\*If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
-
-> > > > > > > 6573d82d8ebab887e67dc63ef536fb6d21cfaefc
-=======
-* Using the project manager for java extension in VScode, 
-* Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
-* If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
->>>>>>> cb89b7e94443ec7e6653b45fb223404d13005f1b
+- Using the project manager for java extension in VScode,
+- Add mail.jar and activation.jar from the JarFiles folder by clicking the + sign next to Referenced Libraries node in project view
+- If this step is not done, the email notification class will not be able to import the packages needed to send an email!!
