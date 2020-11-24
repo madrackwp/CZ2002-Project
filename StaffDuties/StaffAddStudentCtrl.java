@@ -25,11 +25,16 @@ public class StaffAddStudentCtrl {
         String username = sc.next();
         System.out.println("Enter name of student");
         String name = sc.next();
+        name = name.replaceAll(" ","_");
         System.out.println("Enter school of student");
         String school = sc.next().toUpperCase();
         System.out.println("Enter matric no. of student");
         String matNo = sc.next().toUpperCase();
         System.out.println("Enter year of study of student");
+        while (!sc.hasNextInt()) {
+            System.out.println("Integers Only");
+            sc.next();
+        }
         int yearOfStudy = sc.nextInt();
         
         while (true) {
