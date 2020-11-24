@@ -88,7 +88,7 @@ student11 -99859846 Melvin SCSE U1932008L 2 22/11/2020 null <br/>
 student12 -99858885 Alicia SCSE U1997741M 2 23/11/2020 CZ2003,10130,CORE <br/>
 student13 -99857924 JunXiong SCSE U1910439N 2 22/11/2020 null <br/>
 student14 -99856963 Nicolette SCSE U1992616P 2 22/11/2020 null <br/>
-bgoh015 1509442 Bryann WKW U1920609E 1 22/11/2020 null <br/>
+bgoh015 -99856002 Bryann WKW U1920609E 1 22/11/2020 null <br/>
 
 ### Email notification
 These are the log in details for the dummy gmail accounts created so that you are able to log in into both these accounts to verify that the email notification has been sent/received.
