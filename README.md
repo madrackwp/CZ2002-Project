@@ -18,18 +18,13 @@ laboratory sessions.
 the first in queue will be allocated the slot. A notification will be sent to the student.
 
 The images below show the console displays when logged in as a student and a staff respectively.
+### Student Console ###
 ![StudentConsole](https://user-images.githubusercontent.com/70562873/100107529-b4eedf80-2ea4-11eb-9c60-d644fd2b956a.JPG)
-
+### Staff Console ###
 ![StaffConsole](https://user-images.githubusercontent.com/70562873/100107664-d9e35280-2ea4-11eb-81ae-711c28a2b6b3.JPG)
 
 Javadoc
 ---------------------------------
 The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Project/tree/main/html)
 
-UML Class Diagram
-----------------------------------
-![Class Diagram](https://user-images.githubusercontent.com/70562873/100108133-6e4db500-2ea5-11eb-86dc-91fed765990d.png)
 
-UML Sequence Diagram
-----------------------------------
-![PrintStudentsByCourse (1)](https://user-images.githubusercontent.com/70562873/100108255-8cb3b080-2ea5-11eb-90a8-30a164ab6443.png)
