@@ -27,7 +27,7 @@ Javadoc
 ---------------------------------
 The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Project/tree/main/html)
 
-## These are the following usernames and respective passwords for each student/staff:
+### These are the following usernames and respective passwords for each student/staff:
 |username|	password|
 |---------|---------|
 |student1|	P@ssword100|
@@ -44,15 +44,18 @@ The Javadoc documents can be found [here](https://github.com/madrackwp/CZ2002-Pr
 |student12|	P@ssword1200|
 |student13|	P@ssword1300|
 |student14|	P@ssword1400|
-|student15|	P@ssword1500|
+|bgoh015|	P@ssword1500|
+|staff1| 12345|
+|staff2| helloworld|
+|staff3| 12345|
 
-## NOTE:
+### NOTE:
 Our project was done on VS code so there might be some incompatibility errors when opening it on other platforms such as Eclipse.
 
-## Text files:
+### Text files:
 As the program runs, changes will be reflected directly in courseData.txt and studentData.txt. There will be no changes made to staffData.txt. For your reference, the following shows the starting state for both courseData.txt and studentData.txt. This is to demonstrate each function to clearly see the change in the database depending on the course of action taken in the program.
 
-### Start state for courseData.txt:
+#### Start state for courseData.txt:
 LJ9001 11333 3 SOH UE null 9 U1960617B 16:30,18:30,Tutorial,TUESDAY 16:30,18:30,Tutorial,THURSDAY <br/>
 LJ9001 11334 3 SOH UE null 10 null 09:30,11:30,Tutorial,MONDAY 09:30,11:30,Tutorial,WEDNESDAY <br/>
 EE8086 18481 2 EEE GERPE_STS,UE null 9 U1960617B 08:30,09:30,Tutorial,THURSDAY 13:30,16:30,Lecture,TUESDAY <br/>
@@ -70,7 +73,7 @@ CZ2003 10128 3 SCSE CORE null 10 null 15:30,16:30,Tutorial,FRIDAY 11:30,12:30,Le
 CZ2003 10129 3 SCSE CORE null 9 U1960617B 13:30,14:30,Tutorial,WEDNESDAY 11:30,12:30,Lecture,THURSDAY 12:30,14:30,Lab,MONDAY <br/>
 CZ2003 10130 3 SCSE CORE null 3 U1997741M 10:30,11:30,Tutorial,TUESDAY 11:30,12:30,Lecture,THURSDAY 14:30,16:30,Lab,TUESDAY<br/>
 
-### Start state for studentData.txt:
+#### Start state for studentData.txt:
 student1 966610007 bobtan SCSE U1945797A 2 25/11/2020 null <br/>
 student2 966610968 Luke SCSE U1960617B 2 24/11/2020 LJ9001,11333,UE CZ2002,10201,CORE EE8086,18481,GERPE_STS CZ2003,10129,CORE CZ2001,10102,CORE <br/>
 student3 966611929 Atticus SPMS U1970579C 2 24/11/2020 null <br/>
@@ -85,15 +88,15 @@ student11 -99859846 Melvin SCSE U1932008L 2 22/11/2020 null <br/>
 student12 -99858885 Alicia SCSE U1997741M 2 23/11/2020 CZ2003,10130,CORE <br/>
 student13 -99857924 JunXiong SCSE U1910439N 2 22/11/2020 null <br/>
 student14 -99856963 Nicolette SCSE U1992616P 2 22/11/2020 null <br/>
-bgoh015 1509442 Bryann WKW U1920609E 1 22/11/2020 null <br/>
+bgoh015 -99856002 Bryann WKW U1920609E 1 22/11/2020 null <br/>
 
-## Email notification
+### Email notification
 These are the log in details for the dummy gmail accounts created so that you are able to log in into both these accounts to verify that the email notification has been sent/received.
 
-### For the staff:
+#### For the staff:
 Email address: staffaccntustar@gmail.com <br/>
 Password: P@ssword12345
 
-### For the student:
+#### For the student:
 Email address: student1bobtan@gmail.com <br/>
 Password: P@ssword12345
