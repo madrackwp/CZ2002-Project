@@ -24,11 +24,22 @@ import StaffDuties.StaffCreateIndex;
 import Users.StaffAcc;
 import Users.StudentAcc;
 
+/**
+ * This is the staff's implementataion of UserUI
+ * 
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class StaffUI implements UserUI {
-
+    /**
+     * This creates the StaffUI object
+     */
     public StaffUI() {
     }
 
+    /**
+     * This will run the StaffAcc's instance of the user interface
+     */
     public void runUI() {
         int userChoice;
         StaffAcc StA = null;

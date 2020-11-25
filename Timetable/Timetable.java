@@ -7,6 +7,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import CourseIndex.*;
 
+/**
+ * An object that will store
+ */
 public class Timetable {
     private ArrayList<CourseIndex> coursestaken;
     private String[][] timetable;

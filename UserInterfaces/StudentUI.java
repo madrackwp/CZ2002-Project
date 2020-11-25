@@ -21,10 +21,22 @@ import ReadWriteFile.StudentReader;
 import ReadWriteFile.StudentWriter;
 import Users.StudentAcc;
 
+/**
+ * Implementation of UserUI for students
+ * 
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class StudentUI implements UserUI {
+    /**
+     * This creates the StudentUI class
+     */
     public StudentUI() {
     }
 
+    /**
+     * This will run the student UI
+     */
     public void runUI() {
         StudentAcc SA = null;
 
