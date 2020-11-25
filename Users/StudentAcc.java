@@ -11,6 +11,7 @@ import Timetable.Timetable;
  * This represents a student that has access to the STARS system One student can
  * be enrolled into many courses
  * 
+ * @author Goh Wei Pin
  * @version 1.0
  * @since 2020-11-25
  */

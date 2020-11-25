@@ -4,6 +4,7 @@ package Users;
  * Represents a staff account that will perform administrative actions on the
  * system
  * 
+ * @author Goh Wei Pin
  * @version 1.0
  * @since 2020-11-25
  */
