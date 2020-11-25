@@ -7,9 +7,20 @@ import java.util.Scanner;
 import Users.StaffAcc;
 import Users.UserAcc;
 
+/**
+ * This class implements the UserLogin interface to allow objects from the StaffAcc class
+ * to login to the STARS system
+ */
+
 public class StaffLogin implements UserLogin {
     public StaffLogin() {
     }
+
+    /**
+     * This method logs staff into their account
+     * @param staffList the list of staff accounts in the database that will be verified against
+     * @return the StaffAcc object that has logged in
+     */
 
     @Override
     public StaffAcc login(Object staffList) {
