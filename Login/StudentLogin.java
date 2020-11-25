@@ -8,10 +8,21 @@ import java.util.Scanner;
 
 import Users.StudentAcc;
 
+/**
+ * This class implements the UserLogin interface to allow objects from the StudentAcc class
+ * to login to the STARS system
+ */
+
 public class StudentLogin implements UserLogin {
 
     public StudentLogin() {
     }
+
+    /**
+     * This method logs students into their account
+     * @param studentList the list of student accounts in the database that will be verified against
+     * @return the StudentAcc object that has logged in
+     */
 
     public StudentAcc login(Object studentList) {
 
