@@ -4,18 +4,31 @@ import CourseIndex.*;
 import Timetable.Timetable;
 import Users.*;
 
+/**
+ * Controller that adds and drops courses for a student
+ * @author Chong Jing Hong
+ * @since 25/11/2020
+ */
+
 public class AddDropCtrl {
+
+    /**
+     * Creates the add/drop controller
+     */
+
     public AddDropCtrl() {
     }
 
+    /**
+     * Registers a student for a course
+     * @param student The student to be registered
+     * @param courseToAdd The course to be added to the student account
+     * @return whether or not the adding is successful
+     */
+
     public boolean addCourse(StudentAcc student, CourseIndex courseToAdd) {
         Timetable timetable = student.getTimetable();
-        // for (CourseIndex courseIndex : student.getRegisteredCourseIndex()) {
-        // if (courseIndex.getCourseCode().equals(courseToAdd.getCourseCode())) {
-        // System.out.println("Already taking course");
-        // return false;
-        // }
-        // }
+
         if (timetable.checkEmptySlot(courseToAdd)) {
             if (courseToAdd.getVacancies() == 0) {
                 courseToAdd.addToWaitList(student.getMatricNo());
@@ -31,6 +44,13 @@ public class AddDropCtrl {
         }
     }
 
+    /**
+     * Drops a course for a student
+     * @param student the student account to drop a course
+     * @param courseToDrop the course code to be dropped
+     * @return the CourseIndex object that has been updated
+     */
+
     public CourseIndex dropCourse(StudentAcc student, String courseToDrop) {
         CourseIndex droppingCourse = student.getCourseIndex(courseToDrop);
         if (courseToDrop != null) {
@@ -38,7 +58,6 @@ public class AddDropCtrl {
             droppingCourse.removeStudent(student.getMatricNo());
             return droppingCourse;
         }
-
         return null;
     }
 

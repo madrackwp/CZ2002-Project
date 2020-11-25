@@ -17,6 +17,9 @@ import Users.StudentAcc;
 
 public class StudentLogin implements UserLogin {
 
+    /**
+     * Creates the StudentLogin object
+     */
     public StudentLogin() {
     }
 
