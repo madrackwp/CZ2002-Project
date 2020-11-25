@@ -7,12 +7,34 @@ import java.util.ArrayList;
 import CourseIndex.*;
 import Users.*;
 
+/** This class implements the DatabaseManager interface to manage the CourseIndex objects
+ * @author Chong Jing Hong
+ * @version 1.0
+ * @since 25/11/2020
+ */
+
 public class CourseIndexDBManager implements DatabaseManager {
+
+    /**
+     * The CourseIndex data to be managed
+     */
+
     private ArrayList<CourseIndex> courseIndexes;
+
+    /**
+     * Creates a new CourseIndexDBManager object with a courseIndexDB object
+     * @param courseIndexDB the course index database to be managed
+     */
 
     public CourseIndexDBManager(CourseIndexDB courseIndexDB) {
         this.courseIndexes = courseIndexDB.getCourseIndexes();
     };
+
+    /**
+     * This method adds a CourseIndex object into the local CourseIndex database
+     * @param courseIndex the CourseIndex object to be added
+     * @return whether the adding is successful or not
+     */
 
     @Override
     public boolean addEntry(Object courseIndex) {
@@ -26,6 +48,12 @@ public class CourseIndexDBManager implements DatabaseManager {
 
     }
 
+    /**
+     * This method removes a CourseIndex object into the local CourseIndex database
+     * @param courseIndex the CourseIndex object to be removed
+     * @return whether the removal is successful or not
+     */
+
     @Override
     public boolean removeEntry(Object courseIndex) {
         if (this.courseIndexes.contains((CourseIndex) courseIndex)) {
@@ -37,6 +65,14 @@ public class CourseIndexDBManager implements DatabaseManager {
         }
     }
 
+    /**
+     * Adds a student into a course index
+     * @param student the student to be added
+     * @param indexNo the course index to add a student
+     * @param courseCode the course code of the course index
+     * @return whether or not the student was added successfully into the course index
+     */
+
     public boolean addStudentToIndex(StudentAcc student, int indexNo, String courseCode) {
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getIndexNo() == indexNo && courseIndex.getCourseCode() == courseCode) {
@@ -46,6 +82,14 @@ public class CourseIndexDBManager implements DatabaseManager {
         }
         return false;
     }
+
+    /**
+     * Removes a student from a course index
+     * @param student the student to be removed
+     * @param indexNo the course index to remove a student
+     * @param courseCode the course code of the course index
+     * @return whether or not the student was removed successfully into the course index
+     */
 
     public boolean removeStudentFromIndex(StudentAcc student, int indexNo, String courseCode) {
         for (CourseIndex courseIndex : courseIndexes) {
@@ -57,15 +101,27 @@ public class CourseIndexDBManager implements DatabaseManager {
         return false;
     }
 
+    /**
+     * Gets a course index
+     * @param courseCode the course code of the course index
+     * @param indexNo the course index
+     * @return
+     */
+
     public CourseIndex getCourseIndexInfo(String courseCode, int indexNo) {
         for (CourseIndex courseIndex : courseIndexes) {
             if (courseIndex.getCourseCode().equals(courseCode) && courseIndex.getIndexNo() == indexNo) {
                 return courseIndex;
             }
         }
-        // System.out.println("Course with course index do not exist!");
         return null;
     }
+
+    /**
+     * Gets an array list of course index
+     * @param courseCode the course code of the course indexes
+     * @return array list of course indexes
+     */
 
     public ArrayList<CourseIndex> getCourseIndexInfoArray(String courseCode) {
         ArrayList<CourseIndex> temp = new ArrayList<CourseIndex>();
@@ -77,9 +133,21 @@ public class CourseIndexDBManager implements DatabaseManager {
         return temp;
     }
 
+    /**
+     * Get the CourseIndex objects
+     * @return array list of CourseIndex
+     */
+
     public ArrayList<CourseIndex> getCourseIndexes() {
         return this.courseIndexes;
     }
+
+    /**
+     * This method updates the local course index database
+     * @param arrayListOfCourse the updated array list of course indexes
+     * @param dataBaseForCourse database of course indexes to be updated
+     * @return whether the updating is successful or not
+     */
 
     @Override
     public boolean updateDatabase(Object arrayListOfCourse, Object dataBaseForCourse) {
@@ -92,6 +160,10 @@ public class CourseIndexDBManager implements DatabaseManager {
         }
     }
 
+    /**
+     * Prints all the course codes in the course database
+     */
+
     public void printCourses() {
         ArrayList<String> printedCourses = new ArrayList<>();
         for (CourseIndex courseIndex : this.courseIndexes) {
@@ -103,6 +175,10 @@ public class CourseIndexDBManager implements DatabaseManager {
             }
         }
     }
+
+    /**
+     * Prints all the course indexes all the course codes
+     */
 
     public void printIndexes() {
         for (CourseIndex courseIndex : this.courseIndexes) {
