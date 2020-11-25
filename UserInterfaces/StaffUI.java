@@ -271,7 +271,7 @@ public class StaffUI implements UserUI {
                                 System.out.println(temp);
                             }
                         } else {
-                            System.out.println("This course/index number does not exist");
+                            System.out.println("This course code/index number does not exist");
                         }
                         break;
 
@@ -290,9 +290,6 @@ public class StaffUI implements UserUI {
                                     if (!courseIndexToPrint.get(i).getRegisteredStudentMatricNo().get(j).equals("null"))
                                         mat1.add((courseIndexToPrint.get(i).getRegisteredStudentMatricNo().get(j)));
                                 }
-                            }
-                            if(mat1.isEmpty()){
-                                System.out.println("No students in this course");
                             }
                             for (int z = 0; z < mat1.size(); z++) {
                                 StudentAcc temp = studentDBManager.getStudentByMatricNo(mat1.get(z));
