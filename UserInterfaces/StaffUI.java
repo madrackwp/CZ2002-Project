@@ -291,6 +291,9 @@ public class StaffUI implements UserUI {
                                         mat1.add((courseIndexToPrint.get(i).getRegisteredStudentMatricNo().get(j)));
                                 }
                             }
+                            if(mat1.isEmpty()){
+                                System.out.println("No students in this course");
+                            }
                             for (int z = 0; z < mat1.size(); z++) {
                                 StudentAcc temp = studentDBManager.getStudentByMatricNo(mat1.get(z));
                                 System.out.print("Index: " + temp.getCourseIndex(course2).getIndexNo());
