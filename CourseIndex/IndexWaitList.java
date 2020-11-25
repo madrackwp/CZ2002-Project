@@ -2,20 +2,48 @@ package CourseIndex;
 
 import java.util.ArrayList;
 
+/**
+ * This class holds all the students who are waiting to enroll in a course that
+ * is currently full
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class IndexWaitList {
+    /**
+     * The students who are on the wait list is stored as an arraylist of String of
+     * their matriculation numbers
+     */
     ArrayList<String> waitList;
 
-    public IndexWaitList(ArrayList<String> w) {
-        this.waitList = w;
+    /**
+     * Constructor to create the IndexWaitList object
+     * 
+     * @param waitList This is the arraylist of matriculation number strings that
+     *                 are currently on the wait list
+     */
+    public IndexWaitList(ArrayList<String> waitList) {
+        this.waitList = waitList;
     }
 
-    public void addStudent(String s) {
-        this.waitList.add(s);
-        // System.out.println("StudentAcc added successfully!");
+    /**
+     * Adds a student to the waitlist
+     * 
+     * @param student The student's matriculation number to be added to the waitlist
+     */
+    public void addStudent(String student) {
+        this.waitList.add(student);
     }
 
-    public void removeStudent(String s) {
-        boolean check = this.waitList.remove(s);
+    /**
+     * Removes a student from the waitlist
+     * 
+     * @param student The student's matriculation number to be removed from the
+     *                waitlist
+     */
+    public void removeStudent(String student) {
+        boolean check = this.waitList.remove(student);
         if (check) {
             // System.out.println("StudentAcc removed!");
         } else {
@@ -23,6 +51,11 @@ public class IndexWaitList {
         }
     }
 
+    /**
+     * Gets the waitlist
+     * 
+     * @return The entire waitlist of student's matriculation number
+     */
     public ArrayList<String> getWaitList() {
         return this.waitList;
     }
