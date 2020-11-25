@@ -62,7 +62,7 @@ Our project was done on VS code so there might be some incompatibility errors wh
 
 ### Text files:
 
-As the program runs, changes will be reflected directly in courseData.txt and studentData.txt. There will be no changes made to staffData.txt. For your reference, the following shows the starting state for both courseData.txt and studentData.txt. This is to demonstrate each function to clearly see the change in the database depending on the course of action taken in the program.
+As the program runs, changes will be reflected directly in courseData.txt and studentData.txt. There will be no changes made to staffData.txt. For your reference, the following shows the starting state for both courseData.txt and studentData.txt. This is to demonstrate each function to clearly see the change in the database depending on the course of action taken in the program. Also ensure that the accessdate of the student you are trying to log into is today.
 
 #### Start state for courseData.txt:
 

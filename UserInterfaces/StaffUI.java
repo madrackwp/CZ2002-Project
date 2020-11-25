@@ -237,7 +237,7 @@ public class StaffUI implements UserUI {
                             courseIndexWriter.writeFile(indexDBManager);
 
                         } else {
-                            System.out.println("This course and index number does not exist.");
+                            System.out.println("This course code/index number does not exist.");
                         }
                         break;
 
@@ -271,7 +271,7 @@ public class StaffUI implements UserUI {
                                 System.out.println(temp);
                             }
                         } else {
-                            System.out.println("This course and index number does not exist");
+                            System.out.println("This course/index number does not exist");
                         }
                         break;
 
