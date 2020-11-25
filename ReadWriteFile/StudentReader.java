@@ -11,11 +11,30 @@ import CourseIndex.ModType;
 import DatabaseManager.CourseIndexDBManager;
 import Users.StudentAcc;
 
+/**
+ * This will read the studentdata.txt file and return an arraylist of StudentAcc
+ * objects
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class StudentReader implements TextFileReader {
 
+	/**
+	 * Creates the StudentReader class
+	 */
 	public StudentReader() {
 	}
 
+	/**
+	 * This reads the file specified in the path variable and returns an arraylist
+	 * of StudentAcc objects
+	 * 
+	 * An instance of the courseIndexDBManager is used here to get the registered
+	 * courses a student is taking as the data .txt file only store the course code
+	 * and the index number and not the whole courseIndex object
+	 */
 	public ArrayList<StudentAcc> ReadFile(Object courseIndexDBManager) {
 		ArrayList<StudentAcc> studentArr = new ArrayList<StudentAcc>();
 
@@ -63,6 +82,9 @@ public class StudentReader implements TextFileReader {
 		return studentArr;
 	}
 
+	/**
+	 * Unused as method signature is different
+	 */
 	@Override
 	public Object ReadFile() {
 		// TODO Auto-generated method stub
