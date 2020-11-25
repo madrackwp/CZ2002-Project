@@ -65,7 +65,6 @@ Our project was done on VS code so there might be some incompatibility errors wh
 As the program runs, changes will be reflected directly in courseData.txt and studentData.txt. There will be no changes made to staffData.txt. For your reference, the following shows the starting state for both courseData.txt and studentData.txt. This is to demonstrate each function to clearly see the change in the database depending on the course of action taken in the program. Also ensure that the accessdate of the student you are trying to log into is today.
 
 #### Start state for courseData.txt:
-
 LJ9001 11333 3 SOH UE null 9 U1960617B 16:30,18:30,Tutorial,TUESDAY 16:30,18:30,Tutorial,THURSDAY <br/>
 LJ9001 11334 3 SOH UE null 10 null 09:30,11:30,Tutorial,MONDAY 09:30,11:30,Tutorial,WEDNESDAY <br/>
 EE8086 18481 2 EEE GERPE_STS,UE null 9 U1960617B 08:30,09:30,Tutorial,THURSDAY 13:30,16:30,Lecture,TUESDAY <br/>
@@ -78,13 +77,12 @@ CZ2002 10200 3 SCSE CORE null 10 null 10:30,11:30,Tutorial,THURSDAY 11:30,12:30,
 CZ2002 10201 3 SCSE CORE null 10 null 11:30,12:30,Tutorial,MONDAY 11:30,12:30,Lecture,FRIDAY <br/>
 CZ2002 10202 3 SCSE CORE null 10 null 13:30,14:30,Tutorial,WEDNESDAY 11:30,12:30,Lecture,FRIDAY <br/>
 CZ2002 10203 3 SCSE CORE null 10 null 15:30,16:30,Tutorial,TUESDAY 11:30,12:30,Lecture,FRIDAY <br/>
-CZ2003 12345 3 SCSE CORE null 1 null 10:30,11:30,Tutorial,TUESDAY 11:30,12:30,Lecture,THURSDAY 14:30,16:30,Lab,TUESDAY <br/>
 CZ2003 10128 3 SCSE CORE null 10 null 15:30,16:30,Tutorial,FRIDAY 11:30,12:30,Lecture,THURSDAY 12:30,16:30,Lab,WEDNESDAY <br/>
 CZ2003 10129 3 SCSE CORE null 9 U1960617B 13:30,14:30,Tutorial,WEDNESDAY 11:30,12:30,Lecture,THURSDAY 12:30,14:30,Lab,MONDAY <br/>
 CZ2003 10130 3 SCSE CORE null 3 U1997741M 10:30,11:30,Tutorial,TUESDAY 11:30,12:30,Lecture,THURSDAY 14:30,16:30,Lab,TUESDAY<br/>
+CZ2003 12345 3 SCSE CORE null 1 null 10:30,11:30,Tutorial,TUESDAY 11:30,12:30,Lecture,THURSDAY 14:30,16:30,Lab,TUESDAY <br/>
 
 #### Start state for studentData.txt:
-
 student1 966610007 bobtan SCSE U1945797A 2 25/11/2020 null <br/>
 student2 966610968 Luke SCSE U1960617B 2 24/11/2020 LJ9001,11333,UE CZ2002,10201,CORE EE8086,18481,GERPE_STS CZ2003,10129,CORE CZ2001,10102,CORE <br/>
 student3 966611929 Atticus SPMS U1970579C 2 24/11/2020 null <br/>
