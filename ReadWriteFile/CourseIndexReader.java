@@ -7,8 +7,26 @@ import java.util.ArrayList;
 import CourseIndex.CourseIndex;
 import CourseIndex.*;
 
+/**
+ * This will read the courseData.txt file and return an arraylist of CourseIndex
+ * items
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-25-11
+ */
 public class CourseIndexReader implements TextFileReader {
 
+    /**
+     * This creates the CourseIndexReader object
+     */
+    public CourseIndexReader() {
+    }
+
+    /**
+     * This reads the file specified in the path variable and returns an arraylist
+     * of CourseIndex items
+     */
     public ArrayList<CourseIndex> ReadFile() {
 
         ArrayList<CourseIndex> courseIndexes = new ArrayList<CourseIndex>();

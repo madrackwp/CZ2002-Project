@@ -4,14 +4,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import CourseIndex.CourseIndex;
-import LocalDatabase.CourseIndexDB;
 import DatabaseManager.*;
+
+/**
+ * This class implements the TextFileWriter interface in order to write the data
+ * from the CourseIndex database manager into the data .txt file
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 
 public class CourseIndexWriter implements TextFileWriter {
 
+    /**
+     * Creates the CourseIndexWriter class
+     */
     public CourseIndexWriter() {
     }
 
+    /**
+     * Method used the write the data in the CourseIndexDBManager into the data .txt
+     * file
+     */
     public void writeFile(Object courseIndexDBManager) {
         ArrayList<CourseIndex> courseIndexes = ((CourseIndexDBManager) courseIndexDBManager).getCourseIndexes();
 
@@ -32,16 +47,4 @@ public class CourseIndexWriter implements TextFileWriter {
             e.printStackTrace();
         }
     }
-
-    // public void WriteDirect() {
-
-    // }
-
-    // public static void main(String[] args) {
-    // CourseIndexReader cr1 = new CourseIndexReader();
-    // ArrayList<CourseIndex> courseIndexes = cr1.ReadFile();
-    // CourseIndexDB db = new CourseIndexDB(courseIndexes);
-    // CourseIndexWriter writer = new CourseIndexWriter();
-    // writer.writeFile(db);
-    // }
 }

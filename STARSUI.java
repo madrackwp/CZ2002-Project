@@ -3,25 +3,14 @@ import java.util.Scanner;
 import UserInterfaces.StaffUI;
 import UserInterfaces.StudentUI;
 
-// import java.util.ArrayList;
-// import java.util.Scanner;
-
-// import CourseController.*;
-// import CourseIndex.CourseIndex;
-// import CourseIndex.IndexWaitList;
-
-// import DatabaseManager.CourseIndexDBManager;
-// import DatabaseManager.StudentDBManager;
-// import LocalDatabase.*;
-// import Login.StaffLogin;
-// import Login.StudentLogin;
-// import Notification.NotificationManager;
-// import ReadWriteFile.*;
-// import Users.*;
-// import StaffDuties.*;
-
+/**
+ * The main user interface that will run the entire program
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class STARSUI {
-
     public static void main(String[] args) {
         boolean run = true;
         Scanner sc = new Scanner(System.in);

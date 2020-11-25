@@ -3,45 +3,32 @@ package ReadWriteFile;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import CourseIndex.CourseIndex;
 import Users.StudentAcc;
 import DatabaseManager.*;
-import LocalDatabase.CourseIndexDB;
-import LocalDatabase.StudentDB;
 
+/**
+ * This class implements the TextFileWriter interface in order to write the data
+ * from the Student database manager into the data .txt file
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class StudentWriter implements TextFileWriter {
 
-    StudentReader reader = new StudentReader();
-
+    /**
+     * Creates the StudentWriter class
+     */
     public StudentWriter() {
     }
 
-    // public void writeFile() {
-    // String path = "ReadWriteFile\\studentdata.txt";
-
-    // try {
-    // reader.ReadFile();
-    // FileOutputStream writer = new FileOutputStream(path, false);
-    // for (int i = 0; i < reader.ReadFile().size(); i++) {
-    // writer.write(reader.ReadFile().get(i).toString().getBytes());
-    // writer.write(" ".getBytes());
-    // }
-    // writer.write("\n".getBytes());
-    // writer.close();
-    // } catch (IOException e) {
-    // System.out.println("An error occurred.");
-    // e.printStackTrace();
-    // }
-    // }
-
-    public void WriteDirect() {
-
-    }
-
+    /**
+     * Method used the write the data in the StudentDBManager object into the data
+     * .txt file
+     */
     @Override
     public void writeFile(Object studentDBManager) {
         String path = "ReadWriteFile\\studentdata.txt";
-        // TODO Auto-generated method stub
         ArrayList<StudentAcc> studentAccs = ((StudentDBManager) studentDBManager).getStudentAccs();
 
         try {
@@ -51,31 +38,9 @@ public class StudentWriter implements TextFileWriter {
                 writer.write("\n".getBytes());
             }
             writer.close();
-            // System.out.println("Writing done");
+
         } catch (Exception e) {
-            // System.out.println("An error occured when writing students to txt file");
-            // e.printStackTrace();
+
         }
-    }
-
-    public static void main(String[] args) {
-        CourseIndexReader CIR = new CourseIndexReader();
-        ArrayList<CourseIndex> temp = CIR.ReadFile();
-        CourseIndexDB indexDB = new CourseIndexDB(temp);
-        CourseIndexDBManager indexDBManager = new CourseIndexDBManager(indexDB);
-
-        StudentReader ur = new StudentReader();
-        ArrayList<StudentAcc> studentList = ur.ReadFile(indexDBManager);
-        StudentDB studentDB = new StudentDB(studentList);
-
-        // ArrayList<CourseIndex> testing = new ArrayList<CourseIndex>();
-        // StudentAcc toBeInserted = new StudentAcc("INSERTED", 123123123, "something",
-        // "CEE", "U1921799J", 2, 01/01/2020, )
-
-        StudentDBManager studentDBManager = new StudentDBManager(studentDB);
-
-        StudentWriter studentWriter = new StudentWriter();
-        studentWriter.writeFile(studentDBManager);
-
     }
 }

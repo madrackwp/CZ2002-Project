@@ -1,18 +1,32 @@
 package ReadWriteFile;
 
 import Users.StaffAcc;
-import Users.StudentAcc;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This will read the staffdata.txt file and return an arraylist of StaffAcc
+ * objects
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class StaffReader implements TextFileReader {
-    public StaffReader() {
 
+    /**
+     * Creates the StaffReader class
+     */
+    public StaffReader() {
     }
 
+    /**
+     * This reads the file specified in the path variable and returns an arraylist
+     * of StaffAcc objects
+     */
     public ArrayList<StaffAcc> ReadFile() {
         ArrayList<StaffAcc> staffArr = new ArrayList<>();
         String line;
