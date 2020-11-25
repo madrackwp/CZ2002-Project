@@ -10,6 +10,7 @@ public class UserAcc {
      * user school will be the school/faculty the user belongs to password here will
      * be a hashed value of the actual password the user inputs
      * 
+     * @author Goh Wei Pin
      * @version 1.0
      * @since 2020-11-25
      */

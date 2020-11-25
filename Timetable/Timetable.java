@@ -8,19 +8,56 @@ import java.text.SimpleDateFormat;
 import CourseIndex.*;
 
 /**
- * An object that will store
+ * An object that will store and display the StudentAcc's registered courses
+ * Also used to manage adding courses by checking if the course the student
+ * wants to clashes with anything else
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
  */
 public class Timetable {
+    /**
+     * The Timetable object stores an instance of the courses taken by the student
+     * in order to keep track of the registered courses
+     */
     private ArrayList<CourseIndex> coursestaken;
+    /**
+     * This 2D array will manage the time slots of the student for the purpose of
+     * adding courses
+     */
     private String[][] timetable;
+    /**
+     * The timetable will also have an instance of the HashMap which stores what
+     * this student is taking a particular course as
+     */
     private HashMap<String, ModType> courseHash;
 
+    /**
+     * This creates the timetable object based on the student's current registered
+     * courses The timetable is also created here. It is a 5 by 14 2D String array
+     * where each column will be 5 days of the week and the 14 rows are all the
+     * available periods in a day
+     * 
+     * @param c          The ArrayList of courseIndex objects that the student is
+     *                   currently taking
+     * @param courseHash Stores information on how this student is taking the mod
+     *                   (CORE,GERPE_LA,GERPE_STS,GERPE_BM,UE or MPE)
+     */
     public Timetable(ArrayList<CourseIndex> c, HashMap<String, ModType> courseHash) {
         this.coursestaken = c;
         this.timetable = new String[5][14];
         this.courseHash = courseHash;
     }
 
+    /**
+     * This method is to check if this student's timetable is able to fit the new
+     * index to add
+     * 
+     * @param c The CourseIndex to check if it can be added
+     * @return True if the student's timetable can accomodate the new course index,
+     *         otherwise false
+     */
     public boolean checkEmptySlot(CourseIndex c) {
         this.timetable = new String[5][14];
         for (int i = 0; i < coursestaken.size(); i++) {
@@ -101,6 +138,11 @@ public class Timetable {
         return true;
     }
 
+    /**
+     * This a CourseIndex to this student's timetable
+     * 
+     * @param c This is the CourseIndex the student will be adding to the timetable
+     */
     public void addIndex(CourseIndex c) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
         ArrayList<Lesson> arrayOfLessons = c.getLessons();
@@ -157,6 +199,9 @@ public class Timetable {
         }
     }
 
+    /**
+     * Prints the timetable
+     */
     public void printTimetable() {
         int totalAU = 0;
         System.out.println("");
