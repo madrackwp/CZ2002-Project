@@ -8,10 +8,25 @@ import Users.StudentAcc;
 import CourseIndex.CourseIndex;
 import CourseIndex.ModType;
 
+/**
+ * Controller used by staff to add a new StudentAcc to STARS system
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class StaffAddStudentCtrl {
+    /**
+     * Constructor
+     */
     public StaffAddStudentCtrl() {
     }
 
+    /**
+     * Method that Staff will use to add a new student
+     * 
+     * @return The new StudentAcc to be added
+     */
     public StudentAcc AddStudent() {
         Scanner sc = new Scanner(System.in);
 
@@ -20,7 +35,7 @@ public class StaffAddStudentCtrl {
 
         ArrayList<CourseIndex> emptyArr = new ArrayList<>();
         HashMap<String, ModType> emptyHash = new HashMap<>();
-        
+
         System.out.println("Enter username of student");
         String username = sc.nextLine();
         System.out.println("Enter name of student");
@@ -35,18 +50,19 @@ public class StaffAddStudentCtrl {
             sc.next();
         }
         int yearOfStudy = sc.nextInt();
-        
+
         while (true) {
             try {
                 System.out.println("Enter access date of student (format dd/mm/yyyy)");
                 accessDate = sc.next();
                 String[] tokens = accessDate.split("/");
-                if ((tokens.length == 3) && (tokens[0].length() == 2) && (tokens[1].length() == 2) && (tokens[2].length() == 4) &&
-                (Integer.parseInt(tokens[0]) > 0) && (Integer.parseInt(tokens[0]) < 32) &&
-                (Integer.parseInt(tokens[1]) > 0) && (Integer.parseInt(tokens[1]) < 13) &&
-                (Integer.parseInt(tokens[2]) > 0) && (Integer.parseInt(tokens[2]) < 9999)) 
+                if ((tokens.length == 3) && (tokens[0].length() == 2) && (tokens[1].length() == 2)
+                        && (tokens[2].length() == 4) && (Integer.parseInt(tokens[0]) > 0)
+                        && (Integer.parseInt(tokens[0]) < 32) && (Integer.parseInt(tokens[1]) > 0)
+                        && (Integer.parseInt(tokens[1]) < 13) && (Integer.parseInt(tokens[2]) > 0)
+                        && (Integer.parseInt(tokens[2]) < 9999))
                     break;
-                else 
+                else
                     System.out.println("Invalid date input");
             } catch (NumberFormatException e) {
                 System.out.println("Invalid date input");
@@ -55,7 +71,7 @@ public class StaffAddStudentCtrl {
 
         StudentAcc student = new StudentAcc(username, defaultPassword, name, school, matNo, yearOfStudy, accessDate,
                 emptyArr, emptyHash);
-                
+
         return student;
     }
 }

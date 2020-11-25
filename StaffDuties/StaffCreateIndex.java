@@ -11,10 +11,30 @@ import CourseIndex.ModType;
 import CourseIndex.Type;
 import DatabaseManager.CourseIndexDBManager;
 
+/**
+ * Controller used by staff to create indexes for existing course codes
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 25-11-25
+ */
 public class StaffCreateIndex {
+    /**
+     * Constructor
+     */
     public StaffCreateIndex() {
     }
 
+    /**
+     * Method to create the new index for existing course codes
+     * 
+     * @param indexDBManager The instance of the CourseIndexDB manager used in the
+     *                       program
+     * @param courseCode     The course code to create the new index
+     * @param newIndexNo     The new index number
+     * @return The newly created CourseIndex for the selected newIndexNo and
+     *         existing courseCode
+     */
     public CourseIndex createIndex(CourseIndexDBManager indexDBManager, String courseCode, int newIndexNo) {
         Scanner sc = new Scanner(System.in);
 

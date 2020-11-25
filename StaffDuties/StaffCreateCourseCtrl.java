@@ -11,35 +11,56 @@ import CourseIndex.Lesson;
 import CourseIndex.ModType;
 import CourseIndex.Type;
 
+/**
+ * Controller used by Staff to create a new course
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class StaffCreateCourseCtrl {
+    /**
+     * Constructor
+     */
     public StaffCreateCourseCtrl() {
     }
 
-    public static boolean isValidTime(String time) 
-    { 
-  
-        // Regex to check valid time in 24-hour format. 
-        String regex = "(0[8-9]|1[0-9]|2[0-3]):30"; 
-  
-        // Compile the ReGex 
-        Pattern p = Pattern.compile(regex); 
-  
-        // If the time is empty 
-        // return false 
-        if (time == null) { 
-            return false; 
-        } 
-  
-        // Pattern class contains matcher() method 
-        // to find matching between given time 
-        // and regular expression. 
-        Matcher m = p.matcher(time); 
-  
-        // Return if the time 
-        // matched the ReGex 
-        return m.matches(); 
-    } 
+    /**
+     * Method to check if time input is in the correct format
+     * 
+     * @param time input time String must be in format HH:MM from 08:30 to 23:30
+     * @return true if valid input, else false
+     */
+    public static boolean isValidTime(String time) {
 
+        // Regex to check valid time in 24-hour format.
+        String regex = "(0[8-9]|1[0-9]|2[0-3]):30";
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        // If the time is empty
+        // return false
+        if (time == null) {
+            return false;
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given time
+        // and regular expression.
+        Matcher m = p.matcher(time);
+
+        // Return if the time
+        // matched the ReGex
+        return m.matches();
+    }
+
+    /**
+     * Method to create course
+     * 
+     * @param courseCodeToCreate Course Code that staff would like to create
+     * @return ArrayList of CourseIndex objects with the new course code
+     */
     public ArrayList<CourseIndex> createCourse(String courseCodeToCreate) {
         ArrayList<CourseIndex> newCourseIndexes = new ArrayList<>();
         Scanner sc = new Scanner(System.in);

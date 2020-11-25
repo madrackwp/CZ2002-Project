@@ -6,10 +6,28 @@ import javax.mail.internet.*;
 
 import CourseIndex.CourseIndex;
 
+/**
+ * Email notification class to send emails to students
+ * 
+ * @author Goh Wei Pin
+ * @version 1.0
+ * @since 2020-11-25
+ */
 public class EmailNotification {
+    /**
+     * Constructor
+     */
     public EmailNotification() {
     }
 
+    /**
+     * Method to send notification
+     * 
+     * @param username    userName of receipient
+     * @param studentName name of receipient
+     * @param courseIndex CourseIndex where receipient is added to the registered
+     *                    courses from the wait list
+     */
     public static void sendNotification(String username, String studentName, CourseIndex courseIndex) {
         String courseCode = courseIndex.getCourseCode();
         int indexNo = courseIndex.getIndexNo();
@@ -18,20 +36,27 @@ public class EmailNotification {
                 " You have been added to a course on your wait list.\nCourse Code: " + courseCode + "\nIndex: "
                         + Integer.toString(indexNo));
     }
-    // public static void main(String[] args) {
-    // // from,password,to,subject,message
-    // Mailer.send("from@gmail.com", "insert password here", "to@gmail.com", "insert
-    // subject here",
-    // "insert message body here");
-    // // change from, password, to, subject and message
-    // }
 }
 
+/**
+ * API to send email
+ */
 class Mailer {
 
+    /**
+     * Constructor
+     */
     public Mailer() {
     }
 
+    /**
+     * 
+     * @param from     Email sender
+     * @param password Password of Sender
+     * @param to       Email of recipient
+     * @param sub      Message subject
+     * @param msg      Message body
+     */
     public static void send(String from, String password, String to, String sub, String msg) {
         // Get properties object
         Properties props = new Properties();
