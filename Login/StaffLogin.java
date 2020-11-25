@@ -10,6 +10,8 @@ import Users.UserAcc;
 /**
  * This class implements the UserLogin interface to allow objects from the StaffAcc class
  * to login to the STARS system
+ * @author Chong Jing Hong
+ * @since 25/11/2020
  */
 
 public class StaffLogin implements UserLogin {
