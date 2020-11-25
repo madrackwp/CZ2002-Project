@@ -7,29 +7,27 @@ import CourseIndex.CourseIndex;
 import DatabaseManager.CourseIndexDBManager;
 import Users.StudentAcc;
 
+/**
+ * Controller that shows all courses based on selection
+ * @author Chong Jing Hong
+ * @since 25/11/2020
+ */
+
 public class ShowAllCoursesCtrl {
+
+    /**
+     * Creates the ShowAllCourses controller
+     */
+
     public ShowAllCoursesCtrl() {
     }
 
-    // public void showCourses(CourseIndexDBManager dbManager) {
-    // ArrayList<CourseIndex> temp = dbManager.getCourseIndexes();
-    // int i = 1;
-    // for (CourseIndex courseIndex : temp) {
-
-    // System.out.print(i + " " + courseIndex + " \n");
-    // i++;
-
-    // }
-    // }
-
-    // public CourseIndex selectCourse(CourseIndexDBManager dbManager) {
-    // Scanner sc = new Scanner(System.in);
-    // System.out.println("Select course to add:");
-    // showCourses(dbManager);
-    // int input = sc.nextInt();
-    // ArrayList<CourseIndex> temp = dbManager.getCourseIndexes();
-    // return temp.get(input - 1);
-    // }
+    /**
+     * Allows students to select courses that they are not registered for
+     * @param studentAcc The student's account
+     * @param dbManager The CourseIndexDBManager
+     * @return The course index selected
+     */
 
     public CourseIndex selectCourseThatStudentNotTaking(StudentAcc studentAcc, CourseIndexDBManager dbManager) {
         int k = 1;

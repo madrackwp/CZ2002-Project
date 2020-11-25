@@ -5,10 +5,31 @@ import java.util.ArrayList;
 import CourseIndex.CourseIndex;
 import Users.StudentAcc;
 
+/**
+ * Controller that swaps indexes between 2 students
+ * @author Chong Jing Hong
+ * @since 25/11/2020
+ */
+
 public class SwapIndexCtrl {
+
+    /**
+     * Creates the SwapIndex Controller
+     */
+
     public SwapIndexCtrl() {
 
     }
+
+    /**
+     * Swaps course index between 2 students
+     * @param student1 The account of student1
+     * @param student2 The account of student2
+     * @param student1CourseIndex The course index student1 holds
+     * @param student2CourseIndex The course index student1 holds
+     * @param addDropCtrl The addDropCtrl object
+     * @return The updated course indexes
+     */
 
     public ArrayList<CourseIndex> swapIndex(StudentAcc student1, StudentAcc student2, CourseIndex student1CourseIndex,
             CourseIndex student2CourseIndex, AddDropCtrl addDropCtrl) {

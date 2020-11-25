@@ -8,9 +8,26 @@ import java.util.Scanner;
 import CourseIndex.CourseIndex;
 import CourseIndex.ModType;
 
+/**
+ * Controller that reclassifies the module type
+ * @author Chong Jing Hong
+ * @since 25/11/2020
+ */
+
 public class ReclassifyCtrl {
+
+    /**
+     * Creates the Reclassify Controller
+     */
     public ReclassifyCtrl() {
     }
+
+    /**
+     * Reclassifies the module type of a specific course that the student is taking
+     * @param courseCode The course code that is to be reclassified
+     * @param studentAcc The student that is reclassifying his/her course
+     * @return whether or not the reclassfying is successful or not
+     */
 
     public boolean reclassifyCourse(String courseCode, StudentAcc studentAcc) {
         Scanner sc = new Scanner(System.in);

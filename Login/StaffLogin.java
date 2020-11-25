@@ -15,6 +15,11 @@ import Users.UserAcc;
  */
 
 public class StaffLogin implements UserLogin {
+
+    /**
+     * Creates the StaffLogin object
+     */
+
     public StaffLogin() {
     }
 
