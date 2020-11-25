@@ -6,12 +6,35 @@ import Users.StudentAcc;
 
 import java.util.ArrayList;
 
+/** This class implements the DatabaseManager interface to manage the StudentAcc objects
+ * @author Chong Jing Hong
+ * @version 1.0
+ * @since 25/11/2020
+ */
+
 public class StudentDBManager implements DatabaseManager {
+
+    /**
+     * The StudentAcc data to be managed
+     */
+
     private ArrayList<StudentAcc> studentAccs;
+
+    /**
+     * Creates a new StudentDBManager object with a StudentDB object
+     * @param studentDB the student database to be managed
+     */
 
     public StudentDBManager(StudentDB studentDB) {
         this.studentAccs = studentDB.getStudentDB();
     }
+
+    /**
+     * This method adds a StudentAcc object into the local student database
+     * @param studentAcc the StudentAcc object to be added
+     * @return whether the adding is successful or not
+     */
+
 
     @Override
     public boolean addEntry(Object studentAcc) {
@@ -24,6 +47,12 @@ public class StudentDBManager implements DatabaseManager {
         }
     }
 
+    /**
+     * This method removes a StudentAcc object into the local student database
+     * @param studentAcc the StudentAcc object to be removed
+     * @return whether the removal is successful or not
+     */
+
     @Override
     public boolean removeEntry(Object studentAcc) {
         if (this.studentAccs.contains((CourseIndex) studentAcc)) {
@@ -35,9 +64,21 @@ public class StudentDBManager implements DatabaseManager {
         }
     }
 
+    /**
+     * Get the StudentAcc objects
+     * @return array list of StudentAcc
+     */
+
     public ArrayList<StudentAcc> getStudentAccs() {
         return this.studentAccs;
     }
+
+    /**
+     * This method updates the local student database
+     * @param studentAccs the updated student data
+     * @param studentDB the student database to be updated
+     * @return whether the updating is successful or not
+     */
 
     @Override
     public boolean updateDatabase(Object studentAccs, Object studentDB) {
@@ -51,6 +92,12 @@ public class StudentDBManager implements DatabaseManager {
         }
     }
 
+    /**
+     * Get StudentAcc objects by their matriculation number
+     * @param matricNo matriculation number of the student
+     * @return the student account
+     */
+
     public StudentAcc getStudentByMatricNo(String matricNo) {
         for (StudentAcc sa : studentAccs) {
             if (sa.getMatricNo().equals(matricNo)) {
@@ -61,27 +108,14 @@ public class StudentDBManager implements DatabaseManager {
         return null;
     }
 
+    /**
+     * Print all students in the database
+     */
+
     public void printAllStudents() {
         for (StudentAcc student : this.studentAccs) {
             System.out.println(student);
         }
     }
-    // public boolean changeAccess(String matricNo){
-    // for(int i=0; i<this.studentAccs.size(); i++){
-    // if(matricNo.equals(studentAccs.get(i).getMatricNo())){
-    // System.out.print("Enter new access year: ");
-    // Scanner sc = new Scanner(System.in);
-    // int year = sc.nextInt();
-    // studentAccs.get(i).setAccessYear(year);
-    // System.out.print("Enter new access month: ");
-    // int month = sc.nextInt();
-    // studentAccs.get(i).setAccessMonth(month);
-    // System.out.print("Enter new access date: ");
-    // int date = sc.nextInt();
-    // studentAccs.get(i).setAccesDate(date);
-    // return true;
-    // }
-    // }
-    // return false;
-    // }
+
 }
